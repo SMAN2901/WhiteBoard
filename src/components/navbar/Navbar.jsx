@@ -26,9 +26,9 @@ class Navbar extends Component {
 
         const profileImage = user ? (
             <img
-                className="profile-img"
+                className="nav-profile-img"
                 src={user ? user.profile_pic : ""}
-                alt="image"
+                alt=""
             ></img>
         ) : null;
 
