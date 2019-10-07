@@ -1,0 +1,48 @@
+.navbar-container {
+    display: flex;
+    align-items: center;
+    height: 50px;
+    background-color: rgb(36, 36, 37);
+    justify-content: space-between;
+}
+
+.navbar-logo {
+    height: flex;
+    display: flex;
+    margin: 10px;
+    color: white;
+    font-family: "Exo 2", sans-serif;
+    font-size: 24px;
+}
+
+.navbar-logo-text {
+    text-decoration: none;
+    color: white;
+}
+
+.navbar-login,
+.navbar-signup,
+.navbar-profile {
+    color: rgb(0, 119, 255);
+    margin: 5px;
+}
+
+.navbar-login:hover,
+.navbar-signup:hover,
+.navbar-profile:hover {
+    color: white;
+    margin: 5px;
+}
+
+.navbar-login:active,
+.navbar-signup:active,
+.navbar-profile:active {
+    color: gray;
+    margin: 5px;
+}
+
+.navbar-user {
+    color: white;
+    font-family: "Exo 2", sans-serif;
+    margin: 10px;
+}
