@@ -1,26 +1,37 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import { Route, Switch } from "react-router-dom";
+import Navbar from "./components/navbar/Navbar";
+import Courses from "./components/courses/Courses";
+import LoginForm from "./components/form/LoginForm";
+import SignupForm from "./components/form/SignupForm";
+import { getCurrentUser } from "./api/UsersApi";
+import "./App.css";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+    state = {};
+
+    async componentDidMount() {
+        const user = await getCurrentUser();
+        this.setState({ user });
+    }
+
+    async componentDidUpdate() {
+        //const user = await getCurrentUser();
+        //this.setState({ user });
+    }
+
+    render() {
+        return (
+            <React.Fragment>
+                <Navbar user={this.state.user} />
+                <Switch>
+                    <Route path="/login" component={LoginForm} />
+                    <Route path="/signup" component={SignupForm} />
+                    <Route path="/" component={Courses} />
+                </Switch>
+            </React.Fragment>
+        );
+    }
 }
 
 export default App;
