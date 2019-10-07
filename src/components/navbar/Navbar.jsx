@@ -11,18 +11,26 @@ class Navbar extends Component {
                 <Link className="navbar-login" to="/login">
                     Log in
                 </Link>
-                or
+                <span className="navbar-span">or</span>
                 <Link className="navbar-signup" to="/signup">
                     Sign up
                 </Link>
             </React.Fragment>
         );
 
-        const profileLink = (
-            <Link className="navbar-profile" to="#">
+        const profileLink = user ? (
+            <Link className="navbar-profile" to={"/" + user.username}>
                 {user ? `${user.first_name} ${user.last_name}` : ""}
             </Link>
-        );
+        ) : null;
+
+        const profileImage = user ? (
+            <img
+                className="profile-img"
+                src={user ? user.profile_pic : ""}
+                alt="image"
+            ></img>
+        ) : null;
 
         return (
             <div className="navbar-container">
@@ -32,6 +40,7 @@ class Navbar extends Component {
                     </Link>
                 </div>
                 <div className="navbar-user">
+                    {user ? profileImage : null}
                     {user ? profileLink : loginLink}
                 </div>
             </div>

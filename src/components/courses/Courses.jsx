@@ -4,18 +4,25 @@ import { getCourses } from "../../api/CoursesApi";
 import "./Courses.css";
 
 class Courses extends Component {
+    _isMounted = false;
+
     state = {
         courses: []
     };
 
     async componentDidMount() {
+        this._isMounted = true;
         const courses = await getCourses();
-        this.setState({ courses });
+        if (this._isMounted) this.setState({ courses });
     }
 
     async componentDidUpdate() {
         const courses = await getCourses();
-        this.setState({ courses });
+        if (this._isMounted) this.setState({ courses });
+    }
+
+    componentWillUnmount() {
+        this._isMounted = false;
     }
 
     render() {
