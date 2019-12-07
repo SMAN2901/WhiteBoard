@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Route, Switch } from "react-router-dom";
+import CacheBuster from "./CacheBuster";
 import Navbar from "./components/navbar/Navbar";
 import Loadbar from "./components/loadbar/Loadbar";
 import Courses from "./components/courses/Courses";
@@ -8,7 +9,7 @@ import SignupForm from "./components/form/signup/SignupForm";
 import CourseCreateForm from "./components/form/coursecreate/CourseCreateForm";
 import Profile from "./components/profile/Profile";
 import CourseDetails from "./components/coursedetails/CourseDetails";
-import { getCurrentUser } from "./api/AuthApi";
+import { getCurrentUser, logout } from "./api/AuthApi";
 import { getUserData } from "./api/UsersApi";
 import "./App.css";
 
@@ -104,73 +105,84 @@ class App extends Component {
         popup.hide = this.hidePopup;
 
         return (
-            <React.Fragment>
-                <Navbar user={user} />
-                <Loadbar loadbar={loadbar} popup={popup} />
-                <Switch>
-                    <Route
-                        path="/login"
-                        render={props => (
-                            <LoginForm
-                                {...props}
-                                loadbar={loadbar}
-                                popup={popup}
-                            />
-                        )}
-                    />
-                    <Route
-                        path="/signup"
-                        render={props => (
-                            <SignupForm
-                                {...props}
-                                loadbar={loadbar}
-                                popup={popup}
-                            />
-                        )}
-                    />
-                    <Route
-                        path="/createcourse"
-                        render={props => (
-                            <CourseCreateForm
-                                {...props}
-                                loadbar={loadbar}
-                                popup={popup}
-                            />
-                        )}
-                    />
-                    <Route
-                        path="/user/:username?"
-                        render={props => (
-                            <Profile
-                                {...props}
-                                user={user}
-                                loadbar={loadbar}
-                                popup={popup}
-                            />
-                        )}
-                    />
-                    <Route
-                        path="/course/:id?"
-                        render={props => (
-                            <CourseDetails
-                                {...props}
-                                loadbar={loadbar}
-                                popup={popup}
-                            />
-                        )}
-                    />
-                    <Route
-                        path="/"
-                        render={props => (
-                            <Courses
-                                {...props}
-                                loadbar={loadbar}
-                                popup={popup}
-                            />
-                        )}
-                    />
-                </Switch>
-            </React.Fragment>
+            <CacheBuster>
+                {({ loading, isLatestVersion, refreshCacheAndReload }) => {
+                    if (loading) return null;
+                    if (!loading && !isLatestVersion) {
+                        logout();
+                        refreshCacheAndReload();
+                    }
+                    return (
+                        <React.Fragment>
+                            <Navbar user={user} />
+                            <Loadbar loadbar={loadbar} popup={popup} />
+                            <Switch>
+                                <Route
+                                    path="/login"
+                                    render={props => (
+                                        <LoginForm
+                                            {...props}
+                                            loadbar={loadbar}
+                                            popup={popup}
+                                        />
+                                    )}
+                                />
+                                <Route
+                                    path="/signup"
+                                    render={props => (
+                                        <SignupForm
+                                            {...props}
+                                            loadbar={loadbar}
+                                            popup={popup}
+                                        />
+                                    )}
+                                />
+                                <Route
+                                    path="/createcourse"
+                                    render={props => (
+                                        <CourseCreateForm
+                                            {...props}
+                                            loadbar={loadbar}
+                                            popup={popup}
+                                        />
+                                    )}
+                                />
+                                <Route
+                                    path="/user/:username?"
+                                    render={props => (
+                                        <Profile
+                                            {...props}
+                                            user={user}
+                                            loadbar={loadbar}
+                                            popup={popup}
+                                        />
+                                    )}
+                                />
+                                <Route
+                                    path="/course/:id?"
+                                    render={props => (
+                                        <CourseDetails
+                                            {...props}
+                                            loadbar={loadbar}
+                                            popup={popup}
+                                        />
+                                    )}
+                                />
+                                <Route
+                                    path="/"
+                                    render={props => (
+                                        <Courses
+                                            {...props}
+                                            loadbar={loadbar}
+                                            popup={popup}
+                                        />
+                                    )}
+                                />
+                            </Switch>
+                        </React.Fragment>
+                    );
+                }}
+            </CacheBuster>
         );
     }
 }
