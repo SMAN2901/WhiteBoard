@@ -1,3 +1,13 @@
 {
-    "apiUrl": "https://demo01-9005a.firebaseio.com"
+    "api": {
+		"url": "https://98e20c85.ngrok.io",
+        "url2": "https://34.66.97.39",
+        "endpoint": {
+            "login": "/user/profile/auth/",
+            "signup": "/user/register/",
+            "users": "/user/",
+            "courses": "/course/",
+            "createcourse": "/course-add/"
+        }
+    }
 }

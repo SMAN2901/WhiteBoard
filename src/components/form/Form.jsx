@@ -31,12 +31,6 @@ class Form extends Component {
         const schema = { [name]: this.schema[name] };
         const { error } = Joi.validate(obj, schema);
 
-        if (name === "confirmPassword") {
-            return value !== this.state.data.password
-                ? "Password doesn't match"
-                : null;
-        }
-
         return error ? error.details[0].message : null;
     };
 
@@ -71,6 +65,62 @@ class Form extends Component {
                     placeholder={label}
                     className={classes}
                     type={type}
+                    onChange={this.onChange}
+                />
+                <div className="error-container">
+                    <p className="error-text">{errors[name]}</p>
+                </div>
+            </div>
+        );
+    };
+
+    renderTextArea = (name, label, classes) => {
+        const { data, errors } = this.state;
+        classes = "form-textarea " + classes;
+
+        return (
+            <div className="textarea-container">
+                <textarea
+                    value={data[name]}
+                    name={name}
+                    placeholder={label}
+                    className={classes}
+                    onChange={this.onChange}
+                />
+                <div className="error-container">
+                    <p className="error-text">{errors[name]}</p>
+                </div>
+            </div>
+        );
+    };
+
+    clickFilefieldLabel = ref => {
+        ref.current.click();
+    };
+
+    renderFileField = (name, label, classes, labelClasses, ref, labelRef) => {
+        const { data, errors } = this.state;
+        classes = "form-filefield " + classes;
+        labelClasses = "form-filefield-label " + labelClasses;
+
+        return (
+            <div className="filefield-container">
+                <label
+                    htmlFor={name}
+                    ref={labelRef}
+                    onClick={() => {
+                        this.clickFilefieldLabel(ref);
+                    }}
+                    className={labelClasses}
+                >
+                    {data[name] ? data[name] : label}
+                </label>
+                <input
+                    value={data[name]}
+                    type="file"
+                    name={name}
+                    ref={ref}
+                    className={classes}
                     onChange={this.onChange}
                 />
                 <div className="error-container">

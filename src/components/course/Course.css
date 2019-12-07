@@ -1,9 +1,15 @@
 .course-container {
     width: 300px;
-    height: 320px;
+    height: 300px;
     margin: 10px;
     overflow: hidden;
-    background-color: white;
+    background: linear-gradient(
+        to bottom,
+        white,
+        white,
+        white,
+        rgba(255, 255, 255, 0.5)
+    );
     border-bottom: 10px solid rgb(255, 166, 0);
     box-shadow: 1px 1px 5px black;
     display: inline-block;
@@ -15,7 +21,18 @@
     height: 200px;
     background-color: gray;
     background-size: cover;
+    background-position: center;
     border-bottom: 10px solid rgb(29, 28, 28);
+}
+
+.course-title-link {
+    color: black;
+    text-decoration: initial;
+}
+
+.course-author-link {
+    color: rgb(14, 75, 75);
+    text-decoration: initial;
 }
 
 .course-title {
@@ -36,13 +53,23 @@
     text-overflow: ellipsis;
 }
 
+.course-title-link:hover,
+.course-author-link:hover {
+    text-decoration: underline;
+}
+
+.course-title-link:active,
+.course-author-link:active {
+    color: gray;
+}
+
 .course-tags {
     margin: 0;
     margin-left: 5px;
     padding: 2px;
     font-family: "Exo 2", sans-serif;
     color: white;
-    background-color: rgb(61, 90, 255);
+    background-color: rgb(0, 140, 255);
     font-size: 14px;
     border-radius: 2px;
     white-space: nowrap;
@@ -86,4 +113,10 @@
 .icon-star {
     color: rgb(80, 79, 79);
     font-size: 18px;
+}
+
+@media screen and (max-width: 330px) {
+    .course-container {
+        width: 250px;
+    }
 }

@@ -1,45 +1,93 @@
 .navbar-container {
-    display: flex;
-    align-items: center;
+    width: 100%;
     height: 50px;
-    background-color: rgb(36, 36, 37);
+    background-color: white;
+    box-shadow: 1px 1px 5px black;
+    align-items: center;
     justify-content: space-between;
+    display: flex;
+    position: fixed;
+    z-index: 100;
 }
 
 .navbar-logo {
     height: flex;
     display: flex;
     margin: 10px;
-    color: white;
     font-family: "Exo 2", sans-serif;
     font-size: 24px;
 }
 
 .navbar-logo-text {
+    font-weight: bold;
     text-decoration: none;
-    color: white;
+    color: rgb(51, 41, 88);
 }
 
-.navbar-login,
-.navbar-signup,
+.logout-icon {
+    font-size: 30px;
+    text-decoration: none;
+    color: rgb(0, 119, 255);
+    margin-top: 4px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.navbar-logout {
+    display: none;
+}
+
 .navbar-profile {
     text-decoration: none;
+    font-weight: bold;
     color: rgb(0, 119, 255);
     margin: 10px;
 }
 
-.navbar-login:hover,
-.navbar-signup:hover,
 .navbar-profile:hover {
-    color: white;
+    color: rgb(255, 136, 0);
+}
+
+.navbar-profile:active {
+    color: gray;
+}
+
+.navbar-login,
+.navbar-logout,
+.navbar-signup {
+    text-decoration: none;
+    color: rgb(50, 180, 255);
+    background-color: rgb(44, 43, 43);
+    border-left: 10px solid rgb(50, 180, 255);
+    padding: 5px;
     margin: 10px;
+    margin-left: 0px;
+    margin-right: 5px;
+    border-radius: 3px;
+}
+
+.navbar-signup {
+    color: rgb(45, 216, 45);
+    border-left: 10px solid rgb(45, 216, 45);
+}
+
+.navbar-login:hover,
+.navbar-signup:hover {
+    color: rgb(255, 136, 0);
+    border-left: 10px solid rgb(255, 136, 0);
 }
 
 .navbar-login:active,
-.navbar-signup:active,
-.navbar-profile:active {
+.navbar-signup:active {
+    color: white;
+}
+
+.logout-icon:hover {
+    color: rgb(255, 136, 0);
+}
+
+.logout-icon:active {
     color: gray;
-    margin: 10px;
 }
 
 .navbar-span {
@@ -61,4 +109,16 @@
     height: 40px;
     border-radius: 50%;
     margin: 0;
+}
+
+@media screen and (max-width: 500px) {
+    .navbar-profile {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 330px) {
+    .navbar-signup {
+        display: none;
+    }
 }

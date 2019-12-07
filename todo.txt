@@ -1,0 +1,19 @@
+Loading view for course banner
+Loading view for profile page & profile pic
+Loading view for login, signup and course creation
+
+make loadbar text dynamic
+implement popup message
+
+change color theme
+add banner:
+
+https://www.freepik.com/free-vector/distance-course-isometric_5702273.htm#page=1&query=online%20school&position=1
+
+https://www.freepik.com/free-vector/flat-university-background_4482529.htm#page=3&query=read&position=28
+
+https://www.freepik.com/free-vector/people-using-computers-studying-online-school_5259935.htm#page=1&query=learn&position=16
+
+https://www.freepik.com/free-vector/hand-drawn-university-concept_4580929.htm
+
+beautify forms

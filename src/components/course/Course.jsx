@@ -1,10 +1,36 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import "./Course.css";
 
 class Course extends Component {
+    _isMounted = false;
+
+    state = {
+        bannerUrl: "/assets/images/whiteboard_course.jpg"
+    };
+
+    componentDidMount() {
+        this._isMounted = true;
+        this.image = new Image();
+        this.image.src = this.props.data.banner;
+        this.image.onload = this.handleImageLoaded;
+    }
+
+    componentWillUnmount() {
+        this._isMounted = false;
+    }
+
+    handleImageLoaded = () => {
+        const { banner } = this.props.data;
+        if (this._isMounted) this.setState({ bannerUrl: banner });
+    };
+
     render() {
-        const { title, author, tags, rating, fee, banner } = this.props.data;
-        const bannerStyle = { backgroundImage: `url(${banner})` };
+        const { course_id, title, author, tags, rating, fee } = this.props.data;
+        const bannerStyle = {
+            backgroundImage: `url(${this.state.bannerUrl})`
+        };
+
         return (
             <div className="course-container">
                 <div className="course-value">
@@ -16,8 +42,18 @@ class Course extends Component {
                 </div>
                 <div className="course-banner" style={bannerStyle}></div>
                 <div className="course-info">
-                    <p className="course-title">{title}</p>
-                    <p className="course-author">{author}</p>
+                    <Link
+                        className="course-title-link"
+                        to={`/course/${course_id}`}
+                    >
+                        <p className="course-title">{title}</p>
+                    </Link>
+                    <Link
+                        className="course-author-link"
+                        to={`/user/${author.username}`}
+                    >
+                        <p className="course-author">{author.name}</p>
+                    </Link>
                     {tags.map(tag => (
                         <p key={tag} className="course-tags">
                             {tag}

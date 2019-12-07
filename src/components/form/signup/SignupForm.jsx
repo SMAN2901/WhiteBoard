@@ -1,8 +1,8 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import Form from "./Form";
+import { Link, Redirect } from "react-router-dom";
+import Form from "../Form";
 import Joi from "joi-browser";
-import { signup } from "../../api/UsersApi";
+import { signup, isAuthenticated } from "../../../api/AuthApi";
 import "./SignupForm.css";
 
 class SignupForm extends Form {
@@ -54,26 +54,57 @@ class SignupForm extends Form {
             })
     };
 
+    componentDidMount() {
+        const { loadbar } = this.props;
+        loadbar.stop();
+    }
+
     signupButton = React.createRef();
 
     submitForm = async () => {
+        const { loadbar, popup } = this.props;
+        loadbar.start("Signing up");
         try {
             const response = await signup(this.state.data);
             //localStorage.setItem("token", response.headers["auth-token"]);
             localStorage.setItem("token", response.data.token);
-            this.props.history.push("/");
+            loadbar.stop();
+            popup.show("success", "Signed up", "successfully");
         } catch (ex) {
+            loadbar.stop();
             if (ex.response && ex.response.status === 400) {
                 var errors = { ...this.state.errors };
                 errors = ex.response.data.errors;
                 this.setState({ errors });
             }
+            popup.show("error", "Sign up", "failed");
         }
     };
 
+    validateField = ({ name, value }) => {
+        const obj = { [name]: value };
+        const schema = { [name]: this.schema[name] };
+        const { error } = Joi.validate(obj, schema);
+
+        if (name === "confirmPassword") {
+            return value !== this.state.data.password
+                ? "Password doesn't match"
+                : null;
+        }
+
+        return error ? error.details[0].message : null;
+    };
+
     render() {
-        return (
+        return isAuthenticated() ? (
+            <Redirect to="/" />
+        ) : (
             <div className="form-container">
+                <img
+                    className="signup-img"
+                    src="/assets/images/signup.png"
+                    alt=""
+                ></img>
                 <form className="signup-form">
                     <div className="form-header">
                         <span className="form-title">Sign up here</span>

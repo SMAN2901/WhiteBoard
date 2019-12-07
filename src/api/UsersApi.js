@@ -1,30 +1,15 @@
-import jwtDecode from "jwt-decode";
 import http from "../services/httpService";
-import config from "../config.json";
+import { getAuthHeader } from "./AuthApi";
+import { getEndpointUrl } from "./ApiUtility";
 
-export async function signup(user) {
-    const apiEndpoint = config.apiUrl + "/signup";
-    const respone = await http.post(apiEndpoint, user);
-    return respone;
-}
-
-export async function login(user) {
-    const apiEndpoint = config.apiUrl + "/login";
-    const response = await http.post(apiEndpoint, user);
-    return response;
-}
-
-export async function getCurrentUser() {
+export async function getUserData(username) {
+    if (!username) return null;
     try {
-        const token = localStorage.getItem("token");
-
-        if (token) {
-            const data = jwtDecode(token);
-            const apiEndpoint =
-                config.apiUrl + "/users/" + data.username + ".json";
-            const response = await http.get(apiEndpoint);
-            return response.data;
-        } else return null;
+        const apiEndpoint = getEndpointUrl("users") + username + "/";
+        var config = getAuthHeader();
+        const response = await http.get(apiEndpoint, config);
+        //console.log(response);
+        return response.data;
     } catch (ex) {
         return null;
     }
