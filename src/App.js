@@ -9,7 +9,7 @@ import SignupForm from "./components/form/signup/SignupForm";
 import CourseCreateForm from "./components/form/coursecreate/CourseCreateForm";
 import Profile from "./components/profile/Profile";
 import CourseDetails from "./components/coursedetails/CourseDetails";
-import { getCurrentUser, logout } from "./api/AuthApi";
+import { getCurrentUser } from "./api/AuthApi";
 import { getUserData } from "./api/UsersApi";
 import "./App.css";
 
@@ -109,7 +109,6 @@ class App extends Component {
                 {({ loading, isLatestVersion, refreshCacheAndReload }) => {
                     if (loading) return null;
                     if (!loading && !isLatestVersion) {
-                        logout();
                         refreshCacheAndReload();
                     }
                     return (
