@@ -57,12 +57,12 @@ class CacheBuster extends React.Component {
                 );
                 if (shouldForceRefresh) {
                     console.log(
-                        `We have a new version - ${latestVersion}. Should force refresh`
+                        `Updating to WhiteBoard version ${latestVersion}.`
                     );
                     this.setState({ loading: false, isLatestVersion: false });
                 } else {
                     console.log(
-                        `You already have the latest version - ${latestVersion}. No cache refresh needed.`
+                        `Latest version WhiteBoard ${latestVersion} is running.`
                     );
                     this.setState({ loading: false, isLatestVersion: true });
                 }

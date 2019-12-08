@@ -50,7 +50,7 @@ export async function createCourse(course, banner) {
     course = jsonToFormdata(course, banner);
 
     try {
-        const apiEndpoint = getEndpointUrl("createcourse");
+        const apiEndpoint = getEndpointUrl("createCourse");
         var config = getAuthHeader();
 
         var { data } = await http.post(apiEndpoint, course, config);

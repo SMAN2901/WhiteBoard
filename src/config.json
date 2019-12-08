@@ -1,13 +1,14 @@
 {
     "api": {
-		"url": "https://98e20c85.ngrok.io",
+        "url": "https://98e20c85.ngrok.io",
         "url2": "https://34.66.97.39",
         "endpoint": {
+            "refreshToken": "/api-token-refresh/",
             "login": "/user/profile/auth/",
             "signup": "/user/register/",
             "users": "/user/",
             "courses": "/course/",
-            "createcourse": "/course-add/"
+            "createCourse": "/course-add/"
         }
     }
 }
