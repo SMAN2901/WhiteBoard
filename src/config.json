@@ -3,6 +3,7 @@
         "url": "https://98e20c85.ngrok.io",
         "url2": "https://34.66.97.39",
         "endpoint": {
+            "verifyToken": "/api-token-verify/",
             "refreshToken": "/api-token-refresh/",
             "login": "/user/profile/auth/",
             "signup": "/user/register/",

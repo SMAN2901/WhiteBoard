@@ -42,9 +42,28 @@ export async function refreshAuthToken() {
     }
 }
 
+export async function verifyAuthToken() {
+    const token = getAuthToken();
+    if (token) {
+        const apiEndpoint = getEndpointUrl("verifyToken");
+        const data = { token: token };
+
+        try {
+            const response = await http.post(apiEndpoint, data);
+            return response.data.token;
+        } catch (ex) {
+            if (ex.response && ex.response.status === 400) {
+                removeAuthToken();
+            }
+        }
+    }
+}
+
 export async function checkAuthToken() {
-    if (getAuthToken()) refreshAuthToken();
-    else removeAuthToken();
+    if (getAuthToken()) {
+        await refreshAuthToken();
+        await verifyAuthToken();
+    } else removeAuthToken();
 }
 
 export function authTokenExpired(token, tokenCreated) {

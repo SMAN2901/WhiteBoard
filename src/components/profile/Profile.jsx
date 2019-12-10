@@ -15,7 +15,7 @@ class Profile extends Component {
         loadbar.start();
         const username = this.props.match.params.username;
         const user = await getUserData(username);
-        if (user) loadbar.stop();
+        if (user !== "pending") loadbar.stop();
         this.setState({ user });
     }
 
