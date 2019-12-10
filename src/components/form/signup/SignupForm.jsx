@@ -2,7 +2,7 @@ import React from "react";
 import { Link, Redirect } from "react-router-dom";
 import Form from "../Form";
 import Joi from "joi-browser";
-import { signup, isAuthenticated } from "../../../api/AuthApi";
+import { signup, isAuthenticated, storeAuthToken } from "../../../api/AuthApi";
 import "./SignupForm.css";
 
 class SignupForm extends Form {
@@ -65,9 +65,10 @@ class SignupForm extends Form {
         const { loadbar, popup } = this.props;
         loadbar.start("Signing up");
         try {
-            const response = await signup(this.state.data);
+            const { data } = await signup(this.state.data);
             //localStorage.setItem("token", response.headers["auth-token"]);
-            localStorage.setItem("token", response.data.token);
+            //localStorage.setItem("token", response.data.token);
+            storeAuthToken(data.token);
             loadbar.stop();
             popup.show("success", "Signed up", "successfully");
         } catch (ex) {

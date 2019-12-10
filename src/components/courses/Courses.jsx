@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import SiteBanner from "../sitebanner/SiteBanner";
 import Course from "../course/Course";
 import { getCourses } from "../../api/CoursesApi";
 import "./Courses.css";
@@ -34,20 +33,12 @@ class Courses extends Component {
     render() {
         const { courses } = this.state;
 
-        const coursesComp =
-            courses === "pending" ? null : (
-                <div className="courses">
-                    {this.state.courses.map(item => (
-                        <Course key={item.course_id} data={item} />
-                    ))}
-                </div>
-            );
-
-        return (
-            <React.Fragment>
-                <SiteBanner />
-                {coursesComp}
-            </React.Fragment>
+        return courses === "pending" ? null : (
+            <div className="courses">
+                {this.state.courses.map(item => (
+                    <Course key={item.course_id} data={item} />
+                ))}
+            </div>
         );
     }
 }

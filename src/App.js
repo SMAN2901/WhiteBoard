@@ -3,7 +3,7 @@ import { Route, Switch } from "react-router-dom";
 import CacheBuster from "./CacheBuster";
 import Navbar from "./components/navbar/Navbar";
 import Loadbar from "./components/loadbar/Loadbar";
-import Courses from "./components/courses/Courses";
+import Home from "./components/home/Home";
 import LoginForm from "./components/form/login/LoginForm";
 import SignupForm from "./components/form/signup/SignupForm";
 import CourseCreateForm from "./components/form/coursecreate/CourseCreateForm";
@@ -171,7 +171,7 @@ class App extends Component {
                                 <Route
                                     path="/"
                                     render={props => (
-                                        <Courses
+                                        <Home
                                             {...props}
                                             loadbar={loadbar}
                                             popup={popup}

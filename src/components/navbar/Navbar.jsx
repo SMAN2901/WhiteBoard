@@ -55,7 +55,13 @@ class Navbar extends Component {
             <Link to={"/user/" + user.username}>
                 <img
                     className="nav-profile-img"
-                    src={user ? user.profile_pic : ""}
+                    src={
+                        user
+                            ? user.profile_pic
+                                ? user.profile_pic
+                                : "/assets/images/profile_pic.png"
+                            : "/assets/images/profile_pic.png"
+                    }
                     alt=""
                 ></img>
             </Link>
