@@ -133,7 +133,7 @@ class CourseCreateForm extends Form {
                     {this.renderInput("tags", "Tags", "course-tags-inp")}
                     {this.renderInput(
                         "fee",
-                        "Course Fee in BDT",
+                        "Course Fee in USD",
                         "course-fee-inp"
                     )}
                     {this.renderButton("Submit", "course-create-button")}

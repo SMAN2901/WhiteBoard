@@ -9,6 +9,7 @@ import SignupForm from "./components/form/signup/SignupForm";
 import CourseCreateForm from "./components/form/coursecreate/CourseCreateForm";
 import Profile from "./components/profile/Profile";
 import CourseDetails from "./components/coursedetails/CourseDetails";
+import Footer from "./components/footer/Footer";
 import { getCurrentUser, checkAuthToken } from "./api/AuthApi";
 import { getUserData } from "./api/UsersApi";
 import "./App.css";
@@ -179,6 +180,7 @@ class App extends Component {
                                     )}
                                 />
                             </Switch>
+                            <Footer />
                         </React.Fragment>
                     );
                 }}

@@ -36,7 +36,7 @@ class Courses extends Component {
         return courses === "pending" ? null : (
             <div className="courses">
                 {this.state.courses.map(item => (
-                    <Course key={item.course_id} data={item} />
+                    <Course key={item.course_id} {...this.props} data={item} />
                 ))}
             </div>
         );

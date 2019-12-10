@@ -8,7 +8,7 @@ class Home extends Component {
         return (
             <React.Fragment>
                 <SiteBanner />
-                <Courses loadbar={loadbar} popup={popup} />
+                <Courses {...this.props} loadbar={loadbar} popup={popup} />
             </React.Fragment>
         );
     }

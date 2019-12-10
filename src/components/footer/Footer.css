@@ -1,0 +1,17 @@
+.footer-container {
+    width: 100%;
+    margin-top: 250px;
+    margin-bottom: 20px;
+    text-align: center;
+    display: block;
+}
+
+.footer-container p {
+    margin: 4px;
+    color: white;
+}
+
+.footer-container span {
+    margin: 2px;
+    color: rgb(0, 255, 255);
+}

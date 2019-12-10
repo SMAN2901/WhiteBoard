@@ -27,38 +27,49 @@ class Course extends Component {
 
     render() {
         const { course_id, title, author, tags, rating, fee } = this.props.data;
-        const bannerStyle = {
-            backgroundImage: `url(${this.state.bannerUrl})`
-        };
 
         return (
-            <div className="course-container">
-                <div className="course-value">
-                    <p className="course-rating">
-                        {rating.toFixed(1)}{" "}
-                        <i className="fas fa-star icon-star"></i>
-                    </p>
-                    <p className="course-fee">{fee.toFixed(2)}$</p>
-                </div>
-                <div className="course-banner" style={bannerStyle}></div>
-                <div className="course-info">
-                    <Link
-                        className="course-title-link"
-                        to={`/course/${course_id}`}
-                    >
-                        <p className="course-title">{title}</p>
-                    </Link>
-                    <Link
-                        className="course-author-link"
-                        to={`/user/${author.username}`}
-                    >
-                        <p className="course-author">{author.name}</p>
-                    </Link>
-                    {tags.map(tag => (
-                        <p key={tag} className="course-tags">
-                            {tag}
-                        </p>
-                    ))}
+            <div className="courses-container">
+                <div
+                    className="course-container"
+                    onClick={() => {
+                        this.props.history.push(`/course/${course_id}`);
+                    }}
+                >
+                    <img
+                        className="course-banner"
+                        src={this.state.bannerUrl}
+                        alt=""
+                    />
+                    <div className="course-badge">BESTSELLER</div>
+                    <div className="course-values">
+                        <div className="course-fee">{fee.toFixed(2)} $</div>
+                        <div className="course-rating-icon">
+                            <i className="material-icons rating-icon">
+                                bar_chart
+                            </i>
+                        </div>
+                        <div className="course-rating">{rating.toFixed(1)}</div>
+                    </div>
+                    <div className="course-info">
+                        <Link
+                            className="course-title"
+                            to={`/course/${course_id}`}
+                        >
+                            {title}
+                        </Link>
+                        <Link
+                            className="course-author"
+                            to={`/user/${author.username}`}
+                        >
+                            {author.name}
+                        </Link>
+                        {tags.map(tag => (
+                            <span key={tag} className="course-tags">
+                                {tag}
+                            </span>
+                        ))}
+                    </div>
                 </div>
             </div>
         );
