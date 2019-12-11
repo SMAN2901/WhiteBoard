@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { getRandomInt } from "../../services/util";
+import { shuffleArray } from "../../services/util";
 import $ from "jquery";
 import "./SiteBanner.css";
 
@@ -7,7 +7,7 @@ class SiteBanner extends Component {
     animate = true;
     fun = null;
 
-    images = [
+    images = shuffleArray([
         {
             classes: "sitebanner-img1",
             src: "/assets/images/banner01.png"
@@ -20,7 +20,7 @@ class SiteBanner extends Component {
             classes: "sitebanner-img3",
             src: "/assets/images/banner03.png"
         }
-    ];
+    ]);
 
     componentDidMount() {
         this.toggleImg(0);
@@ -69,13 +69,14 @@ class SiteBanner extends Component {
     };
 
     render() {
-        const index = getRandomInt(0, this.images.length - 1);
-        const wallpaper = this.images[index].src;
-
         return (
             <div className="sitebanner-container">
                 <div className="wallp-container">
-                    <img className="wallp-img" src={wallpaper} alt=""></img>
+                    <img
+                        className="wallp-img"
+                        src={this.images[0].src}
+                        alt=""
+                    ></img>
                 </div>
                 <div className="image-container">
                     {this.images.map(item => (
