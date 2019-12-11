@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { getRandomInt } from "../../services/util";
 import $ from "jquery";
 import "./SiteBanner.css";
 
@@ -68,14 +69,13 @@ class SiteBanner extends Component {
     };
 
     render() {
+        const index = getRandomInt(0, this.images.length - 1);
+        const wallpaper = this.images[index].src;
+
         return (
             <div className="sitebanner-container">
                 <div className="wallp-container">
-                    <img
-                        className="wallp-img"
-                        src={this.images[0].src}
-                        alt=""
-                    ></img>
+                    <img className="wallp-img" src={wallpaper} alt=""></img>
                 </div>
                 <div className="image-container">
                     {this.images.map(item => (
