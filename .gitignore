@@ -10,8 +10,6 @@
 
 # production
 /build
-/package.json
-/package-lock.json
 /todo.txt
 /debug.log
 
