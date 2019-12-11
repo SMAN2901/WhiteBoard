@@ -13,12 +13,14 @@
     height: 460px;
     margin: 50px;
     display: inline-block;
+    position: relative;
 }
 
 .sitebanner-img {
     width: 450px;
     height: 400px;
     display: none;
+    position: absolute;
 }
 
 .searchbox-container {

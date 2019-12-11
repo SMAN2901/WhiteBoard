@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { getUserData } from "../../api/UsersApi";
 import { getCurrentUser } from "../../api/AuthApi";
 import "./Profile.css";
@@ -11,11 +11,14 @@ class Profile extends Component {
     };
 
     async componentDidMount() {
-        const { loadbar } = this.props;
+        const { loadbar, popup } = this.props;
         loadbar.start();
         const username = this.props.match.params.username;
         const user = await getUserData(username);
-        if (user !== "pending") loadbar.stop();
+        if (user !== "pending") {
+            loadbar.stop();
+            if (user === null) popup.show("error", "404", "Not found");
+        }
         this.setState({ user });
     }
 
@@ -94,7 +97,7 @@ class Profile extends Component {
                 {createcourse_link}
             </React.Fragment>
         ) : (
-            <h2 style={{ color: "red" }}>Not Found</h2>
+            <Redirect to="/" />
         );
     }
 }

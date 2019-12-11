@@ -53,12 +53,18 @@ class Course extends Component {
                     </div>
                     <div className="course-info">
                         <Link
+                            onClick={e => {
+                                e.stopPropagation();
+                            }}
                             className="course-title"
                             to={`/course/${course_id}`}
                         >
                             {title}
                         </Link>
                         <Link
+                            onClick={e => {
+                                e.stopPropagation();
+                            }}
                             className="course-author"
                             to={`/user/${author.username}`}
                         >

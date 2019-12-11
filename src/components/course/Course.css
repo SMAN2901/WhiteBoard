@@ -29,12 +29,11 @@
 .course-values {
     width: 100%;
     display: table;
-    background-color: rgb(252, 62, 62);
+    background-color: rgb(252, 60, 60);
 }
 
 .course-fee {
     color: white;
-    background-color: rgb(255, 60, 60);
     text-align: left;
     display: table-cell;
     font-size: 16px;
@@ -46,7 +45,6 @@
 
 .course-rating {
     color: white;
-    background-color: rgb(252, 62, 62);
     text-align: left;
     display: table-cell;
     font-size: 16px;
@@ -58,7 +56,6 @@
 
 .course-rating-icon {
     color: white;
-    background-color: rgb(252, 62, 62);
     text-align: right;
     display: table-cell;
     font-size: 16px;
@@ -74,10 +71,9 @@
 
 .course-title {
     text-decoration: none;
-    color: rgb(51, 50, 50);
+    color: black;
     font-size: 18px;
     font-family: "Exo 2", sans-serif;
-    font-weight: bold;
     display: block;
     margin: 5px;
     white-space: nowrap;
@@ -87,10 +83,9 @@
 
 .course-author {
     text-decoration: none;
-    color: rgb(0, 141, 108);
+    color: rgb(0, 87, 66);
     font-size: 16px;
     font-family: "Exo 2", sans-serif;
-    font-weight: bold;
     display: block;
     margin: 5px;
     white-space: nowrap;
