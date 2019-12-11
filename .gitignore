@@ -10,6 +10,18 @@
 
 # production
 /build
+/package.json
+/package-lock.json
+/todo.txt
+/debug.log
+
+# firebase
+/.firebase
+/.firebaserc
+/firebase.json
+/404.html
+/index.html
+
 
 # misc
 .DS_Store
