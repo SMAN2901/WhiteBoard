@@ -1,0 +1,26 @@
+.coursedetails-container {
+    width: calc(100% - 10px);
+    max-width: 900px;
+    margin: auto;
+    margin-top: 0px;
+    padding-top: 90px;
+}
+
+.coursedetails-banner-container {
+    max-height: 300px;
+    overflow: hidden;
+    box-shadow: 1px 1px 5px black;
+}
+
+.coursedetails-banner {
+    width: 100%;
+    height: auto;
+    box-shadow: 1px 1px 5px black;
+}
+
+.coursedetails-div {
+    width: calc(100% - 10px);
+    margin: 5px;
+    text-align: center;
+    padding-bottom: 20px;
+}

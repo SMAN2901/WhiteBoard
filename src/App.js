@@ -8,7 +8,7 @@ import LoginForm from "./components/form/login/LoginForm";
 import SignupForm from "./components/form/signup/SignupForm";
 import CourseCreateForm from "./components/form/coursecreate/CourseCreateForm";
 import Profile from "./components/profile/Profile";
-import CourseDetails from "./components/coursedetails/CourseDetails";
+import CoursePage from "./components/coursepage/CoursePage";
 import { getCurrentUser, checkAuthToken } from "./api/AuthApi";
 import { getUserData } from "./api/UsersApi";
 import "./App.css";
@@ -163,7 +163,7 @@ class App extends Component {
                                 <Route
                                     path="/course/:id?"
                                     render={props => (
-                                        <CourseDetails
+                                        <CoursePage
                                             {...props}
                                             loadbar={loadbar}
                                             popup={popup}

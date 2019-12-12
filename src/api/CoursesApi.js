@@ -73,7 +73,8 @@ export async function getCourses() {
                 name: author
                     ? `${author.first_name} ${author.last_name}`
                     : null,
-                username: author ? author.username : null
+                username: author ? author.username : null,
+                profile_pic: author ? author.profile_pic : null
             };
 
             const approved_by = await getUserData(courses[i].approved_by);
@@ -81,7 +82,8 @@ export async function getCourses() {
                 name: approved_by
                     ? `${approved_by.first_name} ${approved_by.last_name}`
                     : null,
-                username: approved_by ? approved_by.username : null
+                username: approved_by ? approved_by.username : null,
+                profile_pic: approved_by ? approved_by.profile_pic : null
             };
 
             // temporary fix
@@ -105,7 +107,8 @@ export async function getCourse(id) {
         const author = await getUserData(course.author);
         course.author = {
             name: author ? `${author.first_name} ${author.last_name}` : null,
-            username: author ? author.username : null
+            username: author ? author.username : null,
+            profile_pic: author ? author.profile_pic : null
         };
 
         const approved_by = await getUserData(course.approved_by);
@@ -113,12 +116,13 @@ export async function getCourse(id) {
             name: approved_by
                 ? `${approved_by.first_name} ${approved_by.last_name}`
                 : null,
-            username: approved_by ? approved_by.username : null
+            username: approved_by ? approved_by.username : null,
+            profile_pic: approved_by ? approved_by.profile_pic : null
         };
 
         return course;
     } catch (ex) {
-        return [];
+        throw ex;
     }
 }
 
@@ -137,7 +141,8 @@ export async function getLatestCourse() {
         const author = await getUserData(course.author);
         course.author = {
             name: author ? `${author.first_name} ${author.last_name}` : null,
-            username: author ? author.username : null
+            username: author ? author.username : null,
+            profile_pic: author ? author.profile_pic : null
         };
 
         const approved_by = await getUserData(course.approved_by);
@@ -145,11 +150,12 @@ export async function getLatestCourse() {
             name: approved_by
                 ? `${approved_by.first_name} ${approved_by.last_name}`
                 : null,
-            username: approved_by ? approved_by.username : null
+            username: approved_by ? approved_by.username : null,
+            profile_pic: approved_by ? approved_by.profile_pic : null
         };
 
         return course;
     } catch (ex) {
-        return null;
+        throw ex;
     }
 }

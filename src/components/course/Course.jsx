@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import HashTag from "../hashtag/HashTag";
 import "./Course.css";
 
 class Course extends Component {
@@ -71,9 +72,7 @@ class Course extends Component {
                             {author.name}
                         </Link>
                         {tags.map(tag => (
-                            <span key={tag} className="course-tags">
-                                {tag}
-                            </span>
+                            <HashTag key={tag} tag={tag} />
                         ))}
                     </div>
                 </div>

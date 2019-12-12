@@ -21,6 +21,7 @@
     height: 400px;
     display: none;
     position: absolute;
+    background-color: rgb(51, 41, 88);
 }
 
 .searchbox-container {

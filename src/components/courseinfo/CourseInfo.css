@@ -1,0 +1,123 @@
+.coursedetails-info-container {
+    width: calc(100% - 320px);
+    min-width: 280px;
+    display: inline-block;
+    vertical-align: top;
+    margin: 10px;
+    text-align: initial;
+}
+
+.coursedetails-info-container p {
+    word-break: break-all;
+}
+
+.coursedetails-title {
+    color: white;
+    font-family: "Exo 2", sans-serif;
+    font-size: 24px;
+    margin: 5px;
+}
+
+.coursedetails-author {
+    text-decoration: none;
+    color: rgb(0, 174, 255);
+    font-family: "Exo 2", sans-serif;
+    font-size: 18px;
+    margin: 5px;
+}
+
+.coursedetails-author-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    vertical-align: middle;
+}
+
+.coursedetails-author-name {
+    text-decoration: none;
+    display: inline-block;
+    margin: 5px;
+    color: rgb(0, 195, 255);
+}
+
+.coursedetails-author-name:hover {
+    text-decoration: underline;
+}
+
+.coursedetails-enroll {
+    text-decoration: none;
+    color: rgb(51, 41, 88);
+    background-color: orange;
+    font-family: "Exo 2", sans-serif;
+    font-size: 20px;
+    margin: 5px;
+    padding: 3px;
+    padding-left: 5px;
+    padding-right: 5px;
+    border-radius: 3px;
+    box-shadow: 1px 1px 5px black;
+}
+
+.coursedetails-enroll:hover {
+    background-color: rgb(0, 174, 255);
+}
+
+.coursedetails-enroll:active {
+    background-color: gray;
+}
+
+.coursedetails-separator {
+    height: 30px;
+}
+
+.coursedetails-fee,
+.coursedetails-rating,
+.coursedetails-language,
+.coursedetails-length,
+.coursedetails-difficulty {
+    color: rgb(185, 185, 185);
+    font-size: 18px;
+    font-family: "Exo 2", sans-serif;
+    margin: 5px;
+}
+
+.coursedetails-fee-icon,
+.coursedetails-rating-icon,
+.coursedetails-language-icon,
+.coursedetails-length-icon,
+.coursedetails-difficulty-icon {
+    color: orange;
+    font-size: 36px;
+    vertical-align: middle;
+    margin-right: 5px;
+}
+
+.coursedetails-outline-header,
+.coursedetails-prerequisites-header {
+    color: white;
+    font-family: "Exo 2", sans-serif;
+    font-size: 18px;
+    margin: 5px;
+    padding-left: 5px;
+    border-radius: 2px;
+    background: linear-gradient(to right, rgb(0, 132, 255), transparent);
+}
+
+.coursedetails-outline,
+.coursedetails-prerequisites {
+    color: white;
+    font-family: "Exo 2", sans-serif;
+    font-size: 14px;
+    margin: 5px;
+}
+
+.coursedetails-author:hover {
+    text-decoration: underline;
+}
+
+@media screen and (max-width: 650px) {
+    .coursedetails-info-container {
+        width: calc(100% - 20px);
+        min-width: 0px;
+    }
+}

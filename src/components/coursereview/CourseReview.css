@@ -1,0 +1,95 @@
+.coursereview-div {
+    width: calc(100% - 320px);
+    height: 400px;
+    min-width: 280px;
+    display: inline-block;
+    vertical-align: top;
+    margin: 10px;
+}
+
+.coursereview-header {
+    color: white;
+    font-family: "Exo 2", sans-serif;
+    font-size: 22px;
+    margin: 5px;
+    padding-left: 5px;
+    border-radius: 2px;
+    background: linear-gradient(to right, rgb(0, 132, 255), transparent);
+}
+
+.coursereview-container {
+    width: 100%;
+    display: inline-block;
+    text-align: center;
+}
+
+.coursereview-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: inline-block;
+    vertical-align: top;
+    margin: 5px;
+}
+
+.coursereview-nametext {
+    width: calc(100% - 80px);
+    display: inline-block;
+    vertical-align: top;
+    margin: 5px;
+    padding-bottom: 10px;
+    text-align: initial;
+    border-bottom: 2px solid rgb(0, 110, 255);
+}
+
+.coursereview-name {
+    text-decoration: none;
+    color: rgb(0, 183, 255);
+    font-family: "Exo 2", sans-serif;
+    font-size: 18px;
+    margin: 5px;
+    margin-top: 0px;
+    word-break: break-all;
+    display: inline-block;
+}
+
+.coursereview-name:hover {
+    text-decoration: underline;
+}
+
+.coursereview-text {
+    color: white;
+    font-family: "Exo 2", sans-serif;
+    font-size: 16px;
+    margin: 5px;
+    margin-top: 0px;
+    word-break: break-all;
+}
+
+.coursereview-rating {
+    color: white;
+    font-size: 14px;
+    font-family: "Exo 2", sans-serif;
+    background-color: rgb(21, 133, 185);
+    display: inline-block;
+    margin: 0px;
+    margin-left: 5px;
+    padding-left: 2px;
+    padding-right: 2px;
+    border-radius: 2px;
+}
+
+.rating-high {
+    background-color: rgb(86, 167, 20);
+}
+
+.rating-low {
+    background-color: rgb(214, 50, 50);
+}
+
+@media screen and (max-width: 650px) {
+    .coursereview-div {
+        width: calc(100% - 20px);
+        min-width: 0px;
+    }
+}

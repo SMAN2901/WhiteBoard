@@ -98,19 +98,6 @@
     text-decoration: underline;
 }
 
-.course-tags {
-    margin: 0;
-    margin-left: 5px;
-    padding: 2px;
-    font-family: "Exo 2", sans-serif;
-    color: white;
-    background-color: rgb(2, 61, 109);
-    font-size: 14px;
-    border-radius: 2px;
-    white-space: nowrap;
-    display: inline-block;
-}
-
 .course-container:hover {
     transform: scale(1.1);
 }
