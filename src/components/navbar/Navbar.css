@@ -1,47 +1,68 @@
 .navbar-container {
     width: 100%;
+    max-width: 1080px;
     height: 50px;
-    background-color: white;
-    box-shadow: 1px 1px 5px black;
-    align-items: center;
-    justify-content: space-between;
-    display: flex;
     position: fixed;
     z-index: 100;
+    background-color: white;
+    text-align: center;
 }
 
 .navbar-logo {
-    height: flex;
-    display: flex;
-    margin: 10px;
+    width: 150px;
+    height: 100%;
+    vertical-align: middle;
     font-family: "Exo 2", sans-serif;
     font-size: 24px;
+    display: inline-block;
+}
+
+.navbar-user {
+    width: calc(100% - 152px);
+    height: 100%;
+    font-family: "Exo 2", sans-serif;
+    display: inline-block;
+    text-align: right;
 }
 
 .navbar-logo-text {
     font-weight: bold;
     text-decoration: none;
+    display: inline-block;
+    vertical-align: middle;
+    margin-top: 8px;
     color: rgb(51, 41, 88);
+}
+
+.nav-profile-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: inline-block;
+    vertical-align: middle;
+    margin-bottom: 5px;
 }
 
 .logout-icon {
     font-size: 30px;
-    text-decoration: none;
     color: rgb(0, 119, 255);
-    margin-top: 4px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-bottom: 5px;
     margin-left: 10px;
     margin-right: 10px;
-}
-
-.navbar-logout {
-    display: none;
 }
 
 .navbar-profile {
     text-decoration: none;
     font-weight: bold;
+    font-family: "Exo 2", sans-serif;
     color: rgb(0, 119, 255);
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 100%;
     margin: 10px;
+    margin-bottom: 15px;
 }
 
 .navbar-profile:hover {
@@ -53,7 +74,6 @@
 }
 
 .navbar-login,
-.navbar-logout,
 .navbar-signup {
     text-decoration: none;
     color: rgb(50, 180, 255);
@@ -62,8 +82,9 @@
     padding: 5px;
     margin: 10px;
     margin-left: 0px;
-    margin-right: 5px;
+    margin-right: 10px;
     border-radius: 3px;
+    display: inline-block;
 }
 
 .navbar-signup {
@@ -95,20 +116,6 @@
     margin: 10px;
     margin-left: 0px;
     margin-right: 0px;
-}
-
-.navbar-user {
-    color: white;
-    font-family: "Exo 2", sans-serif;
-    margin: 10px;
-    display: flex;
-}
-
-.nav-profile-img {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    margin: 0;
 }
 
 @media screen and (max-width: 500px) {

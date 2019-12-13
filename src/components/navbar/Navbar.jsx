@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import createFragment from "react-addons-create-fragment";
 import { Link } from "react-router-dom";
 import { logout } from "../../api/AuthApi";
 import "./Navbar.css";
@@ -20,29 +19,15 @@ class Navbar extends Component {
         );
 
         const logoutLink = user ? (
-            <React.Fragment>
-                <Link
-                    to=""
-                    onClick={() => {
-                        logout();
-                        window.location = "/";
-                    }}
-                >
-                    <i className="material-icons logout-icon">
-                        power_settings_new
-                    </i>
-                </Link>
-                <Link
-                    className="navbar-logout"
-                    to=""
-                    onClick={() => {
-                        logout();
-                        window.location = "/";
-                    }}
-                >
-                    Log Out
-                </Link>
-            </React.Fragment>
+            <Link
+                to=""
+                onClick={() => {
+                    logout();
+                    window.location = "/";
+                }}
+            >
+                <i className="material-icons logout-icon">power_settings_new</i>
+            </Link>
         ) : null;
 
         const profileLink = user ? (
@@ -75,15 +60,15 @@ class Navbar extends Component {
                     </Link>
                 </div>
                 <div className="navbar-user">
-                    {user === "pending"
-                        ? null
-                        : user
-                        ? createFragment({
-                              profileImage: profileImage,
-                              profileLink: profileLink,
-                              logoutLink: logoutLink
-                          })
-                        : loginLink}
+                    {user === "pending" ? null : user ? (
+                        <React.Fragment>
+                            {profileImage}
+                            {profileLink}
+                            {logoutLink}
+                        </React.Fragment>
+                    ) : (
+                        loginLink
+                    )}
                 </div>
             </div>
         );

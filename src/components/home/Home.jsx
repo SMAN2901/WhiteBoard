@@ -8,7 +8,12 @@ class Home extends Component {
         return (
             <React.Fragment>
                 <SiteBanner />
-                <Courses {...this.props} loadbar={loadbar} popup={popup} />
+                <Courses
+                    {...this.props}
+                    loadbar={loadbar}
+                    popup={popup}
+                    queryType="all"
+                />
             </React.Fragment>
         );
     }

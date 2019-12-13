@@ -97,26 +97,22 @@ class SiteBanner extends Component {
                         type="text"
                         placeholder="Search here"
                     ></input>
-                    <span className="sitebanner-text">
+                    <div className="sitebanner-text-container">
                         <i className="material-icons sitebanner-icons">
                             record_voice_over
                         </i>
-                        Teach on WhiteBoard
-                    </span>
-                    <br></br>
-                    <br></br>
-                    <span className="sitebanner-text">
+                        <p className="sitebanner-text">Teach on WhiteBoard</p>
+                    </div>
+                    <div className="sitebanner-text-container">
                         <i className="material-icons sitebanner-icons">share</i>
-                        Share your knowledge
-                    </span>
-                    <br></br>
-                    <br></br>
-                    <span className="sitebanner-text">
+                        <p className="sitebanner-text">Share your knowledge</p>
+                    </div>
+                    <div className="sitebanner-text-container">
                         <i className="material-icons sitebanner-icons">
                             school
                         </i>
-                        Make learning easy!
-                    </span>
+                        <p className="sitebanner-text">Make learning easy</p>
+                    </div>
                 </div>
             </div>
         );

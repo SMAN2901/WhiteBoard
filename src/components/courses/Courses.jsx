@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Course from "../course/Course";
-import { getCourses } from "../../api/CoursesApi";
+import { getCourses, getCreatedCourses } from "../../api/CoursesApi";
 import "./Courses.css";
 
 class Courses extends Component {
@@ -12,18 +12,18 @@ class Courses extends Component {
 
     async componentDidMount() {
         this._isMounted = true;
-        const { loadbar } = this.props;
+        const { loadbar, queryType } = this.props;
         loadbar.start();
-        const courses = await getCourses();
+        var courses = "pending";
+
+        if (queryType === "created")
+            courses = await getCreatedCourses(this.props.user);
+        else courses = await getCourses();
+
         if (courses !== "pending") {
             if (this._isMounted) this.setState({ courses });
             loadbar.stop();
         }
-    }
-
-    async componentDidUpdate() {
-        //const courses = await getCourses();
-        //if (this._isMounted) this.setState({ courses });
     }
 
     componentWillUnmount() {

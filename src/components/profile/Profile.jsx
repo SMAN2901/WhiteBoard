@@ -3,6 +3,7 @@ import { Link, Redirect } from "react-router-dom";
 import { getUserData } from "../../api/UsersApi";
 import { getCurrentUser } from "../../api/AuthApi";
 import "./Profile.css";
+import Courses from "../courses/Courses";
 
 class Profile extends Component {
     state = {
@@ -54,20 +55,44 @@ class Profile extends Component {
 
     render() {
         const { user } = this.state;
+        const { loadbar, popup } = this.props;
         const currentUserData = getCurrentUser();
         const currentUser = currentUserData ? currentUserData.username : null;
 
+        const editprofile_link =
+            this.props.match.params.username === currentUser ? (
+                <Link className="edit-profile-link" to="/user/edit">
+                    <i className="material-icons edit-profile-icon">edit</i>
+                    <span className="edit-profile-text">Edit profile</span>
+                </Link>
+            ) : null;
+
         const createcourse_link =
             this.props.match.params.username === currentUser ? (
-                <Link className="create-course-btn" to="/createcourse">
-                    Create a new course
+                <Link className="create-course-link" to="/course/create">
+                    <i className="material-icons create-course-icon">
+                        create_new_folder
+                    </i>
+                    <span className="create-course-text">
+                        Create a new course
+                    </span>
+                </Link>
+            ) : null;
+
+        const updatecourse_link =
+            this.props.match.params.username === currentUser ? (
+                <Link className="update-course-link" to="/course/update">
+                    <i className="material-icons update-course-icon">
+                        playlist_add
+                    </i>
+                    <span className="update-course-text">Update a course</span>
                 </Link>
             ) : null;
 
         return user === "pending" ? null : user ? (
             <React.Fragment>
                 <div className="profile-info">
-                    <div className="profile-info-left">
+                    <div className="profile-img-div">
                         <div className="profile-img-container">
                             <div className="profile-img-outer"></div>
                             <div className="profile-img-inner"></div>
@@ -90,11 +115,23 @@ class Profile extends Component {
                             {user ? user.email : ""}
                         </span>
                     </div>
-                    <div className="profile-info-right">
+                    <div className="profile-bio-container">
                         <p className="profile-bio">{user ? user.bio : ""}</p>
                     </div>
+                    <br></br>
+                    {editprofile_link}
+                    <br></br>
+                    {createcourse_link}
+                    <br></br>
+                    {updatecourse_link}
                 </div>
-                {createcourse_link}
+                <Courses
+                    {...this.props}
+                    loadbar={loadbar}
+                    popup={popup}
+                    queryType="created"
+                    user={user.id}
+                />
             </React.Fragment>
         ) : (
             <Redirect to="/" />

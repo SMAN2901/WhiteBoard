@@ -69,26 +69,25 @@
     height: 30px;
 }
 
-.coursedetails-fee,
-.coursedetails-rating,
-.coursedetails-language,
-.coursedetails-length,
-.coursedetails-difficulty {
-    color: rgb(185, 185, 185);
-    font-size: 18px;
-    font-family: "Exo 2", sans-serif;
+.coursedetails-value {
+    display: block;
+}
+
+.coursedetails-value-icon {
+    color: orange;
+    font-size: 24px;
+    display: inline-block;
+    vertical-align: middle;
     margin: 5px;
 }
 
-.coursedetails-fee-icon,
-.coursedetails-rating-icon,
-.coursedetails-language-icon,
-.coursedetails-length-icon,
-.coursedetails-difficulty-icon {
-    color: orange;
-    font-size: 36px;
+.coursedetails-value-text {
+    color: white;
+    font-size: 18px;
+    font-family: "Exo 2", sans-serif;
+    display: inline-block;
     vertical-align: middle;
-    margin-right: 5px;
+    margin: 5px;
 }
 
 .coursedetails-outline-header,
@@ -106,7 +105,7 @@
 .coursedetails-prerequisites {
     color: white;
     font-family: "Exo 2", sans-serif;
-    font-size: 14px;
+    font-size: 16px;
     margin: 5px;
 }
 

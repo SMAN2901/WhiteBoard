@@ -27,14 +27,27 @@
                 background-color: rgb(51, 41, 88);
             }
 
+            .white-navbar {
+                width: 100%;
+                height: 50px;
+                background-color: white;
+                box-shadow: 1px 1px 5px black;
+                position: fixed;
+            }
+
             body {
                 height: 100%;
                 margin: 0;
+                text-align: center;
             }
 
             #root {
+                width: 100%;
+                max-width: 1080px;
                 min-height: 100%;
                 margin-bottom: 200px;
+                text-align: center;
+                display: inline-block;
             }
 
             footer {
@@ -61,6 +74,7 @@
     </head>
     <body>
         <noscript>You need to enable JavaScript to run this app.</noscript>
+        <nav class="white-navbar"></nav>
         <div id="root"></div>
         <footer>
             <p style="color:white;">Developed and maintained by</p>

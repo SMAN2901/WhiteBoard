@@ -140,21 +140,21 @@ class App extends Component {
                                     )}
                                 />
                                 <Route
-                                    path="/createcourse"
+                                    path="/user/:username?"
                                     render={props => (
-                                        <CourseCreateForm
+                                        <Profile
                                             {...props}
+                                            user={user}
                                             loadbar={loadbar}
                                             popup={popup}
                                         />
                                     )}
                                 />
                                 <Route
-                                    path="/user/:username?"
+                                    path="/course/create"
                                     render={props => (
-                                        <Profile
+                                        <CourseCreateForm
                                             {...props}
-                                            user={user}
                                             loadbar={loadbar}
                                             popup={popup}
                                         />
