@@ -44,9 +44,9 @@ class App extends Component {
         window.scrollTo(0, 0);
         var user = getCurrentUser();
         var prevUser = this.state.user;
-        if (prevUser) {
+        if (prevUser && user) {
             if (prevUser !== "pending" && prevUser.username !== user.username) {
-                if (user) user = await getUserData(user.username);
+                user = await getUserData(user.username);
                 this.setState({ user });
             }
         } else {
