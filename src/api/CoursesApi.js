@@ -12,7 +12,7 @@ function filterTags(tags) {
     // filtering tags according to length
     var a = [];
     var len = 0;
-    var limit = 20;
+    var limit = 30;
     for (var i = 0; i < tags.length; i++) {
         if (len + tags[i].length > limit) break;
         a.push(tags[i]);

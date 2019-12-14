@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import Joi from "joi-browser";
-import "./Form.css";
 
 class Form extends Component {
     state = {
@@ -152,7 +151,9 @@ class Form extends Component {
 
         return (
             <div className="input-container">
-                <label className="input-label">{label}</label>
+                <label className={`input-label ${classes}-label`}>
+                    {label}
+                </label>
                 <select
                     value={data[name]}
                     name={name}

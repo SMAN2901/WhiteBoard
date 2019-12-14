@@ -25,7 +25,10 @@ class CourseInfo extends Component {
             outline,
             prerequisites,
             author,
-            tags
+            tags,
+            language,
+            length,
+            difficulty
         } = this.props.course;
         var defaultImage = "/assets/images/profile_pic.png";
         var image = author.profile_pic ? author.profile_pic : defaultImage;
@@ -55,9 +58,9 @@ class CourseInfo extends Component {
                 <div className="coursedetails-separator"></div>
                 {this.courseValue("payment", "Fee", fee)}
                 {this.courseValue("bar_chart", "Rating", rating)}
-                {this.courseValue("language", "Language", "English")}
-                {this.courseValue("access_time", "Length", "18 Hours")}
-                {this.courseValue("widgets", "Difficulty", "Advanced")}
+                {this.courseValue("language", "Language", language)}
+                {this.courseValue("access_time", "Length", `${length} Hours`)}
+                {this.courseValue("widgets", "Difficulty", difficulty)}
                 <br></br>
                 <p className="coursedetails-outline-header">Course Outline</p>
                 <p className="coursedetails-outline">{outline}</p>

@@ -1,3 +1,108 @@
+.form-input {
+    width: 260px;
+    max-width: calc(100% - 30px);
+    height: 30px;
+    margin: 15px;
+    margin-top: 5px;
+    margin-bottom: 0px;
+    border: none;
+    outline: none;
+    border-bottom: 2px solid white;
+    font-size: 14px;
+    background-color: transparent;
+    color: white;
+    font-family: "Exo 2", sans-serif;
+}
+
+.form-input::placeholder {
+    color: white;
+}
+
+.input-label {
+    margin: 15px;
+    margin-top: 5px;
+    margin-bottom: 0px;
+    color: rgb(178, 187, 179);
+    font-size: 14px;
+    font-family: "Exo 2", sans-serif;
+}
+
+.form-select {
+    width: 198px;
+    max-width: calc(100% - 150px);
+    min-width: 150px;
+    height: 30px;
+    margin: 15px;
+    margin-left: 15px;
+    margin-top: 5px;
+    margin-bottom: 0px;
+    border: none;
+    outline: none;
+    font-size: 14px;
+    background-color: transparent;
+    color: white;
+    font-family: "Exo 2", sans-serif;
+}
+
+.form-select-option {
+    color: black;
+    font-family: "Exo 2", sans-serif;
+}
+
+.form-input[type="date"] {
+    width: 162px;
+    margin-left: 0px;
+}
+
+.form-button {
+    height: 30px;
+    border: none;
+    outline: none;
+    margin: 15px;
+    border-radius: 4px;
+    font-size: 14px;
+    background-color: rgb(0, 162, 255);
+    color: white;
+    font-family: "Exo 2", sans-serif;
+}
+
+.form-button:hover {
+    background-color: rgb(39, 194, 39);
+}
+
+.form-button:active {
+    background-color: rgb(0, 162, 255);
+}
+
+.error-container {
+    width: 260px;
+    height: flex;
+    margin: 15px;
+    margin-bottom: 5px;
+    margin-top: 0px;
+    border-bottom-left-radius: 2px;
+    border-bottom-right-radius: 2px;
+    background-color: rgb(247, 64, 64);
+}
+
+.filefield-container .error-container {
+    margin-top: 5px;
+}
+
+.error-text {
+    color: white;
+    font-size: 12px;
+    margin: 5px;
+    margin-top: 0px;
+    font-family: "Exo 2", sans-serif;
+}
+
+.form-button:disabled {
+    background-color: gray;
+}
+
+/* sign up form specific */
+
 .form-container {
     width: 100%;
     height: flex;

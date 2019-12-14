@@ -4,6 +4,7 @@ import Form from "../Form";
 import Joi from "joi-browser";
 import { isAuthenticated } from "../../../api/AuthApi";
 import { createCourse } from "../../../api/CoursesApi";
+import staticValues from "../../../staticValues.json";
 import "./CourseCreateForm.css";
 
 class CourseCreateForm extends Form {
@@ -14,6 +15,9 @@ class CourseCreateForm extends Form {
             prerequisites: "",
             tags: "",
             fee: "",
+            language: staticValues.languages[0],
+            length: "",
+            difficulty: staticValues.courseDifficulties[0],
             banner: ""
         },
         errors: {}
@@ -41,6 +45,11 @@ class CourseCreateForm extends Form {
         fee: Joi.number()
             .required()
             .label("Course Fee"),
+        language: Joi.string().required(),
+        length: Joi.number()
+            .integer()
+            .required(),
+        difficulty: Joi.string().required(),
         banner: Joi.any().label("Banner")
     };
 
@@ -131,6 +140,29 @@ class CourseCreateForm extends Form {
                         this.filefield_label
                     )}
                     {this.renderInput("tags", "Tags", "course-tags-inp")}
+                    {this.renderSelectBox(
+                        "language",
+                        "Language",
+                        "course-language-select",
+                        staticValues.languages.map(item => ({
+                            value: item,
+                            text: item
+                        }))
+                    )}
+                    {this.renderInput(
+                        "length",
+                        "Length (Hours)",
+                        "course-length-inp"
+                    )}
+                    {this.renderSelectBox(
+                        "difficulty",
+                        "Difficulty",
+                        "course-difficulty-select",
+                        staticValues.courseDifficulties.map(item => ({
+                            value: item,
+                            text: item
+                        }))
+                    )}
                     {this.renderInput(
                         "fee",
                         "Course Fee in USD",
