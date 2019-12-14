@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import HashTag from "../hashtag/HashTag";
 import "./CourseInfo.css";
 
 class CourseInfo extends Component {
@@ -23,7 +24,8 @@ class CourseInfo extends Component {
             rating,
             outline,
             prerequisites,
-            author
+            author,
+            tags
         } = this.props.course;
         var defaultImage = "/assets/images/profile_pic.png";
         var image = author.profile_pic ? author.profile_pic : defaultImage;
@@ -64,6 +66,10 @@ class CourseInfo extends Component {
                     Prerequisites
                 </p>
                 <p className="coursedetails-prerequisites">{prerequisites}</p>
+                <br></br>
+                {tags.map(tag => (
+                    <HashTag {...this.props} key={tag} tag={tag} />
+                ))}
             </div>
         );
     }

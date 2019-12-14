@@ -1,6 +1,5 @@
 .coursedetails-container {
     width: calc(100% - 10px);
-    max-width: 900px;
     margin: auto;
     margin-top: 0px;
     padding-top: 90px;
@@ -8,8 +7,11 @@
 }
 
 .coursedetails-banner-container {
+    max-width: calc(100% - 20px);
     max-height: 300px;
     overflow: hidden;
+    margin-left: 10px;
+    margin-right: 10px;
     box-shadow: 1px 1px 5px black;
 }
 

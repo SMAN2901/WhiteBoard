@@ -72,7 +72,7 @@ class Course extends Component {
                             {author.name}
                         </Link>
                         {tags.map(tag => (
-                            <HashTag key={tag} tag={tag} />
+                            <HashTag {...this.props} key={tag} tag={tag} />
                         ))}
                     </div>
                 </div>

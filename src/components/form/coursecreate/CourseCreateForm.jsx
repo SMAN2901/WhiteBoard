@@ -124,7 +124,7 @@ class CourseCreateForm extends Form {
                     )}
                     {this.renderFileField(
                         "banner",
-                        "Select file",
+                        "Select banner",
                         "course-banner-filefield",
                         "course-banner-filefield-label",
                         this.filefield,

@@ -1,25 +1,22 @@
 .navbar-container {
     width: 100%;
-    max-width: 1080px;
     height: 50px;
+    max-width: 1080px;
     position: fixed;
     z-index: 100;
     background-color: white;
-    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .navbar-logo {
     width: 150px;
-    height: 100%;
-    vertical-align: middle;
-    font-family: "Exo 2", sans-serif;
-    font-size: 24px;
     display: inline-block;
 }
 
 .navbar-user {
-    width: calc(100% - 152px);
-    height: 100%;
+    width: calc(100% - 155px);
     font-family: "Exo 2", sans-serif;
     display: inline-block;
     text-align: right;
@@ -27,10 +24,11 @@
 
 .navbar-logo-text {
     font-weight: bold;
+    font-family: "Exo 2", sans-serif;
+    font-size: 24px;
     text-decoration: none;
     display: inline-block;
     vertical-align: middle;
-    margin-top: 8px;
     color: rgb(51, 41, 88);
 }
 
@@ -40,7 +38,6 @@
     border-radius: 50%;
     display: inline-block;
     vertical-align: middle;
-    margin-bottom: 5px;
 }
 
 .logout-icon {
@@ -48,7 +45,6 @@
     color: rgb(0, 119, 255);
     display: inline-block;
     vertical-align: middle;
-    margin-bottom: 5px;
     margin-left: 10px;
     margin-right: 10px;
 }
@@ -60,9 +56,7 @@
     color: rgb(0, 119, 255);
     display: inline-block;
     vertical-align: middle;
-    line-height: 100%;
     margin: 10px;
-    margin-bottom: 15px;
 }
 
 .navbar-profile:hover {
@@ -85,6 +79,7 @@
     margin-right: 10px;
     border-radius: 3px;
     display: inline-block;
+    vertical-align: middle;
 }
 
 .navbar-signup {
