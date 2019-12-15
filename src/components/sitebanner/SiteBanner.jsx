@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { shuffleArray } from "../../services/util";
+import staticValues from "../../staticValues.json";
 import $ from "jquery";
 import "./SiteBanner.css";
 
@@ -7,20 +8,12 @@ class SiteBanner extends Component {
     animate = true;
     fun = null;
 
-    images = shuffleArray([
-        {
-            classes: "sitebanner-img1",
-            src: "/assets/images/banner01.png"
-        },
-        {
-            classes: "sitebanner-img2",
-            src: "/assets/images/banner02.png"
-        },
-        {
-            classes: "sitebanner-img3",
-            src: "/assets/images/banner03.png"
-        }
-    ]);
+    images = shuffleArray(
+        staticValues.images.siteBanners.map((img, index) => ({
+            classes: "sitebanner" + index.toString(),
+            src: img
+        }))
+    );
 
     componentDidMount() {
         this.toggleImg(0);

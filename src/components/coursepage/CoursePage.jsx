@@ -4,6 +4,7 @@ import CourseInfo from "../courseinfo/CourseInfo";
 import CourseContents from "../coursecontents/CourseContents";
 import CourseReview from "../coursereview/CourseReview";
 import { getCourse, getLatestCourse } from "../../api/CoursesApi";
+import staticValues from "../../staticValues.json";
 import "./CoursePage.css";
 
 class CoursePage extends Component {
@@ -12,6 +13,7 @@ class CoursePage extends Component {
     };
 
     async componentDidMount() {
+        window.scrollTo(0, 0);
         const { loadbar, popup } = this.props;
         const id = this.props.match.params.id;
         loadbar.start();
@@ -39,7 +41,7 @@ class CoursePage extends Component {
 
     render() {
         const { course } = this.state;
-        const defaultBanner = "/assets/images/whiteboard_course.jpg";
+        const defaultBanner = staticValues.images.defaultCourseBanner;
 
         return course === "pending" ? null : course ? (
             <div className="coursedetails-container">

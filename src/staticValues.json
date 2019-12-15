@@ -74,5 +74,14 @@
         "Xhosa"
     ],
     "courseDifficulties": ["Beginner", "Intermediate", "Advanced"],
-    "genders": ["Male", "Female"]
+    "genders": ["Male", "Female"],
+    "images": {
+        "defaultProfileImage": "/assets/images/profile_pic.png",
+        "defaultCourseBanner": "/assets/images/whiteboard_course.jpg",
+        "siteBanners": [
+            "/assets/images/banner01.png",
+            "/assets/images/banner02.png",
+            "/assets/images/banner03.png"
+        ]
+    }
 }

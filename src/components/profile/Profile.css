@@ -52,15 +52,23 @@
     transform-origin: bottom right;
 }
 
-.profile-img {
-    width: 196px;
-    height: 196px;
-    border-radius: 2px;
+.profile-img-holder {
+    width: 200px;
+    height: 200px;
     margin: 5px;
-    padding: 4px;
+    overflow: hidden;
     position: absolute;
-    background-color: rgb(255, 67, 67);
     box-shadow: 1px 1px 5px black;
+    background-color: rgb(255, 67, 67);
+}
+
+.profile-img {
+    width: auto;
+    height: 200px;
+    border-radius: 2px;
+    position: absolute;
+    box-shadow: 1px 1px 5px black;
+    background-position: center;
 }
 
 .profile-name {

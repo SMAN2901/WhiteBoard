@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import HashTag from "../hashtag/HashTag";
+import staticValues from "../../staticValues.json";
 import "./CourseInfo.css";
 
 class CourseInfo extends Component {
@@ -30,7 +31,7 @@ class CourseInfo extends Component {
             length,
             difficulty
         } = this.props.course;
-        var defaultImage = "/assets/images/profile_pic.png";
+        var defaultImage = staticValues.images.defaultProfileImage;
         var image = author.profile_pic ? author.profile_pic : defaultImage;
         fee = fee.toFixed(2).toString() + "$";
         rating = rating.toFixed(2);

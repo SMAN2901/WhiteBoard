@@ -8,6 +8,7 @@ import LoginForm from "./components/form/login/LoginForm";
 import SignupForm from "./components/form/signup/SignupForm";
 import CourseCreateForm from "./components/form/coursecreate/CourseCreateForm";
 import Profile from "./components/profile/Profile";
+import EditProfile from "./components/editprofile/EditProfile";
 import CoursePage from "./components/coursepage/CoursePage";
 import { getCurrentUser, checkAuthToken } from "./api/AuthApi";
 import { getUserData } from "./api/UsersApi";
@@ -41,11 +42,10 @@ class App extends Component {
     }
 
     async componentDidUpdate() {
-        window.scrollTo(0, 0);
         var user = getCurrentUser();
         var prevUser = this.state.user;
         if (prevUser && user) {
-            if (prevUser !== "pending" && prevUser.username !== user.username) {
+            if (prevUser !== "pending" && prevUser !== user) {
                 user = await getUserData(user.username);
                 this.setState({ user });
             }
@@ -134,6 +134,17 @@ class App extends Component {
                                     render={props => (
                                         <SignupForm
                                             {...props}
+                                            loadbar={loadbar}
+                                            popup={popup}
+                                        />
+                                    )}
+                                />
+                                <Route
+                                    path="/edit/profile"
+                                    render={props => (
+                                        <EditProfile
+                                            {...props}
+                                            user={user}
                                             loadbar={loadbar}
                                             popup={popup}
                                         />

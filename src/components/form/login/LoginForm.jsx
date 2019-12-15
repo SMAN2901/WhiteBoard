@@ -11,7 +11,8 @@ class LoginForm extends Form {
             email: "",
             password: ""
         },
-        errors: {}
+        errors: {},
+        loading: false
     };
 
     schema = {
@@ -20,6 +21,7 @@ class LoginForm extends Form {
     };
 
     componentDidMount() {
+        window.scrollTo(0, 0);
         const { loadbar } = this.props;
         loadbar.stop();
     }
@@ -28,6 +30,7 @@ class LoginForm extends Form {
         const { loadbar, popup } = this.props;
         loadbar.start("Logging in");
         try {
+            this.setState({ loading: true });
             const { data } = await login(this.state.data);
             //localStorage.setItem("token", response.headers["auth-token"]);
             storeAuthToken(data.token);
@@ -41,6 +44,7 @@ class LoginForm extends Form {
                 popup.show("error", "Invalid credentials", "Please try again");
             } else popup.show("error", "Error", "Something went wrong");
             loadbar.stop();
+            this.setState({ loading: true });
         }
     };
 
@@ -48,15 +52,15 @@ class LoginForm extends Form {
         return isAuthenticated() ? (
             <Redirect to="/" />
         ) : (
-            <div className="form-container">
+            <div className="login-form-container">
                 <img
                     className="login-img"
                     src="/assets/images/login.png"
                     alt=""
                 ></img>
                 <form className="login-form">
-                    <div className="form-header">
-                        <span className="form-title">Log in here</span>
+                    <div className="login-form-header">
+                        <span className="login-form-title">Log in here</span>
                     </div>
                     {this.renderInput(
                         "email",

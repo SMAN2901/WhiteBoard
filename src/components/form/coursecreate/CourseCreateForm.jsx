@@ -5,6 +5,7 @@ import Joi from "joi-browser";
 import { isAuthenticated } from "../../../api/AuthApi";
 import { createCourse } from "../../../api/CoursesApi";
 import staticValues from "../../../staticValues.json";
+import config from "../../../config.json";
 import "./CourseCreateForm.css";
 
 class CourseCreateForm extends Form {
@@ -20,7 +21,8 @@ class CourseCreateForm extends Form {
             difficulty: staticValues.courseDifficulties[0],
             banner: ""
         },
-        errors: {}
+        errors: {},
+        loading: false
     };
 
     schema = {
@@ -54,6 +56,7 @@ class CourseCreateForm extends Form {
     };
 
     componentDidMount() {
+        window.scrollTo(0, 0);
         const { loadbar } = this.props;
         loadbar.stop();
     }
@@ -62,6 +65,7 @@ class CourseCreateForm extends Form {
         const { loadbar, popup } = this.props;
         loadbar.start("Creating course");
         try {
+            this.setState({ loading: true });
             const course = this.state.data;
             const banner = this.filefield.current.files[0];
             await createCourse(course, banner);
@@ -71,6 +75,7 @@ class CourseCreateForm extends Form {
         } catch (ex) {
             loadbar.stop();
             popup.show("error", "Error", "Couldn't create");
+            this.setState({ loading: false });
         }
     };
 
@@ -88,14 +93,13 @@ class CourseCreateForm extends Form {
     };
 
     validateImage = file => {
-        const imageTypes = ["image/gif", "image/jpeg", "image/png"];
-        const maxFilesize = 2 * 1024 * 1024;
+        const { maxImageSize, imageTypes } = config.validation;
 
         if (!imageTypes.includes(file.type)) {
             return "Selected file is not an image";
         }
 
-        if (file.size > maxFilesize) {
+        if (file.size > maxImageSize) {
             return "File is too large.";
         }
 

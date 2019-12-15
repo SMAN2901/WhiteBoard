@@ -15,7 +15,8 @@ class SignupForm extends Form {
             password: "",
             confirmPassword: ""
         },
-        errors: {}
+        errors: {},
+        loading: false
     };
 
     schema = {
@@ -55,6 +56,7 @@ class SignupForm extends Form {
     };
 
     componentDidMount() {
+        window.scrollTo(0, 0);
         const { loadbar } = this.props;
         loadbar.stop();
     }
@@ -65,6 +67,7 @@ class SignupForm extends Form {
         const { loadbar, popup } = this.props;
         loadbar.start("Signing up");
         try {
+            this.setState({ loading: true });
             const { data } = await signup(this.state.data);
             //localStorage.setItem("token", response.headers["auth-token"]);
             //localStorage.setItem("token", response.data.token);
@@ -79,6 +82,7 @@ class SignupForm extends Form {
                 this.setState({ errors });
             }
             popup.show("error", "Sign up", "failed");
+            this.setState({ loading: false });
         }
     };
 
@@ -100,15 +104,15 @@ class SignupForm extends Form {
         return isAuthenticated() ? (
             <Redirect to="/" />
         ) : (
-            <div className="form-container">
+            <div className="signup-form-container">
                 <img
                     className="signup-img"
                     src="/assets/images/signup.png"
                     alt=""
                 ></img>
                 <form className="signup-form">
-                    <div className="form-header">
-                        <span className="form-title">Sign up here</span>
+                    <div className="signup-form-header">
+                        <span className="signup-form-title">Sign up here</span>
                     </div>
                     {this.renderInput(
                         "first_name",

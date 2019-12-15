@@ -130,14 +130,14 @@ class Form extends Component {
     };
 
     renderButton = (label, classes, ref = null) => {
-        const { errors } = this.state;
+        const { errors, loading } = this.state;
         classes = "form-button " + classes;
 
         return (
             <button
                 className={classes}
                 onClick={this.onSubmit}
-                disabled={Object.keys(errors).length}
+                disabled={Object.keys(errors).length || loading}
                 ref={ref}
             >
                 {label}

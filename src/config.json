@@ -11,5 +11,9 @@
             "courses": "/course/",
             "createCourse": "/course-add/"
         }
+    },
+    "validation": {
+        "maxImageSize": 1048576,
+        "imageTypes": ["image/gif", "image/jpeg", "image/png"]
     }
 }

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import staticValues from "../../staticValues.json";
 import "./CourseReview.css";
 
 class CourseReview extends Component {
@@ -31,7 +32,7 @@ class CourseReview extends Component {
 
     reviewElement = review => {
         var ratingClass = "coursereview-rating";
-        const defaultImage = "/assets/images/profile_pic.png";
+        const defaultImage = staticValues.images.defaultProfileImage;
         var { name, username, image, text, rating } = review;
 
         image = image ? image : defaultImage;

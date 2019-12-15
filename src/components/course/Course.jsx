@@ -1,13 +1,14 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import HashTag from "../hashtag/HashTag";
+import staticValues from "../../staticValues.json";
 import "./Course.css";
 
 class Course extends Component {
     _isMounted = false;
 
     state = {
-        bannerUrl: "/assets/images/whiteboard_course.jpg"
+        bannerUrl: staticValues.images.defaultCourseBanner
     };
 
     componentDidMount() {

@@ -1,17 +1,18 @@
 import React, { Component } from "react";
 import { Link, Redirect } from "react-router-dom";
+import Courses from "../courses/Courses";
 import { getUserData } from "../../api/UsersApi";
 import { getCurrentUser } from "../../api/AuthApi";
+import staticValues from "../../staticValues.json";
 import "./Profile.css";
-import Courses from "../courses/Courses";
 
 class Profile extends Component {
     state = {
-        user: "pending",
-        defaultProfilePic: "/assets/images/profile_pic.png"
+        user: "pending"
     };
 
     async componentDidMount() {
+        window.scrollTo(0, 0);
         const { loadbar, popup } = this.props;
         loadbar.start();
         const username = this.props.match.params.username;
@@ -30,7 +31,7 @@ class Profile extends Component {
         if (username !== prev) {
             this.setState({
                 user: "pending",
-                defaultProfilePic: "/assets/images/profile_pic.png"
+                defaultProfilePic: staticValues.images.defaultProfileImage
             });
             const { loadbar } = this.props;
             loadbar.start();
@@ -61,7 +62,7 @@ class Profile extends Component {
 
         const editprofile_link =
             this.props.match.params.username === currentUser ? (
-                <Link className="edit-profile-link" to="/user/edit">
+                <Link className="edit-profile-link" to="/edit/profile">
                     <i className="material-icons edit-profile-icon">edit</i>
                     <span className="edit-profile-text">Edit profile</span>
                 </Link>
@@ -96,15 +97,18 @@ class Profile extends Component {
                         <div className="profile-img-container">
                             <div className="profile-img-outer"></div>
                             <div className="profile-img-inner"></div>
-                            <img
-                                className="profile-img"
-                                src={
-                                    user.profile_pic
-                                        ? user.profile_pic
-                                        : this.state.defaultProfilePic
-                                }
-                                alt=""
-                            ></img>
+                            <div className="profile-img-holder">
+                                <img
+                                    className="profile-img"
+                                    src={
+                                        user.profile_pic
+                                            ? user.profile_pic
+                                            : staticValues.images
+                                                  .defaultProfileImage
+                                    }
+                                    alt=""
+                                ></img>
+                            </div>
                         </div>
                         <br></br>
                         <span className="profile-name">

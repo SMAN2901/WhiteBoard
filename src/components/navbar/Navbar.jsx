@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { logout } from "../../api/AuthApi";
+import staticValues from "../../staticValues.json";
 import "./Navbar.css";
 
 class Navbar extends Component {
@@ -44,8 +45,8 @@ class Navbar extends Component {
                         user
                             ? user.profile_pic
                                 ? user.profile_pic
-                                : "/assets/images/profile_pic.png"
-                            : "/assets/images/profile_pic.png"
+                                : staticValues.images.defaultProfileImage
+                            : staticValues.images.defaultProfileImage
                     }
                     alt=""
                 ></img>
