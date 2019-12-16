@@ -97,6 +97,19 @@ class Profile extends Component {
                         <div className="profile-img-container">
                             <div className="profile-img-outer"></div>
                             <div className="profile-img-inner"></div>
+                            <div className="profile-img-back-container">
+                                <div
+                                    className="profile-img-back"
+                                    style={{
+                                        backgroundImage: `url(${
+                                            user.profile_pic
+                                                ? user.profile_pic
+                                                : staticValues.images
+                                                      .defaultProfileImage
+                                        })`
+                                    }}
+                                ></div>
+                            </div>
                             <div className="profile-img-holder">
                                 <img
                                     className="profile-img"

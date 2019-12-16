@@ -13,6 +13,16 @@ class EditProfileImage extends Component {
                 <div className="profile-img-container">
                     <div className="profile-img-outer"></div>
                     <div className="profile-img-inner"></div>
+                    <div className="profile-img-back-container">
+                        <div
+                            className="profile-img-back"
+                            style={{
+                                backgroundImage: `url(${
+                                    image ? image : defaultProfileImage
+                                })`
+                            }}
+                        ></div>
+                    </div>
                     <div className="profile-img-holder">
                         <img
                             className="profile-img"

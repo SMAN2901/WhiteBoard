@@ -1,5 +1,7 @@
 import React, { Component } from "react";
+import { Redirect } from "react-router-dom";
 import EditProfileImage from "../editprofileimage/EditProfileImage";
+import ProfileEditForm from "../form/profileeditform/ProfileEditForm";
 import "./EditProfile.css";
 
 class EditProfile extends Component {
@@ -10,15 +12,25 @@ class EditProfile extends Component {
     render() {
         const { loadbar, popup, user } = this.props;
 
-        return user ? (
-            <div className="edit-profile-container">
-                <EditProfileImage
-                    {...this.props}
-                    loadbar={loadbar}
-                    popup={popup}
-                    image={user.profile_pic}
-                />
-            </div>
+        return user !== "pending" ? (
+            user ? (
+                <div className="edit-profile-container">
+                    <EditProfileImage
+                        {...this.props}
+                        loadbar={loadbar}
+                        popup={popup}
+                        image={user.profile_pic}
+                    />
+                    <ProfileEditForm
+                        {...this.props}
+                        loadbar={loadbar}
+                        popup={popup}
+                        user={user}
+                    />
+                </div>
+            ) : (
+                <Redirect to="/" />
+            )
         ) : null;
     }
 }
