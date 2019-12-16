@@ -11,24 +11,30 @@ class Profile extends Component {
         user: "pending"
     };
 
+    _isMounted = false;
+
     async componentDidMount() {
+        this._isMounted = true;
         window.scrollTo(0, 0);
         const { loadbar, popup } = this.props;
-        loadbar.start();
-        const username = this.props.match.params.username;
-        const user = await getUserData(username);
-        if (user !== "pending") {
-            loadbar.stop();
-            if (user === null) popup.show("error", "404", "Not found");
+
+        if (this._isMounted) {
+            loadbar.start();
+            const username = this.props.match.params.username;
+            const user = await getUserData(username);
+            if (user !== "pending") {
+                loadbar.stop();
+                if (user === null) popup.show("error", "404", "Not found");
+            }
+            this.setState({ user });
         }
-        this.setState({ user });
     }
 
     async componentDidUpdate(props) {
         const username = this.props.match.params.username;
         const prev = props.match.params.username;
 
-        if (username !== prev) {
+        if (username !== prev && this._isMounted) {
             this.setState({
                 user: "pending",
                 defaultProfilePic: staticValues.images.defaultProfileImage
@@ -41,18 +47,10 @@ class Profile extends Component {
         }
     }
 
-    /*static async getDerivedStateFromProps(nextProps, prevState) {
-        const username = nextProps.match.params.username;
-        const prevUser =
-            typeof prevState.user === "undefined" ? null : prevState.user;
-
-        if (!prevUser || prevUser === {} || prevUser === "pending") return null;
-        if (username !== prevUser.username) {
-            //console.log(username, prevUser);
-            window.location = window.location.href;
-        }
-        return null;
-    }*/
+    componentWillUnmount() {
+        this._isMounted = false;
+        this.props.loadbar.stop();
+    }
 
     render() {
         const { user } = this.state;

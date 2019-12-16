@@ -3,6 +3,10 @@ import SiteBanner from "../sitebanner/SiteBanner";
 import Courses from "../courses/Courses";
 
 class Home extends Component {
+    componentWillUnmount() {
+        this.props.loadbar.stop();
+    }
+
     render() {
         const { loadbar, popup } = this.props;
         return (

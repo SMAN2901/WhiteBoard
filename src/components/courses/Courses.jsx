@@ -16,18 +16,21 @@ class Courses extends Component {
         loadbar.start();
         var courses = "pending";
 
-        if (queryType === "created")
-            courses = await getCreatedCourses(this.props.user);
-        else courses = await getCourses();
+        if (this._isMounted) {
+            if (queryType === "created")
+                courses = await getCreatedCourses(this.props.user);
+            else courses = await getCourses();
 
-        if (courses !== "pending") {
-            if (this._isMounted) this.setState({ courses });
-            loadbar.stop();
+            if (courses !== "pending") {
+                if (this._isMounted) this.setState({ courses });
+                loadbar.stop();
+            }
         }
     }
 
     componentWillUnmount() {
         this._isMounted = false;
+        this.props.loadbar.stop();
     }
 
     render() {
