@@ -13,10 +13,10 @@ class Courses extends Component {
     async componentDidMount() {
         this._isMounted = true;
         const { loadbar, queryType } = this.props;
-        loadbar.start();
         var courses = "pending";
 
         if (this._isMounted) {
+            loadbar.start();
             if (queryType === "created")
                 courses = await getCreatedCourses(this.props.user);
             else courses = await getCourses();

@@ -17,33 +17,38 @@ class Profile extends Component {
         this._isMounted = true;
         window.scrollTo(0, 0);
         const { loadbar, popup } = this.props;
-
+        const currentUser = this.props.user;
         if (this._isMounted) {
-            loadbar.start();
             const username = this.props.match.params.username;
-            const user = await getUserData(username);
-            if (user !== "pending") {
-                loadbar.stop();
-                if (user === null) popup.show("error", "404", "Not found");
-            }
-            this.setState({ user });
+            if (username !== currentUser.username) {
+                loadbar.start();
+                const user = await getUserData(username);
+                if (user !== "pending") {
+                    loadbar.stop();
+                    if (user === null) popup.show("error", "404", "Not found");
+                }
+                this.setState({ user });
+            } else this.setState({ user: currentUser });
         }
     }
 
     async componentDidUpdate(props) {
-        const username = this.props.match.params.username;
+        const { username } = this.props.match.params;
         const prev = props.match.params.username;
+        const currentUser = this.props.user;
 
         if (username !== prev && this._isMounted) {
-            this.setState({
-                user: "pending",
-                defaultProfilePic: staticValues.images.defaultProfileImage
-            });
-            const { loadbar } = this.props;
-            loadbar.start();
-            const user = await getUserData(username);
-            if (user) loadbar.stop();
-            this.setState({ user });
+            if (username !== currentUser) {
+                this.setState({
+                    user: "pending",
+                    defaultProfilePic: staticValues.images.defaultProfileImage
+                });
+                const { loadbar } = this.props;
+                loadbar.start();
+                const user = await getUserData(username);
+                if (user) loadbar.stop();
+                this.setState({ user });
+            } else this.setState({ user: currentUser });
         }
     }
 
