@@ -4,20 +4,14 @@ import Courses from "../courses/Courses";
 
 class Home extends Component {
     componentWillUnmount() {
-        this.props.loadbar.stop();
+        window.scroll(0, 0);
     }
 
     render() {
-        const { loadbar, popup } = this.props;
         return (
             <React.Fragment>
                 <SiteBanner />
-                <Courses
-                    {...this.props}
-                    loadbar={loadbar}
-                    popup={popup}
-                    queryType="all"
-                />
+                <Courses {...this.props} queryType="all" />
             </React.Fragment>
         );
     }

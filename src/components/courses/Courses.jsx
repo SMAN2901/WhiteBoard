@@ -22,8 +22,10 @@ class Courses extends Component {
             else courses = await getCourses();
 
             if (courses !== "pending") {
-                if (this._isMounted) this.setState({ courses });
-                loadbar.stop();
+                if (this._isMounted) {
+                    this.setState({ courses });
+                    loadbar.stop();
+                }
             }
         }
     }

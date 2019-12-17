@@ -17,6 +17,7 @@ class CoursePage extends Component {
     async componentDidMount() {
         this._isMounted = true;
         window.scrollTo(0, 0);
+        this.props.loadbar.stop();
         const { loadbar, popup } = this.props;
         const id = this.props.match.params.id;
 

@@ -7,7 +7,7 @@ import Home from "./components/home/Home";
 import LoginForm from "./components/form/login/LoginForm";
 import SignupForm from "./components/form/signup/SignupForm";
 import CourseCreateForm from "./components/form/coursecreate/CourseCreateForm";
-import Profile from "./components/profile/Profile";
+import ProfilePage from "./components/profilepage/ProfilePage";
 import EditProfile from "./components/editprofile/EditProfile";
 import CoursePage from "./components/coursepage/CoursePage";
 import { getCurrentUser, checkAuthToken } from "./api/AuthApi";
@@ -153,11 +153,12 @@ class App extends Component {
                                 <Route
                                     path="/user/:username?"
                                     render={props => (
-                                        <Profile
+                                        <ProfilePage
                                             {...props}
                                             user={user}
                                             loadbar={loadbar}
                                             popup={popup}
+                                            key={window.location.href}
                                         />
                                     )}
                                 />
@@ -178,6 +179,7 @@ class App extends Component {
                                             {...props}
                                             loadbar={loadbar}
                                             popup={popup}
+                                            key={window.location.href}
                                         />
                                     )}
                                 />

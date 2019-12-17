@@ -7,6 +7,7 @@ import "./EditProfile.css";
 class EditProfile extends Component {
     componentDidMount() {
         window.scrollTo(0, 0);
+        this.props.loadbar.stop();
     }
 
     render() {

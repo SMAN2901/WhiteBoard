@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { Link, Redirect } from "react-router-dom";
-import Courses from "../courses/Courses";
 import { getUserData } from "../../api/UsersApi";
 import { getCurrentUser } from "../../api/AuthApi";
 import staticValues from "../../staticValues.json";
+import $ from "jquery";
 import "./Profile.css";
 
 class Profile extends Component {
@@ -15,51 +15,53 @@ class Profile extends Component {
 
     async componentDidMount() {
         this._isMounted = true;
-        window.scrollTo(0, 0);
-        const { loadbar, popup } = this.props;
         const currentUser = this.props.user;
+        const currentUsername = currentUser ? currentUser.username : null;
+
         if (this._isMounted) {
             const username = this.props.match.params.username;
-            if (username !== currentUser.username) {
-                loadbar.start();
+            if (username !== currentUsername) {
                 const user = await getUserData(username);
                 if (user !== "pending") {
-                    loadbar.stop();
-                    if (user === null) popup.show("error", "404", "Not found");
+                    if (user === null) {
+                        const { popup } = this.props;
+                        popup.show("error", "404", "Not found");
+                    }
                 }
-                this.setState({ user });
-            } else this.setState({ user: currentUser });
+                if (this._isMounted) this.setState({ user });
+            } else {
+                if (this._isMounted) this.setState({ user: currentUser });
+            }
         }
     }
 
-    async componentDidUpdate(props) {
+    /*async componentDidUpdate(props) {
         const { username } = this.props.match.params;
         const prev = props.match.params.username;
-        const currentUser = this.props.user;
+        const currentUser = this.props.user ? this.props.user.username : null;
 
         if (username !== prev && this._isMounted) {
             if (username !== currentUser) {
-                this.setState({
-                    user: "pending",
-                    defaultProfilePic: staticValues.images.defaultProfileImage
-                });
-                const { loadbar } = this.props;
-                loadbar.start();
+                this.setState({ user: "pending" });
                 const user = await getUserData(username);
-                if (user) loadbar.stop();
                 this.setState({ user });
-            } else this.setState({ user: currentUser });
+            } else {
+                $(".profile-img").css("visibility", "hidden");
+                this.setState({ user: this.props.user });
+            }
         }
-    }
+    }*/
 
     componentWillUnmount() {
         this._isMounted = false;
-        this.props.loadbar.stop();
     }
+
+    onLoad = () => {
+        $(".profile-img").css("visibility", "visible");
+    };
 
     render() {
         const { user } = this.state;
-        const { loadbar, popup } = this.props;
         const currentUserData = getCurrentUser();
         const currentUser = currentUserData ? currentUserData.username : null;
 
@@ -94,65 +96,57 @@ class Profile extends Component {
             ) : null;
 
         return user === "pending" ? null : user ? (
-            <React.Fragment>
-                <div className="profile-info">
-                    <div className="profile-img-div">
-                        <div className="profile-img-container">
-                            <div className="profile-img-outer"></div>
-                            <div className="profile-img-inner"></div>
-                            <div className="profile-img-back-container">
-                                <div
-                                    className="profile-img-back"
-                                    style={{
-                                        backgroundImage: `url(${
-                                            user.profile_pic
-                                                ? user.profile_pic
-                                                : staticValues.images
-                                                      .defaultProfileImage
-                                        })`
-                                    }}
-                                ></div>
-                            </div>
-                            <div className="profile-img-holder">
-                                <img
-                                    className="profile-img"
-                                    src={
+            <div className="profile-info">
+                <div className="profile-img-div">
+                    <div className="profile-img-container">
+                        <div className="profile-img-outer"></div>
+                        <div className="profile-img-inner"></div>
+                        <div className="profile-img-back-container">
+                            <div
+                                className="profile-img-back"
+                                style={{
+                                    backgroundImage: `url(${
                                         user.profile_pic
                                             ? user.profile_pic
                                             : staticValues.images
                                                   .defaultProfileImage
-                                    }
-                                    alt=""
-                                ></img>
-                            </div>
+                                    })`
+                                }}
+                            ></div>
                         </div>
-                        <br></br>
-                        <span className="profile-name">
-                            {user ? `${user.first_name} ${user.last_name}` : ""}
-                        </span>
-                        <br></br>
-                        <span className="profile-email">
-                            {user ? user.email : ""}
-                        </span>
+                        <div className="profile-img-holder">
+                            <img
+                                className="profile-img"
+                                src={
+                                    user.profile_pic
+                                        ? user.profile_pic
+                                        : staticValues.images
+                                              .defaultProfileImage
+                                }
+                                onLoad={this.onLoad}
+                                alt=""
+                            ></img>
+                        </div>
                     </div>
-                    <div className="profile-bio-container">
-                        <p className="profile-bio">{user ? user.bio : ""}</p>
-                    </div>
                     <br></br>
-                    {editprofile_link}
+                    <span className="profile-name">
+                        {user ? `${user.first_name} ${user.last_name}` : ""}
+                    </span>
                     <br></br>
-                    {createcourse_link}
-                    <br></br>
-                    {updatecourse_link}
+                    <span className="profile-email">
+                        {user ? user.email : ""}
+                    </span>
                 </div>
-                <Courses
-                    {...this.props}
-                    loadbar={loadbar}
-                    popup={popup}
-                    queryType="created"
-                    user={user.id}
-                />
-            </React.Fragment>
+                <div className="profile-bio-container">
+                    <p className="profile-bio">{user ? user.bio : ""}</p>
+                </div>
+                <br></br>
+                {editprofile_link}
+                <br></br>
+                {createcourse_link}
+                <br></br>
+                {updatecourse_link}
+            </div>
         ) : (
             <Redirect to="/" />
         );
