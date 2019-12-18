@@ -122,16 +122,20 @@
 }
 
 .login-form .error-container {
-    margin-left: 15px;
-    width: 260px;
     background-color: rgb(201, 46, 46);
-    display: none;
+    margin: 0px;
+    margin-left: 15px;
+    margin-bottom: 10px;
+    width: 260px;
+    border-bottom-left-radius: 2px;
+    border-bottom-right-radius: 2px;
 }
 
 .login-form .error-text {
     color: white;
     font-size: 12px;
     font-family: "Exo 2", sans-serif;
+    margin: 0px;
 }
 
 @media screen and (max-width: 800px) {

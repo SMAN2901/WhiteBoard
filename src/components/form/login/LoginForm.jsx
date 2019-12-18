@@ -16,8 +16,8 @@ class LoginForm extends Form {
     };
 
     schema = {
-        email: Joi.string().allow(""),
-        password: Joi.string().allow("")
+        email: Joi.string().required(),
+        password: Joi.string().required()
     };
 
     componentDidMount() {
