@@ -16,8 +16,8 @@ class LoginForm extends Form {
     };
 
     schema = {
-        email: Joi.string(),
-        password: Joi.string()
+        email: Joi.string().allow(""),
+        password: Joi.string().allow("")
     };
 
     componentDidMount() {
@@ -44,7 +44,7 @@ class LoginForm extends Form {
                 popup.show("error", "Invalid credentials", "Please try again");
             } else popup.show("error", "Error", "Something went wrong");
             loadbar.stop();
-            this.setState({ loading: true });
+            this.setState({ loading: false });
         }
     };
 
