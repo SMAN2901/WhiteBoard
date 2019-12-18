@@ -1,4 +1,4 @@
-.profile-img-div {
+.edit-profile-container .profile-img-div {
     width: 210px;
     display: inline-block;
     padding-right: 40px;
@@ -11,13 +11,13 @@
     vertical-align: top;
 }
 
-.profile-img-container {
+.edit-profile-container .profile-img-container {
     width: 200px;
     height: 200px;
     margin-top: 20px;
 }
 
-.profile-img-outer {
+.edit-profile-container .profile-img-outer {
     width: 200px;
     height: 200px;
     border-radius: 2px;
@@ -29,7 +29,7 @@
     transform-origin: bottom right;
 }
 
-.profile-img-inner {
+.edit-profile-container .profile-img-inner {
     width: 200px;
     height: 200px;
     border-radius: 2px;
@@ -41,7 +41,7 @@
     transform-origin: bottom right;
 }
 
-.profile-img-back-container {
+.edit-profile-container .profile-img-back-container {
     width: 200px;
     height: 200px;
     margin: 5px;
@@ -51,7 +51,7 @@
     background-color: rgb(37, 37, 37);
 }
 
-.profile-img-back {
+.edit-profile-container .profile-img-back {
     width: 200px;
     height: 200px;
     overflow: hidden;
@@ -61,7 +61,7 @@
     filter: blur(7px);
 }
 
-.profile-img-holder {
+.edit-profile-container .profile-img-holder {
     width: 200px;
     height: 200px;
     margin: 5px;
@@ -69,7 +69,7 @@
     position: absolute;
 }
 
-.profile-img {
+.edit-profile-container .profile-img {
     width: 100%;
     height: auto;
     position: absolute;

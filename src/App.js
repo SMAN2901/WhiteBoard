@@ -10,6 +10,7 @@ import CourseCreateForm from "./components/form/coursecreate/CourseCreateForm";
 import ProfilePage from "./components/profilepage/ProfilePage";
 import EditProfile from "./components/editprofile/EditProfile";
 import CoursePage from "./components/coursepage/CoursePage";
+import EditCourse from "./components/editcourse/EditCourse";
 import { getCurrentUser, checkAuthToken } from "./api/AuthApi";
 import { getUserData } from "./api/UsersApi";
 import "./App.css";
@@ -144,6 +145,18 @@ class App extends Component {
                                     render={props => (
                                         <EditProfile
                                             {...props}
+                                            user={user}
+                                            loadbar={loadbar}
+                                            popup={popup}
+                                        />
+                                    )}
+                                />
+                                <Route
+                                    path="/edit/course"
+                                    render={props => (
+                                        <EditCourse
+                                            {...props}
+                                            key={user}
                                             user={user}
                                             loadbar={loadbar}
                                             popup={popup}

@@ -32,6 +32,14 @@ function formatTags(tagstring) {
     return tags;
 }
 
+export function getTagString(a) {
+    var str = "";
+    a.forEach(tag => {
+        str = str + tag + " ";
+    });
+    return str;
+}
+
 function jsonToFormdata(course, banner) {
     var form_data = new FormData();
 
@@ -57,6 +65,36 @@ export async function createCourse(course, banner) {
 
         return data;
     } catch (ex) {}
+}
+
+export async function updateCourse(id, course) {
+    course.tags = formatTags(course.tags);
+
+    try {
+        const apiEndpoint = getEndpointUrl("courses") + `${id}/update/`;
+        var config = getAuthHeader();
+
+        var { data } = await http.put(apiEndpoint, course, config);
+
+        return data;
+    } catch (ex) {
+        throw ex;
+    }
+}
+
+export async function updateCourseBanner(id, banner) {
+    try {
+        const apiEndpoint = getEndpointUrl("courses") + `${id}/ban-update/`;
+        var form_data = new FormData();
+        form_data.append("banner", banner);
+        var config = getAuthHeader();
+
+        var { data } = await http.put(apiEndpoint, form_data, config);
+
+        return data;
+    } catch (ex) {
+        throw ex;
+    }
 }
 
 export async function getCourses() {

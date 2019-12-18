@@ -87,7 +87,7 @@ class Profile extends Component {
 
         const updatecourse_link =
             this.props.match.params.username === currentUser ? (
-                <Link className="update-course-link" to="/course/update">
+                <Link className="update-course-link" to="/edit/course">
                     <i className="material-icons update-course-icon">
                         playlist_add
                     </i>

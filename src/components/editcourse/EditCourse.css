@@ -1,0 +1,28 @@
+.edit-course-div {
+    width: 100%;
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: top;
+    padding-top: 70px;
+}
+
+.edit-course-form-div {
+    width: calc(100% - 300px);
+    max-width: 700px;
+    display: inline-block;
+    vertical-align: top;
+    text-align: initial;
+}
+
+@media screen and (max-width: 700px) {
+    .edit-course-div {
+        display: inline-block;
+        text-align: center;
+    }
+
+    .edit-course-form-div {
+        width: calc(100% - 20px);
+        padding: 0px;
+    }
+}
