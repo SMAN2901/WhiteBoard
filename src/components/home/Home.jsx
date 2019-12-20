@@ -11,7 +11,12 @@ class Home extends Component {
         return (
             <React.Fragment>
                 <SiteBanner />
-                <Courses {...this.props} queryType="all" />
+                <Courses
+                    {...this.props}
+                    queryType="toprated"
+                    label="Top Rated"
+                />
+                <Courses {...this.props} queryType="new" label="Brand New" />
             </React.Fragment>
         );
     }

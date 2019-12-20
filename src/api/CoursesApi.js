@@ -123,10 +123,74 @@ export async function getCourses() {
                 username: approved_by ? approved_by.username : null,
                 profile_pic: approved_by ? approved_by.profile_pic : null
             };
+        }
 
-            // temporary fix
-            //var x = courses[i].banner.indexOf("/media");
-            //courses[i].banner = getBaseUrl() + courses[i].banner.substring(x);
+        return courses;
+    } catch (ex) {
+        return [];
+    }
+}
+
+export async function getTopRatedCourses() {
+    try {
+        const apiEndpoint = getEndpointUrl("courses") + "top_rated/";
+        var config = getAuthHeader();
+        var { data: courses } = await http.get(apiEndpoint, config);
+
+        for (var i = 0; i < courses.length; i++) {
+            courses[i].tags = filterTags(courses[i].tags);
+
+            const author = await getUserData(courses[i].author);
+            courses[i].author = {
+                name: author
+                    ? `${author.first_name} ${author.last_name}`
+                    : null,
+                username: author ? author.username : null,
+                profile_pic: author ? author.profile_pic : null
+            };
+
+            const approved_by = await getUserData(courses[i].approved_by);
+            courses[i].approved_by = {
+                name: approved_by
+                    ? `${approved_by.first_name} ${approved_by.last_name}`
+                    : null,
+                username: approved_by ? approved_by.username : null,
+                profile_pic: approved_by ? approved_by.profile_pic : null
+            };
+        }
+
+        return courses;
+    } catch (ex) {
+        return [];
+    }
+}
+
+export async function getNewCourses() {
+    try {
+        const apiEndpoint = getEndpointUrl("courses") + "top_new/";
+        var config = getAuthHeader();
+        var { data: courses } = await http.get(apiEndpoint, config);
+
+        for (var i = 0; i < courses.length; i++) {
+            courses[i].tags = filterTags(courses[i].tags);
+
+            const author = await getUserData(courses[i].author);
+            courses[i].author = {
+                name: author
+                    ? `${author.first_name} ${author.last_name}`
+                    : null,
+                username: author ? author.username : null,
+                profile_pic: author ? author.profile_pic : null
+            };
+
+            const approved_by = await getUserData(courses[i].approved_by);
+            courses[i].approved_by = {
+                name: approved_by
+                    ? `${approved_by.first_name} ${approved_by.last_name}`
+                    : null,
+                username: approved_by ? approved_by.username : null,
+                profile_pic: approved_by ? approved_by.profile_pic : null
+            };
         }
 
         return courses;
