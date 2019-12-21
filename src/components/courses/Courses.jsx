@@ -28,8 +28,8 @@ class Courses extends Component {
     };
 
     touches = {
-        startX: 0,
-        lastX: 0
+        swap: false,
+        posX: null
     };
 
     async componentDidMount() {
@@ -96,30 +96,81 @@ class Courses extends Component {
         }
     };
 
+    moveLeft = trans => {
+        const className = ".courselist-container-" + this.props.queryType;
+        const width = this.getPixelValue(".courses", "width");
+        const len = this.getPixelValue(className, "width");
+        const left = this.getPixelValue(className, "left");
+        const minLeft = width - len;
+        const move = Math.floor(trans);
+        const newLeft = Math.max(minLeft, left - move);
+        const value = newLeft.toString() + "px";
+
+        if (len > width) {
+            $(className).css("left", value);
+        }
+    };
+
+    moveRight = trans => {
+        const className = ".courselist-container-" + this.props.queryType;
+        const width = this.getPixelValue(".courses", "width");
+        const len = this.getPixelValue(className, "width");
+        const left = this.getPixelValue(className, "left");
+        const move = Math.floor(trans);
+        const newLeft = Math.min(0, left + move);
+        const value = newLeft.toString() + "px";
+
+        if (len > width) {
+            $(className).css("left", value);
+        }
+    };
+
     onMouseDown = e => {
-        this.prevX = e.pageX;
+        e.persist();
+        this.touches.swap = true;
+    };
+
+    onMouseMove = e => {
+        e.persist();
+        const { swap, posX } = this.touches;
+        if (swap) {
+            const { pageX } = e;
+            if (posX) {
+                if (pageX > posX) this.moveRight(pageX - posX);
+                else if (pageX < posX) this.moveLeft(posX - pageX);
+            }
+            this.touches.posX = pageX;
+        }
     };
 
     onMouseUp = e => {
-        if (e.pageX > this.prevX) this.clickLeft();
-        else if (e.pageX < this.prevX) this.clickRight();
+        e.persist();
+        this.touches.swap = false;
+        this.touches.posX = null;
     };
 
     onTouchStart = e => {
         e.persist();
-        this.touches.startX = e.touches[0].pageX;
+        this.touches.swap = true;
     };
 
     onTouchMove = e => {
         e.persist();
-        this.touches.lastX = e.touches[0].pageX;
+        const { swap, posX } = this.touches;
+        if (swap) {
+            const { pageX } = e.touches[0];
+            if (posX) {
+                if (pageX > posX) this.moveRight(pageX - posX);
+                else if (pageX < posX) this.moveLeft(posX - pageX);
+            }
+            this.touches.posX = pageX;
+        }
     };
 
     onTouchEnd = e => {
         e.persist();
-        const { startX, lastX } = this.touches;
-        if (lastX > startX) this.clickLeft();
-        else if (lastX < startX) this.clickRight();
+        this.touches.swap = false;
+        this.touches.posX = null;
     };
 
     render() {
@@ -155,7 +206,9 @@ class Courses extends Component {
                 <div
                     className={`courselist-container courselist-container-${queryType}`}
                     onMouseDown={this.onMouseDown}
+                    onMouseMove={this.onMouseMove}
                     onMouseUp={this.onMouseUp}
+                    onMouseLeave={this.onMouseUp}
                     onTouchStart={this.onTouchStart}
                     onTouchMove={this.onTouchMove}
                     onTouchEnd={this.onTouchEnd}
