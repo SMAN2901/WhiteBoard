@@ -10,7 +10,6 @@ class ProfilePage extends Component {
     render() {
         const { loadbar, popup, user, match, history } = this.props;
         const id = match.params.username;
-        const name = `${user.first_name} ${user.last_name}`;
 
         return (
             <React.Fragment>

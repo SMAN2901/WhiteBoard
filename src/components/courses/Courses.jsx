@@ -24,7 +24,12 @@ class Courses extends Component {
     };
 
     animation = {
-        transitionLength: 300
+        transitionLength: 270
+    };
+
+    touches = {
+        startX: 0,
+        lastX: 0
     };
 
     async componentDidMount() {
@@ -91,6 +96,32 @@ class Courses extends Component {
         }
     };
 
+    onMouseDown = e => {
+        this.prevX = e.pageX;
+    };
+
+    onMouseUp = e => {
+        if (e.pageX > this.prevX) this.clickLeft();
+        else if (e.pageX < this.prevX) this.clickRight();
+    };
+
+    onTouchStart = e => {
+        e.persist();
+        this.touches.startX = e.touches[0].pageX;
+    };
+
+    onTouchMove = e => {
+        e.persist();
+        this.touches.lastX = e.touches[0].pageX;
+    };
+
+    onTouchEnd = e => {
+        e.persist();
+        const { startX, lastX } = this.touches;
+        if (lastX > startX) this.clickLeft();
+        else if (lastX < startX) this.clickRight();
+    };
+
     render() {
         const { courses } = this.state;
         const { label, queryType } = this.props;
@@ -123,6 +154,11 @@ class Courses extends Component {
 
                 <div
                     className={`courselist-container courselist-container-${queryType}`}
+                    onMouseDown={this.onMouseDown}
+                    onMouseUp={this.onMouseUp}
+                    onTouchStart={this.onTouchStart}
+                    onTouchMove={this.onTouchMove}
+                    onTouchEnd={this.onTouchEnd}
                 >
                     {this.state.courses.map(item => (
                         <Course
