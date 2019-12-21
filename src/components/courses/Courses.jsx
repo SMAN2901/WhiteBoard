@@ -95,7 +95,7 @@ class Courses extends Component {
             $(className).animate({ left: value }, 400);
         }
     };
-
+    /*
     moveLeft = trans => {
         const className = ".courselist-container-" + this.props.queryType;
         const width = this.getPixelValue(".courses", "width");
@@ -171,7 +171,7 @@ class Courses extends Component {
         e.persist();
         this.touches.swap = false;
         this.touches.posX = null;
-    };
+    };*/
 
     render() {
         const { courses } = this.state;
@@ -179,7 +179,7 @@ class Courses extends Component {
         const icon = this.icons[queryType];
 
         return courses === "pending" ? null : (
-            <div className="courses">
+            <React.Fragment>
                 <div className="courselist-header-container">
                     <div className="courselist-label-container">
                         <i className="material-icons courselist-label-icon">
@@ -202,26 +202,20 @@ class Courses extends Component {
                         </i>
                     </div>
                 </div>
-
-                <div
-                    className={`courselist-container courselist-container-${queryType}`}
-                    onMouseDown={this.onMouseDown}
-                    onMouseMove={this.onMouseMove}
-                    onMouseUp={this.onMouseUp}
-                    onMouseLeave={this.onMouseUp}
-                    onTouchStart={this.onTouchStart}
-                    onTouchMove={this.onTouchMove}
-                    onTouchEnd={this.onTouchEnd}
-                >
-                    {this.state.courses.map(item => (
-                        <Course
-                            key={item.course_id}
-                            {...this.props}
-                            data={item}
-                        />
-                    ))}
+                <div className="courses">
+                    <div
+                        className={`courselist-container courselist-container-${queryType}`}
+                    >
+                        {this.state.courses.map(item => (
+                            <Course
+                                key={item.course_id}
+                                {...this.props}
+                                data={item}
+                            />
+                        ))}
+                    </div>
                 </div>
-            </div>
+            </React.Fragment>
         );
     }
 }
