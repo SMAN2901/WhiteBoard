@@ -27,11 +27,6 @@ class Courses extends Component {
         transitionLength: 270
     };
 
-    touches = {
-        swap: false,
-        posX: null
-    };
-
     async componentDidMount() {
         this._isMounted = true;
         const { loadbar, queryType } = this.props;
@@ -60,6 +55,25 @@ class Courses extends Component {
         this.props.loadbar.stop();
     }
 
+    clickRight = () => {
+        const classes = ".courses-" + this.props.queryType;
+        const move = this.animation.transitionLength;
+        const scrollValue = "+=" + move.toString();
+        $(classes).animate({ scrollLeft: scrollValue }, 500, "swing");
+    };
+
+    clickLeft = () => {
+        const classes = ".courses-" + this.props.queryType;
+        const move = this.animation.transitionLength;
+        const scrollValue = "-=" + move.toString();
+        $(classes).animate({ scrollLeft: scrollValue }, 500, "swing");
+    };
+    /*
+    touches = {
+        swap: false,
+        posX: null
+    };
+
     getPixelValue = (className, prop) => {
         const str = $(className).css(prop);
         const len = str.length;
@@ -67,35 +81,6 @@ class Courses extends Component {
         return parseInt(s);
     };
 
-    clickRight = () => {
-        const className = ".courselist-container-" + this.props.queryType;
-        const width = this.getPixelValue(".courses", "width");
-        const len = this.getPixelValue(className, "width");
-        const left = this.getPixelValue(className, "left");
-        const minLeft = width - len;
-        const move = this.animation.transitionLength;
-        const newLeft = Math.max(minLeft, left - move);
-        const value = newLeft.toString() + "px";
-
-        if (len > width) {
-            $(className).animate({ left: value }, 400);
-        }
-    };
-
-    clickLeft = () => {
-        const className = ".courselist-container-" + this.props.queryType;
-        const width = this.getPixelValue(".courses", "width");
-        const len = this.getPixelValue(className, "width");
-        const left = this.getPixelValue(className, "left");
-        const move = this.animation.transitionLength;
-        const newLeft = Math.min(0, left + move);
-        const value = newLeft.toString() + "px";
-
-        if (len > width) {
-            $(className).animate({ left: value }, 400);
-        }
-    };
-    /*
     moveLeft = trans => {
         const className = ".courselist-container-" + this.props.queryType;
         const width = this.getPixelValue(".courses", "width");
@@ -202,7 +187,7 @@ class Courses extends Component {
                         </i>
                     </div>
                 </div>
-                <div className="courses">
+                <div className={`courses courses-${queryType}`}>
                     <div
                         className={`courselist-container courselist-container-${queryType}`}
                     >
