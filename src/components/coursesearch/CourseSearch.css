@@ -1,0 +1,44 @@
+.coursesearch-container {
+    width: 100%;
+    text-align: center;
+}
+
+.coursesearch-header-container {
+    width: 100%;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    border-bottom: 4px solid rgb(0, 162, 255);
+}
+
+.coursesearch-header-text {
+    color: white;
+    font-size: 18px;
+    font-family: "Exo 2", sans-serif;
+    margin-bottom: 5px;
+}
+
+.coursesearch-pagination-container {
+    margin-top: 10px;
+}
+
+.coursesearch-pagination-number {
+    color: white;
+    font-size: 18px;
+    font-family: "Exo 2", sans-serif;
+    display: inline-block;
+    vertical-align: middle;
+    margin: 5px;
+}
+
+.coursesearch-pagination-icon {
+    color: orange;
+    font-size: 36px;
+    display: inline-block;
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+.coursesearch-pagination-icon:active {
+    color: gray;
+}

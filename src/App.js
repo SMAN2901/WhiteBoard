@@ -11,6 +11,7 @@ import ProfilePage from "./components/profilepage/ProfilePage";
 import EditProfile from "./components/editprofile/EditProfile";
 import CoursePage from "./components/coursepage/CoursePage";
 import EditCourse from "./components/editcourse/EditCourse";
+import CourseSearchPage from "./components/coursesearchpage/CourseSearchPage";
 import { getCurrentUser, checkAuthToken } from "./api/AuthApi";
 import { getUserData } from "./api/UsersApi";
 import "./App.css";
@@ -193,6 +194,16 @@ class App extends Component {
                                             loadbar={loadbar}
                                             popup={popup}
                                             key={window.location.href}
+                                        />
+                                    )}
+                                />
+                                <Route
+                                    path="/search/course/:searchString?"
+                                    render={props => (
+                                        <CourseSearchPage
+                                            {...props}
+                                            loadbar={loadbar}
+                                            popup={popup}
                                         />
                                     )}
                                 />

@@ -14,13 +14,26 @@
     display: inline-block;
     vertical-align: middle;
     overflow: hidden;
+    position: relative;
+}
+
+.sitebanner-img-container {
+    height: 400px;
+    display: flex;
+    position: absolute;
+    left: 0px;
 }
 
 .sitebanner-img {
     width: 450px;
     height: 400px;
-    display: none;
-    background-color: rgb(51, 41, 88);
+    margin-right: 200px;
+    display: inline-block;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
 }
 
 .searchbox-container {

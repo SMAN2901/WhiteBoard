@@ -15,7 +15,7 @@ export async function getUserData(username) {
     }
 }
 
-export async function updateProfileImage(image) {
+export async function updateProfileImage(image = null) {
     const user = getCurrentUser();
     if (user === null) return null;
 
@@ -24,6 +24,10 @@ export async function updateProfileImage(image) {
     var form_data = new FormData();
     form_data.append("profile_pic", image);
     var config = getAuthHeader();
+
+    if (image === null) {
+        form_data = { profile_pic: null };
+    }
 
     var response = await http.put(apiEndpoint, form_data, config);
     return response;

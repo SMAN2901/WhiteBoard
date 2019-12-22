@@ -10,7 +10,7 @@ class Home extends Component {
     render() {
         return (
             <React.Fragment>
-                <SiteBanner />
+                <SiteBanner {...this.props} />
                 <Courses
                     {...this.props}
                     queryType="toprated"

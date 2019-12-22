@@ -7,7 +7,8 @@ import "./CourseBannerEdit.css";
 
 class CourseBannerEdit extends Component {
     state = {
-        course: null
+        course: null,
+        loading: false
     };
 
     filefield = React.createRef();
@@ -29,16 +30,34 @@ class CourseBannerEdit extends Component {
         try {
             const banner = files[0];
             loadbar.start("Uploading");
-            $(".courseedit-banner-btn").prop("disabled", true);
+            this.setState({ loading: true });
             const data = await updateCourseBanner(course.course_id, banner);
             loadbar.stop();
+            this.setState({ loading: false });
             this.changeBanner(data.banner);
             popup.show("success", "Banner", "updated");
-            $(".courseedit-banner-btn").prop("disabled", false);
         } catch (ex) {
             loadbar.stop();
+            this.setState({ loading: false });
             popup.show("error", "Error", "Something went wrong");
-            $(".courseedit-banner-btn").prop("disabled", false);
+        }
+    };
+
+    removeBanner = async () => {
+        const { loadbar, popup, course } = this.props;
+
+        try {
+            loadbar.start();
+            this.setState({ loading: true });
+            await updateCourseBanner(course.course_id, null);
+            loadbar.stop();
+            this.setState({ loading: false });
+            this.changeBanner("");
+            popup.show("success", "Banner", "removed");
+        } catch (ex) {
+            loadbar.stop();
+            this.setState({ loading: false });
+            popup.show("error", "Error", "Something went wrong");
         }
     };
 
@@ -89,6 +108,7 @@ class CourseBannerEdit extends Component {
         $(".courseedit-banner-container").slideToggle();
         $(".courseedit-filefield-container").slideToggle();
         $(".courseedit-banner-btn").slideToggle();
+        $(".courseedit-banner-remove-btn").slideToggle();
     };
 
     render() {
@@ -147,8 +167,16 @@ class CourseBannerEdit extends Component {
                 <button
                     className="courseedit-banner-btn"
                     onClick={this.onSubmit}
+                    disabled={this.state.loading}
                 >
                     Upload
+                </button>
+                <button
+                    className="courseedit-banner-remove-btn"
+                    onClick={this.removeBanner}
+                    disabled={this.state.loading}
+                >
+                    Remove
                 </button>
             </React.Fragment>
         ) : null;

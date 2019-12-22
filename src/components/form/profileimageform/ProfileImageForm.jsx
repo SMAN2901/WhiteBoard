@@ -26,7 +26,7 @@ class ProfileImageForm extends Form {
     }
 
     submitForm = async () => {
-        const { loadbar, popup } = this.props;
+        const { loadbar, popup, user } = this.props;
 
         try {
             if (this.filefield.current.files.length < 1) {
@@ -40,10 +40,29 @@ class ProfileImageForm extends Form {
             loadbar.stop();
             popup.show("success", "Profile", "Updated");
             this.setState({ loading: false });
+            window.location = "/user/" + user.username;
         } catch (ex) {
             loadbar.stop();
             popup.show("error", "Error", "Update failed");
+            this.setState({ loading: false });
+        }
+    };
+
+    removeImage = async () => {
+        const { loadbar, popup, user } = this.props;
+
+        try {
             this.setState({ loading: true });
+            loadbar.start();
+            await updateProfileImage();
+            loadbar.stop();
+            popup.show("success", "Profile", "Updated");
+            this.setState({ loading: false });
+            window.location = "/user/" + user.username;
+        } catch (ex) {
+            loadbar.stop();
+            popup.show("error", "Error", "Update failed");
+            this.setState({ loading: false });
         }
     };
 
@@ -83,6 +102,13 @@ class ProfileImageForm extends Form {
                     this.filefield_label
                 )}
                 {this.renderButton("Upload", "profile-image-upload-btn")}
+                <button
+                    className="profile-image-remove-btn"
+                    onClick={this.removeImage}
+                    disabled={this.state.loading}
+                >
+                    Remove
+                </button>
             </div>
         );
     }

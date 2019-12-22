@@ -22,6 +22,7 @@
     text-overflow: ellipsis;
 }
 
+.profile-image-remove-btn,
 .profile-image-upload-btn {
     height: 30px;
     border: none;
@@ -35,10 +36,20 @@
     cursor: pointer;
 }
 
+.profile-image-remove-btn {
+    background-color: rgb(253, 70, 70);
+}
+
 .profile-image-upload-btn:hover {
     background-color: rgb(25, 161, 25);
 }
 
+.profile-image-remove-btn:hover {
+    background-color: rgb(25, 26, 25);
+}
+
+.profile-image-remove-btn:active,
+.profile-image-remove-btn:disabled,
 .profile-image-upload-btn:active,
 .profile-image-upload-btn:disabled {
     background-color: gray;

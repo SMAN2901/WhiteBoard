@@ -68,95 +68,15 @@ class Courses extends Component {
         const scrollValue = "-=" + move.toString();
         $(classes).animate({ scrollLeft: scrollValue }, 500, "swing");
     };
-    /*
-    touches = {
-        swap: false,
-        posX: null
+
+    expandToggle = () => {
+        const { queryType } = this.props;
+        const contclass = ".courses-" + queryType;
+        const textClass = ".courselist-expand-container-" + queryType;
+
+        $(contclass).slideToggle();
+        $(textClass).slideToggle();
     };
-
-    getPixelValue = (className, prop) => {
-        const str = $(className).css(prop);
-        const len = str.length;
-        const s = str.substring(0, len - 2);
-        return parseInt(s);
-    };
-
-    moveLeft = trans => {
-        const className = ".courselist-container-" + this.props.queryType;
-        const width = this.getPixelValue(".courses", "width");
-        const len = this.getPixelValue(className, "width");
-        const left = this.getPixelValue(className, "left");
-        const minLeft = width - len;
-        const move = Math.floor(trans);
-        const newLeft = Math.max(minLeft, left - move);
-        const value = newLeft.toString() + "px";
-
-        if (len > width) {
-            $(className).css("left", value);
-        }
-    };
-
-    moveRight = trans => {
-        const className = ".courselist-container-" + this.props.queryType;
-        const width = this.getPixelValue(".courses", "width");
-        const len = this.getPixelValue(className, "width");
-        const left = this.getPixelValue(className, "left");
-        const move = Math.floor(trans);
-        const newLeft = Math.min(0, left + move);
-        const value = newLeft.toString() + "px";
-
-        if (len > width) {
-            $(className).css("left", value);
-        }
-    };
-
-    onMouseDown = e => {
-        e.persist();
-        this.touches.swap = true;
-    };
-
-    onMouseMove = e => {
-        e.persist();
-        const { swap, posX } = this.touches;
-        if (swap) {
-            const { pageX } = e;
-            if (posX) {
-                if (pageX > posX) this.moveRight(pageX - posX);
-                else if (pageX < posX) this.moveLeft(posX - pageX);
-            }
-            this.touches.posX = pageX;
-        }
-    };
-
-    onMouseUp = e => {
-        e.persist();
-        this.touches.swap = false;
-        this.touches.posX = null;
-    };
-
-    onTouchStart = e => {
-        e.persist();
-        this.touches.swap = true;
-    };
-
-    onTouchMove = e => {
-        e.persist();
-        const { swap, posX } = this.touches;
-        if (swap) {
-            const { pageX } = e.touches[0];
-            if (posX) {
-                if (pageX > posX) this.moveRight(pageX - posX);
-                else if (pageX < posX) this.moveLeft(posX - pageX);
-            }
-            this.touches.posX = pageX;
-        }
-    };
-
-    onTouchEnd = e => {
-        e.persist();
-        this.touches.swap = false;
-        this.touches.posX = null;
-    };*/
 
     render() {
         const { courses } = this.state;
@@ -166,7 +86,10 @@ class Courses extends Component {
         return courses === "pending" ? null : (
             <React.Fragment>
                 <div className="courselist-header-container">
-                    <div className="courselist-label-container">
+                    <div
+                        className="courselist-label-container"
+                        onClick={this.expandToggle}
+                    >
                         <i className="material-icons courselist-label-icon">
                             {icon}
                         </i>
@@ -199,6 +122,17 @@ class Courses extends Component {
                             />
                         ))}
                     </div>
+                </div>
+                <div
+                    className={`courselist-expand-container courselist-expand-container-${queryType}`}
+                    onClick={this.expandToggle}
+                >
+                    <i className="material-icons courselist-expand-icon">
+                        arrow_right
+                    </i>
+                    <label className="courselist-expand-text">
+                        Click here to see
+                    </label>
                 </div>
             </React.Fragment>
         );

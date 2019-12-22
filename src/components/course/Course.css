@@ -12,7 +12,6 @@
     box-shadow: 1px 1px 5px black;
     transition: transform 0.2s;
     cursor: pointer;
-    user-drag: none;
     user-select: none;
     -moz-user-select: none;
     -webkit-user-drag: none;

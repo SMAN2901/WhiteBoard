@@ -82,12 +82,14 @@ export async function updateCourse(id, course) {
     }
 }
 
-export async function updateCourseBanner(id, banner) {
+export async function updateCourseBanner(id, banner = null) {
     try {
         const apiEndpoint = getEndpointUrl("courses") + `${id}/ban-update/`;
         var form_data = new FormData();
         form_data.append("banner", banner);
         var config = getAuthHeader();
+
+        if (banner === null) form_data = { banner: null };
 
         var { data } = await http.put(apiEndpoint, form_data, config);
 
@@ -298,5 +300,40 @@ export async function getCreatedCourses(user_id) {
         return courses;
     } catch (ex) {
         return [];
+    }
+}
+
+export async function searchCourses(searchString) {
+    try {
+        const apiEndpoint =
+            getEndpointUrl("courses") + `search/?q=${searchString}`;
+        var config = getAuthHeader();
+        var { data: courses } = await http.get(apiEndpoint, config);
+
+        for (var i = 0; i < courses.length; i++) {
+            courses[i].tags = filterTags(courses[i].tags);
+
+            const author = await getUserData(courses[i].author);
+            courses[i].author = {
+                name: author
+                    ? `${author.first_name} ${author.last_name}`
+                    : null,
+                username: author ? author.username : null,
+                profile_pic: author ? author.profile_pic : null
+            };
+
+            const approved_by = await getUserData(courses[i].approved_by);
+            courses[i].approved_by = {
+                name: approved_by
+                    ? `${approved_by.first_name} ${approved_by.last_name}`
+                    : null,
+                username: approved_by ? approved_by.username : null,
+                profile_pic: approved_by ? approved_by.profile_pic : null
+            };
+        }
+
+        return courses;
+    } catch (ex) {
+        throw ex;
     }
 }

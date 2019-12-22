@@ -111,6 +111,7 @@
     color: orange;
 }
 
+.courseedit-banner-remove-btn,
 .courseedit-banner-btn {
     height: 30px;
     border: none;
@@ -127,10 +128,20 @@
     display: none;
 }
 
+.courseedit-banner-remove-btn {
+    background-color: rgb(253, 70, 70);
+}
+
 .courseedit-banner-btn:hover {
     background-color: rgb(25, 161, 25);
 }
 
+.courseedit-banner-remove-btn:hover {
+    background-color: rgb(25, 26, 25);
+}
+
+.courseedit-banner-remove-btn:active,
+.courseedit-banner-remove-btn:disabled,
 .courseedit-banner-btn:active,
 .courseedit-banner-btn:disabled {
     background-color: gray;
