@@ -10,7 +10,7 @@ class CourseSearch extends Component {
     state = {
         courses: "pending",
         pagination: {
-            itemPerPage: 4,
+            itemPerPage: 12,
             totalPage: 0,
             currentPage: 1
         }
