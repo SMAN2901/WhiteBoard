@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import CategoryList from "../categorylist/CategoryList";
 import { shuffleArray } from "../../services/util";
 import staticValues from "../../staticValues.json";
 import $ from "jquery";
@@ -50,6 +51,11 @@ class SiteBanner extends Component {
         }
     };
 
+    toggleCategories = () => {
+        const className = ".sitebanner-course-category";
+        $(className).slideToggle();
+    };
+
     render() {
         return (
             <div className="sitebanner-container">
@@ -76,12 +82,20 @@ class SiteBanner extends Component {
                     <label className="sitebanner-searchbox-label">
                         Need to learn something?
                     </label>
-                    <input
-                        className="sitebanner-searchbox"
-                        type="text"
-                        placeholder="Search here"
-                        onKeyUp={this.onKeyUp}
-                    ></input>
+                    <div className="sitebanner-searchbox-container">
+                        <i
+                            className="material-icons sitebanner-category-icon"
+                            onClick={this.toggleCategories}
+                        >
+                            apps
+                        </i>
+                        <input
+                            className="sitebanner-searchbox"
+                            type="text"
+                            placeholder="Search here"
+                            onKeyUp={this.onKeyUp}
+                        ></input>
+                    </div>
                     <div className="sitebanner-text-container">
                         <i className="material-icons sitebanner-icons">
                             record_voice_over
@@ -98,6 +112,12 @@ class SiteBanner extends Component {
                         </i>
                         <p className="sitebanner-text">Make learning easy</p>
                     </div>
+                </div>
+                <div className="sitebanner-course-category">
+                    <CategoryList
+                        {...this.props}
+                        toggleCategories={this.toggleCategories}
+                    />
                 </div>
             </div>
         );

@@ -83,5 +83,62 @@
             "/assets/images/banner02.png",
             "/assets/images/banner03.png"
         ]
-    }
+    },
+    "courseCategories": [
+        {
+            "name": "Computer Science",
+            "icon": "computer",
+            "tags": "cse cs it software game programming code web app apps ml ai data net network cloud"
+        },
+        {
+            "name": "Electrical & Electronics",
+            "icon": "flash_on",
+            "tags": "eee"
+        },
+        {
+            "name": "Architecture",
+            "icon": "dashboard",
+            "tags": "archi architecture"
+        },
+        {
+            "name": "Mathematics",
+            "icon": "square_foot",
+            "tags": "math"
+        },
+        {
+            "name": "Physics",
+            "icon": "widgets",
+            "tags": "phy physics"
+        },
+        {
+            "name": "Chemistry",
+            "icon": "bubble_chart",
+            "tags": "chem chemistry"
+        },
+        {
+            "name": "Biology",
+            "icon": "eco",
+            "tags": "bio biology zoo zoology"
+        },
+        {
+            "name": "Business",
+            "icon": "monetization_on",
+            "tags": "business finance marketing accounting bba management"
+        },
+        {
+            "name": "Statistics",
+            "icon": "show_chart",
+            "tags": "stat statistics"
+        },
+        {
+            "name": "Design & Arts",
+            "icon": "color_lens",
+            "tags": "design art arts draw drawing"
+        },
+        {
+            "name": "Music",
+            "icon": "music_note",
+            "tags": "music"
+        }
+    ]
 }

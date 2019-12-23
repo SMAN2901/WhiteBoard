@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Course from "../course/Course";
 import { searchCourses } from "../../api/CoursesApi";
+import staticValues from "../../staticValues.json";
 import $ from "jquery";
 import "./CourseSearch.css";
 
@@ -18,8 +19,15 @@ class CourseSearch extends Component {
 
     async componentDidMount() {
         this._isMounted = true;
-        const { match } = this.props;
-        const { searchString } = match.params;
+        const { match, queryType } = this.props;
+        var searchString = match.params.searchString.trim();
+
+        if (queryType === "category") {
+            var a = staticValues.courseCategories.filter(item => {
+                return item.name === searchString;
+            });
+            searchString = a.length > 0 ? a[0].tags : "";
+        }
 
         if (searchString.trim().length > 0) {
             await this.makeQuery(searchString.trim());
@@ -74,7 +82,13 @@ class CourseSearch extends Component {
         if (courses === "pending") return "";
         if (courses.length < 1) return "No such course found.";
 
-        return `Search results for "${searchString}"`;
+        var headerText = `Search results for "${searchString}"`;
+
+        if (this.props.queryType === "category") {
+            headerText = `Courses related to "${searchString}"`;
+        }
+
+        return headerText;
     };
 
     paginateLeft = () => {

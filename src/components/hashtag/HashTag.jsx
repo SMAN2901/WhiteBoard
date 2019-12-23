@@ -1,13 +1,15 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import "./HashTag.css";
 
 class HashTag extends Component {
     render() {
         const { tag } = this.props;
+
         return (
-            <span key={tag} className="hashtag">
+            <Link key={tag} to={`/search/course/${tag}`} className="hashtag">
                 {tag}
-            </span>
+            </Link>
         );
     }
 }

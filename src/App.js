@@ -187,6 +187,17 @@ class App extends Component {
                                     )}
                                 />
                                 <Route
+                                    path="/course/category/:searchString?"
+                                    render={props => (
+                                        <CourseSearchPage
+                                            {...props}
+                                            loadbar={loadbar}
+                                            popup={popup}
+                                            queryType="category"
+                                        />
+                                    )}
+                                />
+                                <Route
                                     path="/course/:id?"
                                     render={props => (
                                         <CoursePage
@@ -204,6 +215,7 @@ class App extends Component {
                                             {...props}
                                             loadbar={loadbar}
                                             popup={popup}
+                                            queryType="search"
                                         />
                                     )}
                                 />

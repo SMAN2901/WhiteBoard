@@ -304,6 +304,10 @@ export async function getCreatedCourses(user_id) {
 }
 
 export async function searchCourses(searchString) {
+    if (searchString === "" || searchString === null) {
+        return [];
+    }
+
     try {
         const apiEndpoint =
             getEndpointUrl("courses") + `search/?q=${searchString}`;
