@@ -6,8 +6,9 @@
     margin-top: 80px;
     background: linear-gradient(
         to bottom,
-        rgb(73, 155, 202),
-        rgba(73, 155, 202, 0.6)
+        rgb(53, 146, 196),
+        rgb(20, 112, 161),
+        rgba(20, 112, 161, 0.6)
     );
     border-radius: 2px;
     display: inline-block;
@@ -71,13 +72,17 @@
     transform: scale(1.05);
 }
 
+.course-category-container:hover .course-category-icon {
+    background-color: white;
+}
+
 .course-category-container:active {
     transform: scale(1);
 }
 
 .course-category-icon {
     color: rgb(35, 41, 56);
-    background-color: white;
+    background-color: rgb(200, 204, 207);
     font-size: 36px;
     padding: 5px;
     display: inline-block;
