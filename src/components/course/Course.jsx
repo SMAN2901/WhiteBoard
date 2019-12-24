@@ -32,7 +32,12 @@ class Course extends Component {
 
         return (
             <div className="courses-container">
-                <div className="course-container">
+                <div
+                    className="course-container"
+                    onClick={() => {
+                        this.props.history.push(`/course/${course_id}`);
+                    }}
+                >
                     <img
                         className="course-banner"
                         src={this.state.bannerUrl}
