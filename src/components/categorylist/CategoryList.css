@@ -6,9 +6,8 @@
     margin-top: 80px;
     background: linear-gradient(
         to bottom,
-        rgb(53, 146, 196),
-        rgb(20, 112, 161),
-        rgba(20, 112, 161, 0.6)
+        rgb(102, 143, 165),
+        rgba(102, 143, 165, 0.6)
     );
     border-radius: 2px;
     display: inline-block;
