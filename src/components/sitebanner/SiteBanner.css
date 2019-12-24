@@ -33,12 +33,14 @@
     display: flex;
     position: absolute;
     left: 0px;
+    top: 0px;
+    animation: sliding 20s infinite;
 }
 
 .sitebanner-img {
     width: 450px;
     height: 400px;
-    margin-right: 200px;
+    margin-right: 450px;
     display: inline-block;
     user-select: none;
     -moz-user-select: none;
@@ -156,5 +158,44 @@
         margin: 0px;
         text-align: center;
         height: 100px;
+    }
+}
+
+@keyframes sliding {
+    0% {
+        left: 0px;
+        visibility: visible;
+    }
+    30% {
+        left: 0px;
+    }
+    35% {
+        left: -900px;
+    }
+    65% {
+        left: -900px;
+    }
+    70% {
+        left: -1800px;
+    }
+    95% {
+        left: -1800px;
+        visibility: visible;
+    }
+    97.4% {
+        left: -2300px;
+        visibility: hidden;
+    }
+    97.5% {
+        left: 450px;
+        visibility: hidden;
+    }
+    97.6% {
+        left: 450px;
+        visibility: visible;
+    }
+    100% {
+        left: 0px;
+        visibility: visible;
     }
 }

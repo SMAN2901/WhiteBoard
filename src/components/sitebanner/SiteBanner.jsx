@@ -13,32 +13,6 @@ class SiteBanner extends Component {
         }))
     );
 
-    componentDidMount() {
-        this.slideImg(0);
-    }
-
-    slideImg = i => {
-        var duration = 700;
-        const middleClass = "." + this.images[1].classes;
-
-        if (i === this.images.length) {
-            i = 0;
-            duration = 600;
-            $(middleClass).css("visibility", "hidden");
-        }
-        if (i === 1) $(middleClass).css("visibility", "visible");
-
-        const move = i * 650;
-        const value = "-" + move.toString() + "px";
-        const className = ".sitebanner-img-container";
-
-        $(className).animate({ left: value }, duration, "swing");
-
-        setTimeout(() => {
-            this.slideImg(i + 1);
-        }, 3000);
-    };
-
     onKeyUp = e => {
         if (e.keyCode === 13) {
             e.target.blur();

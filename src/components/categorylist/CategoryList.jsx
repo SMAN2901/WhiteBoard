@@ -1,9 +1,46 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import staticValues from "../../staticValues.json";
+import $ from "jquery";
 import "./CategoryList.css";
 
 class CategoryList extends Component {
+    componentDidMount() {
+        document.addEventListener("click", this.onClick);
+    }
+
+    componentWillUnmount() {
+        document.removeEventListener("click", this.onClick);
+    }
+
+    onClick = e => {
+        const categoryClass = "course-category-div";
+        const categoryIcon = "sitebanner-category-icon";
+        var classes = $(e.target).attr("class");
+
+        if (typeof classes === "undefined") {
+            this.props.toggleCategories();
+            return;
+        }
+        classes = classes.split(" ");
+
+        const n = classes.length;
+        const len =
+            n > 0
+                ? $("." + categoryClass).find("." + classes[n - 1]).length
+                : 0;
+        const display = $(".sitebanner-course-category").css("display");
+
+        if (
+            classes[n - 1] !== categoryClass &&
+            classes[n - 1] !== categoryIcon &&
+            len === 0 &&
+            display !== "none"
+        ) {
+            this.props.toggleCategories();
+        }
+    };
+
     render() {
         const categories = staticValues.courseCategories;
 
