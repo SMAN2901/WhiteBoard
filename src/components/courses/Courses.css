@@ -9,6 +9,7 @@
     overflow-y: hidden;
     -ms-overflow-style: none;
     margin-bottom: 20px;
+    outline: none;
 }
 
 .courses::-webkit-scrollbar {

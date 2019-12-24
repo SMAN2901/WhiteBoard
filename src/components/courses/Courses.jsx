@@ -78,6 +78,18 @@ class Courses extends Component {
         $(textClass).slideToggle();
     };
 
+    getFocus = () => {
+        const className = ".courses-" + this.props.queryType;
+        const move = $(className).offset().top - 130;
+        const display = $(className).css("display");
+
+        if (display !== "none") {
+            $("html,body").animate({ scrollTop: move }, 1000, () => {
+                $(className).focus();
+            });
+        }
+    };
+
     render() {
         const { courses } = this.state;
         const { label, queryType } = this.props;
@@ -85,7 +97,10 @@ class Courses extends Component {
 
         return courses === "pending" ? null : (
             <React.Fragment>
-                <div className="courselist-header-container">
+                <div
+                    className="courselist-header-container"
+                    onClick={this.getFocus}
+                >
                     <div
                         className="courselist-label-container"
                         onClick={this.expandToggle}
@@ -110,7 +125,7 @@ class Courses extends Component {
                         </i>
                     </div>
                 </div>
-                <div className={`courses courses-${queryType}`}>
+                <div className={`courses courses-${queryType}`} tabIndex="-1">
                     <div
                         className={`courselist-container courselist-container-${queryType}`}
                     >
