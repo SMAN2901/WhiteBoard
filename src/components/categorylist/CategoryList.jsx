@@ -16,10 +16,13 @@ class CategoryList extends Component {
     onClick = e => {
         const categoryClass = "course-category-div";
         const categoryIcon = "sitebanner-category-icon";
+        const display = $(".sitebanner-course-category").css("display");
         var classes = $(e.target).attr("class");
 
         if (typeof classes === "undefined") {
-            this.props.toggleCategories();
+            if (display !== "none") {
+                this.props.toggleCategories();
+            }
             return;
         }
         classes = classes.split(" ");
@@ -29,7 +32,6 @@ class CategoryList extends Component {
             n > 0
                 ? $("." + categoryClass).find("." + classes[n - 1]).length
                 : 0;
-        const display = $(".sitebanner-course-category").css("display");
 
         if (
             classes[n - 1] !== categoryClass &&
