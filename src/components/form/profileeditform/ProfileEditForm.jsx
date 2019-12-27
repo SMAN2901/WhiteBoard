@@ -33,7 +33,6 @@ class ProfileEditForm extends Form {
             .required()
             .label("First Name"),
         gender: Joi.string()
-            .required()
             .label("Gender"),
         bio: Joi.string()
             .max(500)
