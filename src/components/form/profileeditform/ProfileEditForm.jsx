@@ -34,7 +34,7 @@ class ProfileEditForm extends Form {
             .label("First Name"),
         gender: Joi.string().label("Gender"),
         bio: Joi.string()
-            .max(500)
+            .max(300)
             .label("Bio")
     };
 
