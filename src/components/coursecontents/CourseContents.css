@@ -1,10 +1,9 @@
 .coursedetails-contents-container {
     width: 280px;
-    height: 400px;
     display: inline-block;
     vertical-align: top;
     margin: 10px;
-    margin-bottom: 100px;
+    margin-bottom: 20px;
 }
 
 .coursedetails-content {

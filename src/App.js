@@ -11,7 +11,9 @@ import ProfilePage from "./components/profilepage/ProfilePage";
 import EditProfile from "./components/editprofile/EditProfile";
 import CoursePage from "./components/coursepage/CoursePage";
 import EditCourse from "./components/editcourse/EditCourse";
+import EditCourseContent from "./components/editcoursecontent/EditCourseContent";
 import CourseSearchPage from "./components/coursesearchpage/CourseSearchPage";
+import ContentPage from "./components/contentpage/ContentPage";
 import { getCurrentUser, checkAuthToken } from "./api/AuthApi";
 import { getUserData } from "./api/UsersApi";
 import "./App.css";
@@ -153,6 +155,18 @@ class App extends Component {
                                     )}
                                 />
                                 <Route
+                                    path="/update/course/:id"
+                                    render={props => (
+                                        <EditCourseContent
+                                            {...props}
+                                            key={user}
+                                            user={user}
+                                            loadbar={loadbar}
+                                            popup={popup}
+                                        />
+                                    )}
+                                />
+                                <Route
                                     path="/edit/course"
                                     render={props => (
                                         <EditCourse
@@ -187,7 +201,7 @@ class App extends Component {
                                     )}
                                 />
                                 <Route
-                                    path="/course/category/:searchString?"
+                                    path="/course/category/:searchString"
                                     render={props => (
                                         <CourseSearchPage
                                             {...props}
@@ -198,7 +212,7 @@ class App extends Component {
                                     )}
                                 />
                                 <Route
-                                    path="/course/:id?"
+                                    path="/course/:id"
                                     render={props => (
                                         <CoursePage
                                             {...props}
@@ -209,13 +223,25 @@ class App extends Component {
                                     )}
                                 />
                                 <Route
-                                    path="/search/course/:searchString?"
+                                    path="/search/course/:searchString"
                                     render={props => (
                                         <CourseSearchPage
                                             {...props}
                                             loadbar={loadbar}
                                             popup={popup}
                                             queryType="search"
+                                        />
+                                    )}
+                                />
+                                <Route
+                                    path="/content/:course_id/:content_id"
+                                    render={props => (
+                                        <ContentPage
+                                            {...props}
+                                            key={user}
+                                            user={user}
+                                            loadbar={loadbar}
+                                            popup={popup}
                                         />
                                     )}
                                 />

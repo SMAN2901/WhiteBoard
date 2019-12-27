@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
 import CourseInfo from "../courseinfo/CourseInfo";
+import CourseBanner from "../coursebanner/CourseBanner";
 import CourseContents from "../coursecontents/CourseContents";
 import CourseReview from "../coursereview/CourseReview";
 import { getCourse, getLatestCourse } from "../../api/CoursesApi";
-import staticValues from "../../staticValues.json";
 import "./CoursePage.css";
 
 class CoursePage extends Component {
@@ -49,17 +49,10 @@ class CoursePage extends Component {
 
     render() {
         const { course } = this.state;
-        const defaultBanner = staticValues.images.defaultCourseBanner;
 
         return course === "pending" ? null : course ? (
             <div className="coursedetails-container">
-                <div className="coursedetails-banner-container">
-                    <img
-                        className="coursedetails-banner"
-                        src={course.banner ? course.banner : defaultBanner}
-                        alt=""
-                    />
-                </div>
+                <CourseBanner banner={course.banner} />
                 <div className="coursedetails-div">
                     <CourseInfo {...this.props} course={course} />
                     <CourseContents {...this.props} />

@@ -1,0 +1,46 @@
+.course-conupd-container {
+    width: calc(100% - 10px);
+    margin: auto;
+    margin-top: 0px;
+    padding-top: 90px;
+    text-align: initial;
+}
+
+.course-conupd-div {
+    width: calc(100% - 10px);
+    margin: 5px;
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+.course-conupd-forms-div {
+    width: calc(100% - 320px);
+    min-width: 280px;
+    display: inline-block;
+    vertical-align: top;
+    margin: 10px;
+    text-align: initial;
+}
+
+.course-conupd-title {
+    color: rgb(0, 162, 255);
+    font-size: 22px;
+    font-family: "Exo 2", sans-serif;
+    text-decoration: none;
+    margin-left: 10px;
+}
+
+.course-conupd-title:hover {
+    text-decoration: underline;
+}
+
+.course-conupd-title:active {
+    color: gray;
+}
+
+@media screen and (max-width: 650px) {
+    .course-conupd-forms-div {
+        width: calc(100% - 20px);
+        min-width: 0px;
+    }
+}

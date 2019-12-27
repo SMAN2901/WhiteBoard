@@ -1,0 +1,37 @@
+.conv-container {
+    width: calc(100% - 20px);
+    margin: 10px;
+}
+
+.conv-title {
+    color: white;
+    font-size: 20px;
+    font-family: "Exo 2", sans-serif;
+    margin: 5px;
+}
+
+.conv-description {
+    color: rgb(199, 199, 199);
+    font-size: 16px;
+    font-family: "Exo 2", sans-serif;
+    margin: 5px;
+}
+
+.conv-link {
+    vertical-align: middle;
+    display: inline-block;
+}
+
+.conv-icon {
+    color: white;
+    font-size: 24px;
+    margin: 5px;
+    padding: 5px;
+    background-color: rgb(0, 162, 255);
+    border-radius: 50%;
+    border: 3px solid rgba(0, 0, 0, 0.5);
+}
+
+.conv-icon:hover {
+    border: 3px solid rgb(31, 29, 29);
+}

@@ -30,6 +30,7 @@ class CourseCreateForm extends Form {
             .trim()
             .min(5)
             .max(100)
+            .required()
             .label("Title"),
         outline: Joi.string()
             .trim()

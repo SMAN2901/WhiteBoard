@@ -1,5 +1,5 @@
 import http from "../services/httpService";
-import { getEndpointUrl, getBaseUrl } from "./ApiUtility";
+import { getEndpointUrl, getBaseUrl, jsonToFormdata } from "./ApiUtility";
 import { getAuthHeader, getCurrentUser } from "./AuthApi";
 import { getUserData } from "./UsersApi";
 
@@ -40,22 +40,9 @@ export function getTagString(a) {
     return str;
 }
 
-function jsonToFormdata(course, banner) {
-    var form_data = new FormData();
-
-    for (var key in course) {
-        if (key === "banner") {
-            if (!banner) banner = "";
-            form_data.append("banner", banner);
-        } else form_data.append(key, course[key]);
-    }
-
-    return form_data;
-}
-
 export async function createCourse(course, banner) {
     course.tags = formatTags(course.tags);
-    course = jsonToFormdata(course, banner);
+    course = jsonToFormdata(course, banner, "banner");
 
     try {
         const apiEndpoint = getEndpointUrl("createCourse");
@@ -337,6 +324,32 @@ export async function searchCourses(searchString) {
         }
 
         return courses;
+    } catch (ex) {
+        throw ex;
+    }
+}
+
+export async function addContent(course_id, data, file, onUploadProgress) {
+    const form_data = jsonToFormdata(data, file, "file");
+    const apiEndpoint = getEndpointUrl("courses") + `${course_id}/add/`;
+    var config = getAuthHeader();
+    config.onUploadProgress = onUploadProgress;
+
+    try {
+        const response = await http.post(apiEndpoint, form_data, config);
+        return response.data;
+    } catch (ex) {
+        throw ex;
+    }
+}
+
+export async function getContents(course_id) {
+    const apiEndpoint = getEndpointUrl("courses") + `${course_id}/contents/`;
+    var config = getAuthHeader();
+
+    try {
+        const response = await http.get(apiEndpoint, config);
+        return response.data;
     } catch (ex) {
         throw ex;
     }

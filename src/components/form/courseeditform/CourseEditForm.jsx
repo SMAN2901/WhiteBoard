@@ -69,7 +69,7 @@ class CourseEditForm extends Form {
             await updateCourse(course_id, course);
             loadbar.stop();
             popup.show("success", "Course updated", "successfully");
-            //this.props.history.push("/course/latest");
+            this.setState({ loading: false });
         } catch (ex) {
             loadbar.stop();
             popup.show("error", "Error", "Update failed");

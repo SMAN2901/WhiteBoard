@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 import { getCreatedCourses } from "../../api/CoursesApi";
 import EditCourseSelect from "../editcourseselect/EditCourseSelect";
 import CourseEditForm from "../form/courseeditform/CourseEditForm";
@@ -50,6 +50,12 @@ class EditCourse extends Component {
                     onSelect={this.selectCourse}
                 />
                 <div className="edit-course-form-div" key={index}>
+                    <Link
+                        className="edit-course-conupd-link"
+                        to={`/update/course/${courses[index].course_id}`}
+                    >
+                        Click here to update course contents
+                    </Link>
                     <CourseBannerEdit
                         loadbar={loadbar}
                         popup={popup}

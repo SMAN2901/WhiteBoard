@@ -14,6 +14,8 @@
     },
     "validation": {
         "maxImageSize": 1048576,
-        "imageTypes": ["image/gif", "image/jpeg", "image/png"]
+        "imageTypes": ["image/gif", "image/jpeg", "image/png"],
+        "maxFileSize": 104857600,
+        "videoTypes": ["video/mp4"]
     }
 }
