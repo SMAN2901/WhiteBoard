@@ -12,7 +12,7 @@ class ProfileEditForm extends Form {
         data: {
             first_name: this.props.user.first_name,
             last_name: this.props.user.last_name,
-            gender: this.props.user.gender,
+            gender: this.props.user.gender ? this.props.user.gender : "Male",
             bio: this.props.user.bio
         },
         errors: {},
@@ -32,8 +32,7 @@ class ProfileEditForm extends Form {
             .max(50)
             .required()
             .label("First Name"),
-        gender: Joi.string()
-            .label("Gender"),
+        gender: Joi.string().label("Gender"),
         bio: Joi.string()
             .max(500)
             .label("Bio")
