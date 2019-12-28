@@ -20,7 +20,10 @@ class CourseContents extends Component {
         if (!("contents" in this.props)) {
             try {
                 loadbar.start();
-                contents = await getContents(id);
+
+                if (id === "latest") contents = [];
+                else contents = await getContents(id);
+
                 if (contents !== "pending" && this._isMounted) {
                     this.setState({ contents });
                     loadbar.stop();

@@ -3,6 +3,14 @@
     margin: 10px;
 }
 
+.conv-video {
+    max-height: 400px;
+    border-bottom: 5px solid rgba(0, 162, 255);
+    outline: none;
+    box-shadow: 1px 1px 10px black;
+    background-color: rgb(183, 192, 194);
+}
+
 .conv-title {
     color: white;
     font-size: 20px;
