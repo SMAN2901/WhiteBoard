@@ -17,6 +17,11 @@ class Home extends Component {
                     label="Top Rated"
                 />
                 <Courses {...this.props} queryType="new" label="Brand New" />
+                <Courses
+                    {...this.props}
+                    queryType="free"
+                    label="On the House"
+                />
             </React.Fragment>
         );
     }

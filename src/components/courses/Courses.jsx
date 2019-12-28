@@ -4,7 +4,8 @@ import {
     getCourses,
     getCreatedCourses,
     getTopRatedCourses,
-    getNewCourses
+    getNewCourses,
+    getFreeCourses
 } from "../../api/CoursesApi";
 import $ from "jquery";
 import "./Courses.css";
@@ -20,6 +21,7 @@ class Courses extends Component {
         created: "person_pin",
         toprated: "bar_chart",
         new: "new_releases",
+        free: "card_giftcard",
         all: "menu_book"
     };
 
@@ -39,6 +41,7 @@ class Courses extends Component {
             else if (queryType === "toprated")
                 courses = await getTopRatedCourses();
             else if (queryType === "new") courses = await getNewCourses();
+            else if (queryType === "free") courses = await getFreeCourses();
             else courses = await getCourses();
 
             if (courses !== "pending") {
