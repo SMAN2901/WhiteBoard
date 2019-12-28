@@ -16,13 +16,39 @@
 }
 
 .edit-course-conupd-link {
-    color: rgb(0, 162, 255);
-    font-size: 18px;
-    font-family: "Exo 2", sans-serif;
-    text-decoration: none;
+    background-color: rgba(0, 162, 255);
+    box-shadow: 1px 1px 5px black;
     margin-left: 10px;
     margin-bottom: 15px;
+    padding: 5px;
+    border-radius: 2px;
     display: inline-block;
+    cursor: pointer;
+}
+
+.edit-course-conupd-link:hover {
+    background-color: rgb(0, 105, 119);
+}
+
+.edit-course-conupd-link:active {
+    background-color: gray;
+}
+
+.edit-course-conupd-icon {
+    color: white;
+    font-size: 22px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 5px;
+}
+
+.edit-course-conupd-text {
+    color: white;
+    font-size: 16px;
+    font-family: "Exo 2", sans-serif;
+    display: inline-block;
+    vertical-align: middle;
+    margin-bottom: 3px;
 }
 
 .edit-course-conupd-link:hover {
@@ -42,5 +68,9 @@
     .edit-course-form-div {
         width: calc(100% - 20px);
         padding: 0px;
+    }
+
+    .edit-course-conupd-link {
+        margin-top: 20px;
     }
 }

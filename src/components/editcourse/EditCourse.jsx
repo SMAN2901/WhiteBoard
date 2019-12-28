@@ -54,7 +54,12 @@ class EditCourse extends Component {
                         className="edit-course-conupd-link"
                         to={`/update/course/${courses[index].course_id}`}
                     >
-                        Click here to update course contents
+                        <i className="material-icons edit-course-conupd-icon">
+                            video_library
+                        </i>
+                        <span className="edit-course-conupd-text">
+                            Update Contents
+                        </span>
                     </Link>
                     <CourseBannerEdit
                         loadbar={loadbar}
