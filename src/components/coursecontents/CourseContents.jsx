@@ -43,7 +43,10 @@ class CourseContents extends Component {
 
         try {
             if ("contents" in this.props) contents = this.props.contents;
-            else contents = await getContents(id);
+            else {
+                if (id === "latest") contents = [];
+                else contents = await getContents(id);
+            }
 
             if (contents !== "pending") {
                 if (contents !== this.state.contents && this._isMounted) {
