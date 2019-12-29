@@ -20,6 +20,7 @@ class CourseInfo extends Component {
 
     render() {
         var {
+            course_id,
             title,
             fee,
             rating,
@@ -31,6 +32,7 @@ class CourseInfo extends Component {
             length,
             difficulty
         } = this.props.course;
+        const { user } = this.props;
         var defaultImage = staticValues.images.defaultProfileImage;
         var image = author.profile_pic ? author.profile_pic : defaultImage;
         fee = fee.toFixed(2).toString() + "$";
@@ -53,9 +55,32 @@ class CourseInfo extends Component {
                     </Link>
                 </p>
                 <br></br>
-                <Link to="" className="coursedetails-enroll">
-                    Enroll Now
-                </Link>
+                {user.username === author.username ? (
+                    <Link
+                        to={`/edit/course/${course_id}`}
+                        className="coursedetails-edit-link"
+                    >
+                        <div className="coursedetails-edit">
+                            <i className="material-icons coursedetails-edit-icon">
+                                edit
+                            </i>
+                            <span className="coursedetails-edit-text">
+                                Edit
+                            </span>
+                        </div>
+                    </Link>
+                ) : (
+                    <Link to="" className="coursedetails-enroll-link">
+                        <div className="coursedetails-enroll">
+                            <i className="material-icons coursedetails-enroll-icon">
+                                how_to_reg
+                            </i>
+                            <span className="coursedetails-enroll-text">
+                                Enroll
+                            </span>
+                        </div>
+                    </Link>
+                )}
                 <div className="coursedetails-separator"></div>
                 {this.courseValue("payment", "Fee", fee)}
                 {this.courseValue("bar_chart", "Rating", rating)}

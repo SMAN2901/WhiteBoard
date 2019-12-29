@@ -33,7 +33,22 @@ class App extends Component {
             text: null,
             subtext: null
         },
-        user: "pending"
+        user: "pending",
+        courses: {
+            created: "pending",
+            toprated: "pending",
+            new: "pending",
+            free: "pending",
+            all: "pending",
+            lastUpdated: {
+                created: -1,
+                toprated: -1,
+                new: -1,
+                free: -1,
+                all: -1
+            },
+            expirationDelta: 600000
+        }
     };
 
     async componentDidMount() {
@@ -48,6 +63,7 @@ class App extends Component {
     async componentDidUpdate() {
         var user = getCurrentUser();
         var prevUser = this.state.user;
+
         if (prevUser && user) {
             if (prevUser !== "pending" && prevUser !== user) {
                 user = await getUserData(user.username);
@@ -59,7 +75,35 @@ class App extends Component {
                 this.setState({ user });
             }
         }
+
+        this.checkCoursesExpiration();
     }
+
+    storeCourses = (type, fetchedCourses) => {
+        var { courses } = this.state;
+        courses[type] = fetchedCourses;
+        courses.lastUpdated[type] = Date.now();
+        this.setState({ courses });
+    };
+
+    checkCoursesExpiration = () => {
+        var shouldUpdate = false;
+        var { courses } = this.state;
+        const currentTime = Date.now();
+
+        for (var type in Object.keys(courses.lastUpdated)) {
+            const lastUpdated = courses.lastUpdated[type];
+            if (
+                lastUpdated === -1 ||
+                currentTime - lastUpdated > courses.expirationDelta
+            ) {
+                courses[type] = "pending";
+                shouldUpdate = true;
+            }
+        }
+
+        if (shouldUpdate) this.setState({ courses });
+    };
 
     startLoading = (text, subtext) => {
         const { loadbar } = this.state;
@@ -104,7 +148,7 @@ class App extends Component {
     };
 
     render() {
-        const { user, loadbar, popup } = this.state;
+        const { user, courses, loadbar, popup } = this.state;
 
         loadbar.start = this.startLoading;
         loadbar.stop = this.stopLoading;
@@ -167,7 +211,7 @@ class App extends Component {
                                     )}
                                 />
                                 <Route
-                                    path="/edit/course"
+                                    path="/edit/course/:id?"
                                     render={props => (
                                         <EditCourse
                                             {...props}
@@ -175,15 +219,19 @@ class App extends Component {
                                             user={user}
                                             loadbar={loadbar}
                                             popup={popup}
+                                            courses={courses}
+                                            storeCourses={this.storeCourses}
                                         />
                                     )}
                                 />
                                 <Route
-                                    path="/user/:username?"
+                                    path="/user/:username"
                                     render={props => (
                                         <ProfilePage
                                             {...props}
                                             user={user}
+                                            courses={courses}
+                                            storeCourses={this.storeCourses}
                                             loadbar={loadbar}
                                             popup={popup}
                                             key={window.location.href}
@@ -218,6 +266,7 @@ class App extends Component {
                                             {...props}
                                             loadbar={loadbar}
                                             popup={popup}
+                                            user={user}
                                             key={window.location.href}
                                         />
                                     )}
@@ -252,6 +301,8 @@ class App extends Component {
                                             {...props}
                                             loadbar={loadbar}
                                             popup={popup}
+                                            courses={courses}
+                                            storeCourses={this.storeCourses}
                                         />
                                     )}
                                 />

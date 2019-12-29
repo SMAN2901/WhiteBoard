@@ -3,6 +3,7 @@ import { Redirect, Link } from "react-router-dom";
 import CourseBanner from "../coursebanner/CourseBanner";
 import CourseContents from "../coursecontents/CourseContents";
 import ContentView from "../contentview/ContentView";
+import CourseReview from "../coursereview/CourseReview";
 import { getCourse, getContents } from "../../api/CoursesApi";
 import staticValues from "../../staticValues.json";
 import "./ContentPage.css";
@@ -188,6 +189,7 @@ class ContentPage extends Component {
                     </div>
                     <CourseContents {...this.props} contents={contents} />
                 </div>
+                <CourseReview {...this.props} />
             </div>
         );
     }

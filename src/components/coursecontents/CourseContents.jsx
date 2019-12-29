@@ -119,9 +119,11 @@ class CourseContents extends Component {
                 ? this.state.contents
                 : this.fixPlacement(this.state.contents);
 
-        return contents === "pending" ? null : (
+        return (
             <div className="coursedetails-contents-container">
-                {contents.map(content => this.renderContent(content))}
+                {contents === "pending"
+                    ? null
+                    : contents.map(content => this.renderContent(content))}
             </div>
         );
     }

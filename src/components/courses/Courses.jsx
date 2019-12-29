@@ -26,29 +26,41 @@ class Courses extends Component {
     };
 
     animation = {
-        transitionLength: 270
+        transitionLength: 270,
+        lastTime: {
+            click: -1,
+            focus: -1
+        }
     };
 
     async componentDidMount() {
         this._isMounted = true;
-        const { loadbar, queryType } = this.props;
+        const { loadbar, queryType, storeCourses } = this.props;
         var courses = "pending";
 
-        if (this._isMounted) {
-            loadbar.start();
-            if (queryType === "created")
-                courses = await getCreatedCourses(this.props.user);
-            else if (queryType === "toprated")
-                courses = await getTopRatedCourses();
-            else if (queryType === "new") courses = await getNewCourses();
-            else if (queryType === "free") courses = await getFreeCourses();
-            else courses = await getCourses();
+        if (this.props.courses[queryType] === "pending") {
+            if (this._isMounted) {
+                loadbar.start();
+                if (queryType === "created")
+                    courses = await getCreatedCourses(this.props.user);
+                else if (queryType === "toprated")
+                    courses = await getTopRatedCourses();
+                else if (queryType === "new") courses = await getNewCourses();
+                else if (queryType === "free") courses = await getFreeCourses();
+                else courses = await getCourses();
 
-            if (courses !== "pending") {
-                if (this._isMounted) {
-                    this.setState({ courses });
-                    loadbar.stop();
+                if (courses !== "pending") {
+                    if (this._isMounted) {
+                        this.setState({ courses });
+                        storeCourses(queryType, courses);
+                        loadbar.stop();
+                    }
                 }
+            }
+        } else {
+            if (this._isMounted) {
+                courses = this.props.courses[queryType];
+                this.setState({ courses });
             }
         }
     }
@@ -58,18 +70,33 @@ class Courses extends Component {
         this.props.loadbar.stop();
     }
 
+    shouldAnimate = (type, delta) => {
+        const currentTime = Date.now();
+        const lastTime = this.animation.lastTime[type];
+
+        if (lastTime === -1 || currentTime - lastTime > delta) {
+            this.animation.lastTime[type] = currentTime;
+            return true;
+        }
+        return false;
+    };
+
     clickRight = () => {
-        const classes = ".courses-" + this.props.queryType;
-        const move = this.animation.transitionLength;
-        const scrollValue = "+=" + move.toString();
-        $(classes).animate({ scrollLeft: scrollValue }, 500, "swing");
+        if (this.shouldAnimate("click", 500)) {
+            const classes = ".courses-" + this.props.queryType;
+            const move = this.animation.transitionLength;
+            const scrollValue = "+=" + move.toString();
+            $(classes).animate({ scrollLeft: scrollValue }, 500, "swing");
+        }
     };
 
     clickLeft = () => {
-        const classes = ".courses-" + this.props.queryType;
-        const move = this.animation.transitionLength;
-        const scrollValue = "-=" + move.toString();
-        $(classes).animate({ scrollLeft: scrollValue }, 500, "swing");
+        if (this.shouldAnimate("click", 500)) {
+            const classes = ".courses-" + this.props.queryType;
+            const move = this.animation.transitionLength;
+            const scrollValue = "-=" + move.toString();
+            $(classes).animate({ scrollLeft: scrollValue }, 500, "swing");
+        }
     };
 
     expandToggle = () => {
@@ -82,14 +109,16 @@ class Courses extends Component {
     };
 
     getFocus = () => {
-        const className = ".courses-" + this.props.queryType;
-        const move = $(className).offset().top - 130;
-        const display = $(className).css("display");
+        if (this.shouldAnimate("focus", 1000)) {
+            const className = ".courses-" + this.props.queryType;
+            const move = $(className).offset().top - 130;
+            const display = $(className).css("display");
 
-        if (display !== "none") {
-            $("html,body").animate({ scrollTop: move }, 1000, () => {
-                $(className).focus();
-            });
+            if (display !== "none") {
+                $("html,body").animate({ scrollTop: move }, 1000, () => {
+                    $(className).focus();
+                });
+            }
         }
     };
 

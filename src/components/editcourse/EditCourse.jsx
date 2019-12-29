@@ -15,22 +15,45 @@ class EditCourse extends Component {
     async componentDidMount() {
         window.scroll(0, 0);
         var courses = "pending";
-        const { user, loadbar, popup } = this.props;
+        const { user, loadbar, popup, storeCourses } = this.props;
 
-        try {
-            if (user !== "pending") {
-                loadbar.start();
-                courses = await getCreatedCourses(user.id);
-            }
-            if (courses !== "pending") {
+        if (this.props.courses.created === "pending") {
+            try {
+                if (user !== "pending") {
+                    loadbar.start();
+                    courses = await getCreatedCourses(user.id);
+                }
+                if (courses !== "pending") {
+                    loadbar.stop();
+                    this.setState({ courses });
+                    var index = this.getInitialIndex();
+                    this.selectCourse(index);
+                    storeCourses("created", courses);
+                }
+            } catch (ex) {
                 loadbar.stop();
-                this.setState({ courses });
+                popup.show("error", "Error", "something went wrong");
             }
-        } catch (ex) {
-            loadbar.stop();
-            popup.show("error", "Error", "something went wrong");
+        } else {
+            courses = this.props.courses.created;
+            this.setState({ courses });
+            var i = this.getInitialIndex(courses);
+            this.selectCourse(i);
         }
     }
+
+    getInitialIndex = (courses = null) => {
+        const id = this.props.match.params.id;
+
+        if (courses === null) courses = this.state.courses;
+
+        for (var i = 0; i < courses.length; i++) {
+            if (courses[i].course_id === id) {
+                return i;
+            }
+        }
+        return 0;
+    };
 
     selectCourse = index => {
         this.setState({ index });
@@ -42,14 +65,15 @@ class EditCourse extends Component {
 
         return user === "pending" ||
             courses === "pending" ? null : courses.length > 0 ? (
-            <div className="edit-course-div">
+            <div className="edit-course-div" key={index}>
                 <EditCourseSelect
                     loadbar={loadbar}
                     popup={popup}
                     courses={courses}
+                    index={index}
                     onSelect={this.selectCourse}
                 />
-                <div className="edit-course-form-div" key={index}>
+                <div className="edit-course-form-div">
                     <Link
                         className="edit-course-conupd-link"
                         to={`/update/course/${courses[index].course_id}`}

@@ -3,7 +3,7 @@ import SiteBanner from "../sitebanner/SiteBanner";
 import Courses from "../courses/Courses";
 
 class Home extends Component {
-    componentWillUnmount() {
+    componentDidMount() {
         window.scroll(0, 0);
     }
 

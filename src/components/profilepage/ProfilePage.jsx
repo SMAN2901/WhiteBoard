@@ -8,7 +8,15 @@ class ProfilePage extends Component {
     }
 
     render() {
-        const { loadbar, popup, user, match, history } = this.props;
+        const {
+            loadbar,
+            popup,
+            user,
+            match,
+            history,
+            courses,
+            storeCourses
+        } = this.props;
         const id = match.params.username;
 
         return (
@@ -22,6 +30,8 @@ class ProfilePage extends Component {
                     queryType="created"
                     label={`Authored Courses`}
                     user={id}
+                    courses={courses}
+                    storeCourses={storeCourses}
                 />
             </React.Fragment>
         );

@@ -40,6 +40,10 @@
     border: 3px solid rgba(0, 0, 0, 0.5);
 }
 
+.conv-icon-download{
+    background-color: rgb(238, 75, 75);
+}
+
 .conv-icon:hover {
     border: 3px solid rgb(31, 29, 29);
 }

@@ -25,7 +25,9 @@ class ContentView extends Component {
                 <p className="conv-description">{description}</p>
                 <div className="conv-icon-container">
                     <a href={file} className="conv-link" download>
-                        <i className="material-icons conv-icon">save_alt</i>
+                        <i className="material-icons conv-icon conv-icon-download">
+                            save_alt
+                        </i>
                     </a>
                     <Link to={goToPrev()} className="conv-link">
                         <i className="material-icons conv-icon">

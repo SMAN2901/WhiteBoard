@@ -3,6 +3,10 @@ import $ from "jquery";
 import "./EditCourseSelect.css";
 
 class EditCourseSelect extends Component {
+    componentDidMount() {
+        this.onSelect(this.props.index);
+    }
+
     onSelect = index => {
         for (var i = 0; i < this.props.courses.length; i++) {
             if (i !== index) {
