@@ -168,3 +168,10 @@
 .create-course-btn:active {
     color: gray;
 }
+
+@media screen and (max-width: 800px) {
+    .profile-bio-container {
+        display: block;
+        width: 100%;
+    }
+}
