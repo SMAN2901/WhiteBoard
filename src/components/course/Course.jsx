@@ -44,14 +44,25 @@ class Course extends Component {
                         alt=""
                     />
                     <div className="course-badge">BESTSELLER</div>
-                    <div className="course-values">
-                        <div className="course-fee">{fee.toFixed(2)} $</div>
-                        <div className="course-rating-icon">
-                            <i className="material-icons rating-icon">
+                    <div
+                        className={
+                            "course-values " +
+                            (fee === 0 ? "course-values-free" : "")
+                        }
+                    >
+                        <span className="course-fee">
+                            {fee > 0
+                                ? fee.toFixed(2).toString() + " $"
+                                : "FREE"}
+                        </span>
+                        <div className="course-rating">
+                            <i className="material-icons course-rating-icon">
                                 bar_chart
                             </i>
+                            <span className="course-rating-text">
+                                {rating.toFixed(1)}
+                            </span>
                         </div>
-                        <div className="course-rating">{rating.toFixed(1)}</div>
                     </div>
                     <div className="course-info">
                         <Link

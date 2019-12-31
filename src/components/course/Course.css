@@ -41,41 +41,46 @@
 }
 
 .course-values {
-    width: 100%;
-    display: table;
+    width: calc(100% - 15px);
+    height: 26px;
+    padding-left: 5px;
+    padding-right: 10px;
     background-color: rgb(252, 60, 60);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.course-values-free {
+    background-color: rgb(59, 175, 44);
 }
 
 .course-fee {
     color: white;
-    text-align: left;
-    display: table-cell;
+    display: inline-block;
     font-size: 16px;
-    line-height: 16px;
     font-family: "Exo 2", sans-serif;
-    padding-left: 5px;
-    vertical-align: middle;
+    margin-bottom: 2px;
 }
 
 .course-rating {
-    color: white;
-    text-align: left;
-    display: table-cell;
-    font-size: 16px;
-    line-height: 16px;
-    font-family: "Exo 2", sans-serif;
-    padding-right: 5px;
-    vertical-align: middle;
+    text-align: center;
+    display: inline-block;
+    margin-bottom: 3px;
 }
 
 .course-rating-icon {
     color: white;
-    text-align: right;
-    display: table-cell;
+    font-size: 24px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.course-rating-text {
+    color: white;
     font-size: 16px;
-    line-height: 16px;
     font-family: "Exo 2", sans-serif;
-    padding-right: 5px;
+    display: inline-block;
     vertical-align: middle;
 }
 
