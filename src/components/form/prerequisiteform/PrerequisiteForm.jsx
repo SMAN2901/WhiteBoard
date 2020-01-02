@@ -17,6 +17,13 @@ class PrerequisiteForm extends Form {
         this.toggleForm();
     }
 
+    componentDidUpdate() {
+        const { loading } = this.props;
+        if (loading !== this.state.loading) {
+            this.setState({ loading });
+        }
+    }
+
     toggleForm = () => {
         const className = ".preq-form";
         const headerClass = "preq-form-header";
@@ -52,6 +59,7 @@ class PrerequisiteForm extends Form {
 
         if (response) {
             loadbar.stop();
+            setLoading(false);
             if (response.success) popup.show("success", "Update", "Successful");
             else this.setState({ errors: response.errors });
         }
@@ -200,7 +208,11 @@ class PrerequisiteForm extends Form {
                         <button
                             className="preq-add-btn"
                             onClick={this.onPreqSelect}
-                            disabled={this.state.loading}
+                            disabled={
+                                this.state.loading ||
+                                (this.state.errors !== "" &&
+                                    this.state.errors !== null)
+                            }
                         >
                             Add
                         </button>
@@ -245,6 +257,8 @@ class PrerequisiteForm extends Form {
                                 this.state.loading ||
                                 (this.state.errors !== "" &&
                                     this.state.errors !== null)
+                                    ? true
+                                    : false
                             }
                         >
                             Save
