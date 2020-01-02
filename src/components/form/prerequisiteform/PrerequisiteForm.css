@@ -1,0 +1,167 @@
+.preq-form-container {
+    width: 100%;
+    max-width: 700px;
+    min-width: 280px;
+    text-align: right;
+    display: block;
+}
+
+.preq-form {
+    width: calc(100% - 40px);
+    margin: 10px;
+    padding: 10px;
+    display: inline-block;
+    text-align: initial;
+    border-top: 10px solid rgb(0, 162, 255);
+    background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.5),
+        rgba(0, 0, 0, 0.1)
+    );
+}
+
+.preq-form-header {
+    max-width: 400px;
+    border-radius: 2px;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+.preq-form-title {
+    color: rgb(0, 162, 255);
+    font-size: 18px;
+    font-family: "Exo 2", sans-serif;
+    cursor: pointer;
+}
+
+.preq-form-title:hover {
+    text-decoration: underline;
+}
+
+.preq-select-container {
+    display: inline-block;
+    vertical-align: top;
+    margin-bottom: 20px;
+    margin-right: 30px;
+}
+
+.preq-selected-container {
+    width: 240px;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.preq-content-label,
+.preq-preq-label {
+    color: white;
+    font-size: 16px;
+    font-family: "Exo 2", sans-serif;
+    display: block;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.preq-preq-select,
+.preq-content-select {
+    color: white;
+    font-size: 16px;
+    font-family: "Exo 2", sans-serif;
+    width: 200px;
+    border: none;
+    outline: none;
+    border-bottom: 2px solid white;
+    background-color: transparent;
+    display: block;
+}
+
+.preq-preq-select option,
+.preq-content-select option {
+    color: black;
+}
+
+.preq-save-btn,
+.preq-add-btn {
+    border: none;
+    outline: none;
+    background-color: rgb(0, 162, 255);
+    height: 30px;
+    color: white;
+    font-size: 16px;
+    font-family: "Exo 2", sans-serif;
+    border-radius: 2px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.preq-save-btn:hover,
+.preq-add-btn:hover {
+    background-color: rgb(18, 155, 18);
+}
+
+.preq-save-btn:disabled,
+.preq-save-btn:active,
+.preq-add-btn:disabled,
+.preq-add-btn:active {
+    background-color: gray;
+}
+
+.preq-selected {
+    width: 100%;
+    height: flex;
+    display: inline-block;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    margin-bottom: 5px;
+    border-radius: 3px;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.preq-selected-label {
+    color: rgb(0, 162, 255);
+    font-size: 16px;
+    font-family: "Exo 2", sans-serif;
+    display: inline-block;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.preq-selected-delete-icon,
+.preq-selected-icon {
+    color: white;
+    font-size: 16px;
+    margin-right: 5px;
+    margin-left: 5px;
+    display: inline-block;
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+.preq-selected-icon:hover {
+    color: rgb(0, 162, 255);
+}
+
+.preq-selected-delete-icon:hover {
+    color: rgb(250, 62, 62);
+}
+
+.preq-selected-delete-icon:active,
+.preq-selected-icon:active {
+    color: gray;
+}
+
+.preq-selected-text {
+    width: calc(100% - 60px);
+    color: white;
+    font-size: 16px;
+    font-family: "Exo 2", sans-serif;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.preq-selected-error-msg {
+    color: rgb(241, 75, 75);
+    font-size: 14px;
+    font-family: "Exo 2", sans-serif;
+    margin: 0px;
+    margin-bottom: 5px;
+}

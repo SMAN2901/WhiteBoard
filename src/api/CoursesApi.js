@@ -379,12 +379,24 @@ export async function addContent(course_id, data, file, onUploadProgress) {
 
 export async function getContents(course_id) {
     const apiEndpoint = getEndpointUrl("courses") + `${course_id}/contents/`;
-    var config = getAuthHeader();
+    const config = getAuthHeader();
 
     try {
         const response = await http.get(apiEndpoint, config);
         return response.data;
     } catch (ex) {
         throw ex;
+    }
+}
+
+export async function setPrerequisites(course_id, data) {
+    const apiEndpoint = getEndpointUrl("courses") + `${course_id}/set-preq/`;
+    const config = getAuthHeader();
+
+    try {
+        const response = await http.post(apiEndpoint, data, config);
+        return response.data;
+    } catch (ex) {
+        return ex.response.data;
     }
 }

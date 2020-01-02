@@ -3,12 +3,14 @@ import { Redirect, Link } from "react-router-dom";
 import CourseBanner from "../coursebanner/CourseBanner";
 import CourseContents from "../coursecontents/CourseContents";
 import ContentAddForm from "../form/contentaddform/ContentAddForm";
-import { getCourse } from "../../api/CoursesApi";
+import PrerequisiteForm from "../form/prerequisiteform/PrerequisiteForm";
+import { getCourse, getContents } from "../../api/CoursesApi";
 import "./EditCourseContent.css";
 
 class EditCourseContent extends Component {
     state = {
         course: "pending",
+        contents: "pending",
         loading: false
     };
 
@@ -24,20 +26,73 @@ class EditCourseContent extends Component {
         loadbar.start();
         try {
             var course = "pending";
+            var contents = "pending";
             course = await getCourse(id);
+            contents = await getContents(id);
 
-            if (course !== "pending") {
+            if (course !== "pending" && contents !== "pending") {
                 loadbar.stop();
-                if (this._isMounted) this.setState({ course });
+                contents = this.fixPlacement(contents);
+                if (this._isMounted) this.setState({ course, contents });
             }
         } catch (ex) {
             loadbar.stop();
-            if (this._isMounted) this.setState({ course: null });
+            if (this._isMounted) {
+                this.setState({
+                    course: null,
+                    contents: null
+                });
+            }
             if (ex.response && ex.response.status === 404) {
                 popup.show("error", "404", "Not found");
             } else popup.show("error", "Error", "Something went wrong");
         }
     }
+
+    async componentDidUpdate() {
+        var contents = "pending";
+        const id = this.props.match.params.id;
+        contents = await getContents(id);
+
+        if (contents !== "pending" && contents !== this.state.contents) {
+            contents = this.fixPlacement(contents);
+            if (this._isMounted) {
+                this.setState({ contents });
+            }
+        }
+    }
+
+    fixPlacement = contents => {
+        var a = [];
+        var len = contents.length;
+
+        for (var i = 0; i < len; i++) {
+            if (contents[0].serial === -1) {
+                a.push(contents.shift());
+            } else break;
+        }
+
+        for (i = 0; i < a.length; i++) {
+            contents.push(a[i]);
+        }
+
+        return contents;
+    };
+
+    filterContents = () => {
+        var a = [];
+        const { contents } = this.state;
+
+        if (contents !== "pending") {
+            for (var i = 0; i < contents.length; i++) {
+                if (contents[i].serial !== -1) {
+                    a.push(contents[i]);
+                }
+            }
+        }
+
+        return a;
+    };
 
     componentWillUnmount() {
         this._isMounted = false;
@@ -51,9 +106,13 @@ class EditCourseContent extends Component {
     render() {
         const { user } = this.props;
         const { course, loading } = this.state;
+        const contents = this.filterContents();
 
-        return course === "pending" || user === "pending" ? null : course ===
-              null || user === null ? (
+        return course === "pending" ||
+            user === "pending" ||
+            contents === "pending" ? null : course === null ||
+          user === null ||
+          contents === null ? (
             <Redirect to="/" />
         ) : (
             <div className="course-conupd-container">
@@ -78,6 +137,15 @@ class EditCourseContent extends Component {
                             loading={loading}
                             setLoading={this.setLoading}
                         />
+                        {contents.length > 0 ? (
+                            <PrerequisiteForm
+                                {...this.props}
+                                loading={loading}
+                                setLoading={this.setLoading}
+                                contents={contents}
+                                key={contents}
+                            />
+                        ) : null}
                     </div>
                     <CourseContents {...this.props} />
                 </div>

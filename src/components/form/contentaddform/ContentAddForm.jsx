@@ -48,7 +48,6 @@ class ContentAddForm extends Form {
     };
 
     componentDidMount() {
-        window.scrollTo(0, 0);
         const { loadbar } = this.props;
         loadbar.stop();
         this.toggleForm();
