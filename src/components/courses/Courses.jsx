@@ -35,14 +35,17 @@ class Courses extends Component {
 
     async componentDidMount() {
         this._isMounted = true;
-        const { loadbar, queryType, storeCourses } = this.props;
+        const { loadbar, queryType, storeCourses, user } = this.props;
         var courses = "pending";
 
-        if (this.props.courses[queryType] === "pending") {
+        if (
+            this.props.courses[queryType] === "pending" ||
+            (queryType === "created" && this.props.id !== user.username)
+        ) {
             if (this._isMounted) {
                 loadbar.start();
                 if (queryType === "created")
-                    courses = await getCreatedCourses(this.props.user);
+                    courses = await getCreatedCourses(this.props.id);
                 else if (queryType === "toprated")
                     courses = await getTopRatedCourses();
                 else if (queryType === "new") courses = await getNewCourses();
@@ -52,7 +55,13 @@ class Courses extends Component {
                 if (courses !== "pending") {
                     if (this._isMounted) {
                         this.setState({ courses });
-                        storeCourses(queryType, courses);
+
+                        if (queryType === "created") {
+                            if (this.props.id === user.username) {
+                                storeCourses(queryType, courses);
+                            }
+                        } else storeCourses(queryType, courses);
+
                         loadbar.stop();
                     }
                 }

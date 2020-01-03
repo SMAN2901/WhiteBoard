@@ -302,6 +302,7 @@ class App extends Component {
                                             loadbar={loadbar}
                                             popup={popup}
                                             courses={courses}
+                                            user={user}
                                             storeCourses={this.storeCourses}
                                         />
                                     )}
