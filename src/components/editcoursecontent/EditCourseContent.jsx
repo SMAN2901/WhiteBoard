@@ -4,6 +4,7 @@ import CourseBanner from "../coursebanner/CourseBanner";
 import CourseContents from "../coursecontents/CourseContents";
 import ContentAddForm from "../form/contentaddform/ContentAddForm";
 import PrerequisiteForm from "../form/prerequisiteform/PrerequisiteForm";
+import PreviewForm from "../form/previewform/PreviewForm";
 import { getCourse, getContents } from "../../api/CoursesApi";
 import "./EditCourseContent.css";
 
@@ -138,13 +139,20 @@ class EditCourseContent extends Component {
                             setLoading={this.setLoading}
                         />
                         {contents.length > 0 ? (
-                            <PrerequisiteForm
-                                {...this.props}
-                                loading={loading}
-                                setLoading={this.setLoading}
-                                contents={contents}
-                                key={contents}
-                            />
+                            <React.Fragment key={contents}>
+                                <PrerequisiteForm
+                                    {...this.props}
+                                    loading={loading}
+                                    setLoading={this.setLoading}
+                                    contents={contents}
+                                />
+                                <PreviewForm
+                                    {...this.props}
+                                    loading={loading}
+                                    setLoading={this.setLoading}
+                                    contents={contents}
+                                />
+                            </React.Fragment>
                         ) : null}
                     </div>
                     <CourseContents {...this.props} />

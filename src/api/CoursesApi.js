@@ -400,3 +400,16 @@ export async function setPrerequisites(course_id, data) {
         return ex.response.data;
     }
 }
+
+export async function setPreview(course_id, preview) {
+    const apiEndpoint =
+        getEndpointUrl("courses") + `${course_id}/content-prev/`;
+    const config = getAuthHeader();
+
+    try {
+        const response = await http.post(apiEndpoint, preview, config);
+        return response.data;
+    } catch (ex) {
+        return ex.response.data;
+    }
+}

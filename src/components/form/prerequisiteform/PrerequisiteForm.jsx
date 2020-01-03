@@ -61,7 +61,10 @@ class PrerequisiteForm extends Form {
             loadbar.stop();
             setLoading(false);
             if (response.success) popup.show("success", "Update", "Successful");
-            else this.setState({ errors: response.errors });
+            else {
+                popup.show("error", "Error", "Update unsuccessful");
+                this.setState({ errors: response.errors });
+            }
         }
     };
 
@@ -78,7 +81,7 @@ class PrerequisiteForm extends Form {
                 prerequisites.push(j);
             }
         }
-        prerequisites.sort();
+        prerequisites.sort((a, b) => a - b);
 
         this.setState({ index, prerequisites, errors });
     };
@@ -90,12 +93,10 @@ class PrerequisiteForm extends Form {
         const index = this.getIndex(id);
         var { prerequisites, errors } = this.state;
 
-        if (id !== "none") {
-            prerequisites.push(index);
-            prerequisites.sort();
-            errors = "";
-            this.setState({ prerequisites, errors });
-        }
+        prerequisites.push(index);
+        prerequisites.sort((a, b) => a - b);
+        errors = "";
+        this.setState({ prerequisites, errors });
     };
 
     onPreqRemove = i => {
@@ -151,24 +152,12 @@ class PrerequisiteForm extends Form {
         return -1;
     };
 
-    isSelected = index => {
-        const { prerequisites } = this.state;
-
-        for (var i = 0; i < prerequisites.length; i++) {
-            if (prerequisites[i] === index) {
-                return true;
-            }
-        }
-
-        return false;
-    };
-
     render() {
         const { contents } = this.props;
 
         return (
             <div className="preq-form-container">
-                <form className={`preq-form`}>
+                <form className="preq-form">
                     <div className="preq-form-header" onClick={this.toggleForm}>
                         <span className="preq-form-title">
                             Set prerequisites
@@ -195,7 +184,6 @@ class PrerequisiteForm extends Form {
                             Select prerequisite
                         </label>
                         <select className="preq-preq-select">
-                            <option value="none"></option>
                             {this.getPreqCandidates().map(content => (
                                 <option
                                     key={content.content_id}
