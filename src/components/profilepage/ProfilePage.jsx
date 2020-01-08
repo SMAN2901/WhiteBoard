@@ -23,18 +23,32 @@ class ProfilePage extends Component {
             <React.Fragment>
                 <Profile match={match} popup={popup} user={user} />
                 {user === "pending" ? null : (
-                    <Courses
-                        match={match}
-                        history={history}
-                        loadbar={loadbar}
-                        popup={popup}
-                        queryType="created"
-                        label={`Authored Courses`}
-                        user={user}
-                        id={id}
-                        courses={courses}
-                        storeCourses={storeCourses}
-                    />
+                    <React.Fragment>
+                        <Courses
+                            match={match}
+                            history={history}
+                            loadbar={loadbar}
+                            popup={popup}
+                            queryType="created"
+                            label="Authored Courses"
+                            user={user}
+                            id={id}
+                            courses={courses}
+                            storeCourses={storeCourses}
+                        />
+                        <Courses
+                            match={match}
+                            history={history}
+                            loadbar={loadbar}
+                            popup={popup}
+                            queryType="enrolled"
+                            label="Enrolled Courses"
+                            user={user}
+                            id={id}
+                            courses={courses}
+                            storeCourses={storeCourses}
+                        />
+                    </React.Fragment>
                 )}
             </React.Fragment>
         );

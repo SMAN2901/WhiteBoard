@@ -17,17 +17,19 @@
 
 .edit-course-conupd-link {
     background-color: rgba(0, 162, 255);
-    box-shadow: 1px 1px 5px black;
     margin-left: 10px;
     margin-bottom: 15px;
     padding: 5px;
     border-radius: 2px;
     display: inline-block;
     cursor: pointer;
+    border-radius: 30px;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 .edit-course-conupd-link:hover {
-    background-color: rgb(0, 105, 119);
+    background-color: rgb(250, 67, 67);
 }
 
 .edit-course-conupd-link:active {

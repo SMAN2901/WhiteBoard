@@ -6,14 +6,18 @@ import "./CourseInfo.css";
 
 class CourseInfo extends Component {
     courseValue = (icon, name, value) => {
+        const text = value === "" ? name : `${name}: ${value}`;
+        var classes =
+            "coursedetails-value-text" +
+            (value === "" ? " coursedetails-value-badge" : "");
+        var iconClasses =
+            "material-icons coursedetails-value-icon" +
+            (value === "" ? " coursedetails-value-badge-icon" : "");
+
         return (
             <div className="coursedetails-value">
-                <i className="material-icons coursedetails-value-icon">
-                    {icon}
-                </i>
-                <p className="coursedetails-value-text">
-                    {name}: {value}
-                </p>
+                <i className={iconClasses}>{icon}</i>
+                <p className={classes}>{text}</p>
             </div>
         );
     };
@@ -30,13 +34,16 @@ class CourseInfo extends Component {
             tags,
             language,
             length,
-            difficulty
+            difficulty,
+            bestseller,
+            top_rated,
+            enrolled
         } = this.props.course;
         const { user } = this.props;
         var defaultImage = staticValues.images.defaultProfileImage;
         var image = author.profile_pic ? author.profile_pic : defaultImage;
         fee = fee.toFixed(2).toString() + "$";
-        rating = rating.toFixed(2);
+        rating = rating.toFixed(1);
 
         return (
             <div className="coursedetails-info-container">
@@ -54,8 +61,9 @@ class CourseInfo extends Component {
                         {author.name}
                     </Link>
                 </p>
-                <br></br>
-                {user.username === author.username ? (
+                {user !== "pending" &&
+                user !== null &&
+                user.username === author.username ? (
                     <Link
                         to={`/edit/course/${course_id}`}
                         className="coursedetails-edit-link"
@@ -69,8 +77,11 @@ class CourseInfo extends Component {
                             </span>
                         </div>
                     </Link>
-                ) : (
-                    <Link to="" className="coursedetails-enroll-link">
+                ) : user !== "pending" && user !== null && !enrolled ? (
+                    <Link
+                        to={`/enroll/${course_id}`}
+                        className="coursedetails-enroll-link"
+                    >
                         <div className="coursedetails-enroll">
                             <i className="material-icons coursedetails-enroll-icon">
                                 how_to_reg
@@ -80,8 +91,18 @@ class CourseInfo extends Component {
                             </span>
                         </div>
                     </Link>
-                )}
-                <div className="coursedetails-separator"></div>
+                ) : null}
+                {bestseller || top_rated ? (
+                    <React.Fragment>
+                        {bestseller
+                            ? this.courseValue("loyalty", "Bestseller", "")
+                            : null}
+                        {top_rated
+                            ? this.courseValue("loyalty", "Top Rated", "")
+                            : null}
+                        <br></br>
+                    </React.Fragment>
+                ) : null}
                 {this.courseValue("payment", "Fee", fee)}
                 {this.courseValue("bar_chart", "Rating", rating)}
                 {this.courseValue("language", "Language", language)}

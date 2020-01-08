@@ -3,7 +3,8 @@ import { Redirect, Link } from "react-router-dom";
 import Form from "../Form";
 import Joi from "joi-browser";
 import { isAuthenticated } from "../../../api/AuthApi";
-import { getTagString, updateCourse } from "../../../api/CoursesApi";
+import { updateCourse } from "../../../api/CoursesApi";
+import { getTagString } from "../../../api/ApiUtility";
 import staticValues from "../../../staticValues.json";
 import "./CourseEditForm.css";
 

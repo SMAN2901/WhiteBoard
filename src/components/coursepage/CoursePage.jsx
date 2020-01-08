@@ -9,7 +9,9 @@ import "./CoursePage.css";
 
 class CoursePage extends Component {
     state = {
-        course: "pending"
+        course: "pending",
+        lastUpdated: -1,
+        updateDelay: 3000
     };
 
     _isMounted = false;
@@ -21,18 +23,16 @@ class CoursePage extends Component {
         const { loadbar, popup } = this.props;
         const id = this.props.match.params.id;
 
-        if (this._isMounted) {
-            loadbar.start();
-            try {
-                const course =
-                    id === "latest"
-                        ? await getLatestCourse()
-                        : await getCourse(id);
-                if (course !== "pending") {
-                    loadbar.stop();
-                    this.setState({ course });
-                }
-            } catch (ex) {
+        loadbar.start();
+        try {
+            const course =
+                id === "latest" ? await getLatestCourse() : await getCourse(id);
+            if (course !== "pending" && this._isMounted) {
+                loadbar.stop();
+                this.setState({ course });
+            }
+        } catch (ex) {
+            if (this._isMounted) {
                 loadbar.stop();
                 this.setState({ course: null });
                 if (ex.response && ex.response.status === 404) {
@@ -40,6 +40,22 @@ class CoursePage extends Component {
                 } else popup.show("error", "Error", "Something went wrong");
             }
         }
+    }
+
+    async componentDidUpdate() {
+        const id = this.props.match.params.id;
+
+        try {
+            const course =
+                id === "latest" ? await getLatestCourse() : await getCourse(id);
+            if (
+                course !== "pending" &&
+                course !== this.state.course &&
+                this._isMounted
+            ) {
+                this.setState({ course });
+            }
+        } catch (ex) {}
     }
 
     componentWillUnmount() {
@@ -55,9 +71,13 @@ class CoursePage extends Component {
                 <CourseBanner banner={course.banner} />
                 <div className="coursedetails-div">
                     <CourseInfo {...this.props} course={course} />
-                    <CourseContents {...this.props} />
+                    <CourseContents
+                        {...this.props}
+                        author={course.author}
+                        editOption
+                    />
                 </div>
-                <CourseReview {...this.props} />
+                <CourseReview {...this.props} course={course} />
             </div>
         ) : (
             <Redirect to="/" />

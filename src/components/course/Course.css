@@ -32,6 +32,7 @@
 }
 
 .course-badge {
+    min-height: 19px;
     color: rgb(0, 204, 255);
     background-color: rgb(31, 31, 31);
     font-family: "Exo 2", sans-serif;

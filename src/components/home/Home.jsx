@@ -13,6 +13,11 @@ class Home extends Component {
                 <SiteBanner {...this.props} />
                 <Courses
                     {...this.props}
+                    queryType="bestseller"
+                    label="Bestseller"
+                />
+                <Courses
+                    {...this.props}
                     queryType="toprated"
                     label="Top Rated"
                 />

@@ -21,3 +21,40 @@ export function jsonToFormdata(data, file, fileKey) {
 
     return form_data;
 }
+
+export function filterTags(tags) {
+    // making the array unique
+    tags.filter((item, i, ar) => {
+        return ar.indexOf(item) === i;
+    });
+
+    // filtering tags according to length
+    var a = [];
+    var len = 0;
+    var limit = 30;
+    for (var i = 0; i < tags.length; i++) {
+        if (len + tags[i].length > limit) break;
+        a.push(tags[i]);
+        len += tags[i].length;
+    }
+    return a;
+}
+
+export function formatTags(tagstring) {
+    const a = tagstring.split(" ").filter(item => item !== "");
+
+    var tags = "";
+    for (var i = 0; i < a.length; i++) {
+        tags = tags + "#" + a[i];
+    }
+
+    return tags;
+}
+
+export function getTagString(a) {
+    var str = "";
+    a.forEach(tag => {
+        str = str + tag + " ";
+    });
+    return str;
+}

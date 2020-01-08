@@ -56,33 +56,73 @@ class CourseContents extends Component {
         } catch (ex) {}
     }
 
+    cutTitle = title => {
+        const maxWordLen = 24;
+        const indicator = "...";
+
+        var rem = maxWordLen + 1;
+        var newTitle = "";
+        var words = title.split(" ").filter(s => s !== "");
+        var i = 0;
+
+        while (i < words.length) {
+            if (rem < words[i].length + 1) break;
+            newTitle = newTitle.concat(words[i] + " ");
+            rem -= words[i].length + 1;
+            rem += i % 2;
+            i++;
+        }
+
+        rem = maxWordLen;
+
+        while (i < words.length) {
+            if (rem < words[i].length + 1) {
+                var s = words[i].substring(0, rem) + indicator;
+                newTitle = newTitle.concat(s);
+                break;
+            }
+            newTitle = newTitle.concat(words[i] + " ");
+            rem -= words[i].length + 1;
+            rem += i % 2;
+            i++;
+        }
+
+        return newTitle;
+    };
+
     componentWillUnmount() {
         this._isMounted = false;
     }
 
     contentElement = (type, content) => {
-        const { content_id, course_id, title, has_completed } = content;
+        var { content_id, course_id, title, has_completed, file } = content;
 
         var icon = "play_arrow";
         var classes = "coursedetails-content";
 
-        if (type === "locked") classes += " content-locked";
-        else if (type === "file") classes += " content-file";
-
         if (has_completed) icon = "done_all";
-        if (type === "file") icon = "notes";
+        if (type === "file") {
+            icon = "notes";
+            classes += " content-file";
+        }
+        if (file === "" || file === null) {
+            icon = "lock";
+            if (type !== "file") classes += " content-locked";
+        }
 
         return (
-            <Link to={`/content/${course_id}/${content_id}`} key={content_id}>
+            <Link
+                className="coursedetails-content-link"
+                to={`/content/${course_id}/${content_id}`}
+                key={content_id}
+            >
                 <div className={classes}>
-                    <div className="coursedetails-content-icon-container">
-                        <i className="material-icons coursedetails-content-icon">
-                            {icon}
-                        </i>
-                    </div>
-                    <label className="coursedetails-content-title">
-                        {title}
-                    </label>
+                    <i className="material-icons coursedetails-content-icon">
+                        {icon}
+                    </i>
+                    <p className="coursedetails-content-title">
+                        {this.cutTitle(title)}
+                    </p>
                 </div>
             </Link>
         );
@@ -114,6 +154,8 @@ class CourseContents extends Component {
     };
 
     render() {
+        const { user, author } = this.props;
+        const { id } = this.props.match.params;
         const contents =
             this.state.contents === "pending"
                 ? this.state.contents
@@ -121,6 +163,24 @@ class CourseContents extends Component {
 
         return (
             <div className="coursedetails-contents-container">
+                {user !== "pending" &&
+                user !== null &&
+                this.props.hasOwnProperty("editOption") &&
+                user.id === author.id ? (
+                    <div className="coursedetails-contents-edit-cont">
+                        <Link
+                            className="coursedetails-contents-edit-link"
+                            to={`/update/course/${id}`}
+                        >
+                            <i className="material-icons coursedetails-contents-edit-icon">
+                                edit
+                            </i>
+                            <p className="coursedetails-contents-edit-text">
+                                Edit Contents
+                            </p>
+                        </Link>
+                    </div>
+                ) : null}
                 {contents === "pending"
                     ? null
                     : contents.map(content => this.renderContent(content))}

@@ -133,19 +133,28 @@ class ContentPage extends Component {
         }
     };
 
+    getTitle = id => {
+        const { contents } = this.state;
+
+        for (var i = 0; i < contents.length; i++) {
+            if (contents[i].content_id === id) {
+                return contents[i].title;
+            }
+        }
+
+        return "";
+    };
+
     componentWillUnmount() {
         this._isMounted = false;
         this.props.loadbar.stop();
     }
 
     render() {
-        const { user } = this.props;
         const { course, contents } = this.state;
 
         return course === "pending" ||
-            user === "pending" ||
             contents === "pending" ? null : course === null ||
-          user === null ||
           contents === null ? (
             <Redirect to="/" />
         ) : (
@@ -185,11 +194,12 @@ class ContentPage extends Component {
                             content={this.currentContent()}
                             goToNext={this.goToNext}
                             goToPrev={this.goToPrev}
+                            getTitle={this.getTitle}
                         />
                     </div>
                     <CourseContents {...this.props} contents={contents} />
                 </div>
-                <CourseReview {...this.props} />
+                <CourseReview {...this.props} course={course} />
             </div>
         );
     }

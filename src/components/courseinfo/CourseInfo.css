@@ -24,6 +24,7 @@
     font-family: "Exo 2", sans-serif;
     font-size: 18px;
     margin: 5px;
+    margin-bottom: 20px;
 }
 
 .coursedetails-author-img {
@@ -49,7 +50,8 @@
 .coursedetails-enroll {
     background-color: rgb(226, 78, 78);
     display: inline-block;
-    margin-left: 8px;
+    margin-left: 5px;
+    margin-bottom: 20px;
     padding: 3px;
     padding-left: 8px;
     padding-right: 8px;
@@ -94,12 +96,17 @@
     display: block;
 }
 
+.coursedetails-value-badge-icon,
 .coursedetails-value-icon {
     color: orange;
     font-size: 24px;
     display: inline-block;
     vertical-align: middle;
     margin: 5px;
+}
+
+.coursedetails-value-badge-icon {
+    color: rgb(255, 67, 67);
 }
 
 .coursedetails-value-text {

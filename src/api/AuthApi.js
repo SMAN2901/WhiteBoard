@@ -97,7 +97,6 @@ export function getAuthToken() {
     removeAuthToken();
     return null;
 }
-
 export function getAuthHeader() {
     const token = getAuthToken();
     if (!token) return {};

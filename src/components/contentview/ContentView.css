@@ -40,10 +40,87 @@
     border: 3px solid rgba(0, 0, 0, 0.5);
 }
 
-.conv-icon-download{
+.conv-icon-download {
     background-color: rgb(238, 75, 75);
 }
 
 .conv-icon:hover {
     border: 3px solid rgb(31, 29, 29);
+}
+
+.conv-preq-label {
+    color: white;
+    background: linear-gradient(to right, rgb(0, 162, 255), transparent);
+    font-size: 18px;
+    font-family: "Exo 2", sans-serif;
+    margin-left: 5px;
+    padding-left: 5px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    display: block;
+    border-radius: 3px;
+}
+
+.conv-preq-container {
+    margin-left: 5px;
+}
+
+.conv-preq {
+    text-decoration: none;
+    display: block;
+}
+
+.conv-preq-icon {
+    color: white;
+    font-size: 24px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.conv-preq-title {
+    color: white;
+    font-size: 18px;
+    font-family: "Exo 2", sans-serif;
+    display: inline-block;
+    vertical-align: middle;
+    padding-bottom: 2px;
+    margin: 0px;
+}
+
+.conv-preq-title:hover {
+    text-decoration: underline;
+}
+
+.conv-locked-container {
+    width: calc(100% - 20px);
+    background-color: rgba(0, 0, 0, 0.3);
+    margin-top: 30px;
+    margin-bottom: 30px;
+    padding: 10px;
+    border-radius: 3px;
+}
+
+.conv-locked-icon {
+    color: white;
+    font-size: 36px;
+    display: block;
+}
+
+.conv-locked-text {
+    display: inline-block;
+    margin-left: 5px;
+}
+
+.conv-locked-locked {
+    color: white;
+    font-size: 18px;
+    font-family: "Exo 2", sans-serif;
+    margin: 0px;
+}
+
+.conv-locked-p {
+    color: rgb(199, 199, 199);
+    font-size: 16px;
+    font-family: "Exo 2", sans-serif;
+    margin: 0px;
 }

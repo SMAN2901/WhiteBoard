@@ -1,44 +1,11 @@
 import http from "../services/httpService";
-import { getEndpointUrl, getBaseUrl, jsonToFormdata } from "./ApiUtility";
+import {
+    getEndpointUrl,
+    getBaseUrl,
+    jsonToFormdata,
+    formatTags
+} from "./ApiUtility";
 import { getAuthHeader, getCurrentUser } from "./AuthApi";
-import { getUserData } from "./UsersApi";
-
-function filterTags(tags) {
-    // making the array unique
-    tags.filter((item, i, ar) => {
-        return ar.indexOf(item) === i;
-    });
-
-    // filtering tags according to length
-    var a = [];
-    var len = 0;
-    var limit = 30;
-    for (var i = 0; i < tags.length; i++) {
-        if (len + tags[i].length > limit) break;
-        a.push(tags[i]);
-        len += tags[i].length;
-    }
-    return a;
-}
-
-function formatTags(tagstring) {
-    const a = tagstring.split(" ").filter(item => item !== "");
-
-    var tags = "";
-    for (var i = 0; i < a.length; i++) {
-        tags = tags + "#" + a[i];
-    }
-
-    return tags;
-}
-
-export function getTagString(a) {
-    var str = "";
-    a.forEach(tag => {
-        str = str + tag + " ";
-    });
-    return str;
-}
 
 export async function createCourse(course, banner) {
     course.tags = formatTags(course.tags);
@@ -93,25 +60,25 @@ export async function getCourses() {
         var { data: courses } = await http.get(apiEndpoint, config);
 
         for (var i = 0; i < courses.length; i++) {
-            courses[i].tags = filterTags(courses[i].tags);
+            courses[i].author = courses[i].author_info;
+            courses[i].approved_by = courses[i].approved_by_info;
+        }
 
-            const author = await getUserData(courses[i].author);
-            courses[i].author = {
-                name: author
-                    ? `${author.first_name} ${author.last_name}`
-                    : null,
-                username: author ? author.username : null,
-                profile_pic: author ? author.profile_pic : null
-            };
+        return courses;
+    } catch (ex) {
+        return [];
+    }
+}
 
-            const approved_by = await getUserData(courses[i].approved_by);
-            courses[i].approved_by = {
-                name: approved_by
-                    ? `${approved_by.first_name} ${approved_by.last_name}`
-                    : null,
-                username: approved_by ? approved_by.username : null,
-                profile_pic: approved_by ? approved_by.profile_pic : null
-            };
+export async function getBestsellerCourses() {
+    try {
+        const apiEndpoint = getEndpointUrl("courses") + "top-purchased/";
+        var config = getAuthHeader();
+        var { data: courses } = await http.get(apiEndpoint, config);
+
+        for (var i = 0; i < courses.length; i++) {
+            courses[i].author = courses[i].author_info;
+            courses[i].approved_by = courses[i].approved_by_info;
         }
 
         return courses;
@@ -127,25 +94,8 @@ export async function getTopRatedCourses() {
         var { data: courses } = await http.get(apiEndpoint, config);
 
         for (var i = 0; i < courses.length; i++) {
-            courses[i].tags = filterTags(courses[i].tags);
-
-            const author = await getUserData(courses[i].author);
-            courses[i].author = {
-                name: author
-                    ? `${author.first_name} ${author.last_name}`
-                    : null,
-                username: author ? author.username : null,
-                profile_pic: author ? author.profile_pic : null
-            };
-
-            const approved_by = await getUserData(courses[i].approved_by);
-            courses[i].approved_by = {
-                name: approved_by
-                    ? `${approved_by.first_name} ${approved_by.last_name}`
-                    : null,
-                username: approved_by ? approved_by.username : null,
-                profile_pic: approved_by ? approved_by.profile_pic : null
-            };
+            courses[i].author = courses[i].author_info;
+            courses[i].approved_by = courses[i].approved_by_info;
         }
 
         return courses;
@@ -161,25 +111,8 @@ export async function getNewCourses() {
         var { data: courses } = await http.get(apiEndpoint, config);
 
         for (var i = 0; i < courses.length; i++) {
-            courses[i].tags = filterTags(courses[i].tags);
-
-            const author = await getUserData(courses[i].author);
-            courses[i].author = {
-                name: author
-                    ? `${author.first_name} ${author.last_name}`
-                    : null,
-                username: author ? author.username : null,
-                profile_pic: author ? author.profile_pic : null
-            };
-
-            const approved_by = await getUserData(courses[i].approved_by);
-            courses[i].approved_by = {
-                name: approved_by
-                    ? `${approved_by.first_name} ${approved_by.last_name}`
-                    : null,
-                username: approved_by ? approved_by.username : null,
-                profile_pic: approved_by ? approved_by.profile_pic : null
-            };
+            courses[i].author = courses[i].author_info;
+            courses[i].approved_by = courses[i].approved_by_info;
         }
 
         return courses;
@@ -195,25 +128,8 @@ export async function getFreeCourses() {
         var { data: courses } = await http.get(apiEndpoint, config);
 
         for (var i = 0; i < courses.length; i++) {
-            courses[i].tags = filterTags(courses[i].tags);
-
-            const author = await getUserData(courses[i].author);
-            courses[i].author = {
-                name: author
-                    ? `${author.first_name} ${author.last_name}`
-                    : null,
-                username: author ? author.username : null,
-                profile_pic: author ? author.profile_pic : null
-            };
-
-            const approved_by = await getUserData(courses[i].approved_by);
-            courses[i].approved_by = {
-                name: approved_by
-                    ? `${approved_by.first_name} ${approved_by.last_name}`
-                    : null,
-                username: approved_by ? approved_by.username : null,
-                profile_pic: approved_by ? approved_by.profile_pic : null
-            };
+            courses[i].author = courses[i].author_info;
+            courses[i].approved_by = courses[i].approved_by_info;
         }
 
         return courses;
@@ -227,23 +143,9 @@ export async function getCourse(id) {
         const apiEndpoint = getEndpointUrl("courses") + id + "/";
         var config = getAuthHeader();
         var { data: course } = await http.get(apiEndpoint, config);
-        //course.tags = filterTags(course.tags);
 
-        const author = await getUserData(course.author);
-        course.author = {
-            name: author ? `${author.first_name} ${author.last_name}` : null,
-            username: author ? author.username : null,
-            profile_pic: author ? author.profile_pic : null
-        };
-
-        const approved_by = await getUserData(course.approved_by);
-        course.approved_by = {
-            name: approved_by
-                ? `${approved_by.first_name} ${approved_by.last_name}`
-                : null,
-            username: approved_by ? approved_by.username : null,
-            profile_pic: approved_by ? approved_by.profile_pic : null
-        };
+        course.author = course.author_info;
+        course.approved_by = course.approved_by_info;
 
         return course;
     } catch (ex) {
@@ -262,23 +164,8 @@ export async function getLatestCourse() {
 
         var course = courses[0];
 
-        course.tags = filterTags(course.tags);
-
-        const author = await getUserData(course.author);
-        course.author = {
-            name: author ? `${author.first_name} ${author.last_name}` : null,
-            username: author ? author.username : null,
-            profile_pic: author ? author.profile_pic : null
-        };
-
-        const approved_by = await getUserData(course.approved_by);
-        course.approved_by = {
-            name: approved_by
-                ? `${approved_by.first_name} ${approved_by.last_name}`
-                : null,
-            username: approved_by ? approved_by.username : null,
-            profile_pic: approved_by ? approved_by.profile_pic : null
-        };
+        course.author = course.author_info;
+        course.approved_by = course.approved_by_info;
 
         return course;
     } catch (ex) {
@@ -293,29 +180,25 @@ export async function getCreatedCourses(user_id) {
         var { data: courses } = await http.get(apiEndpoint, config);
 
         for (var i = 0; i < courses.length; i++) {
-            courses[i].tags = filterTags(courses[i].tags);
+            courses[i].author = courses[i].author_info;
+            courses[i].approved_by = courses[i].approved_by_info;
+        }
 
-            const author = await getUserData(courses[i].author);
-            courses[i].author = {
-                name: author
-                    ? `${author.first_name} ${author.last_name}`
-                    : null,
-                username: author ? author.username : null,
-                profile_pic: author ? author.profile_pic : null
-            };
+        return courses;
+    } catch (ex) {
+        return [];
+    }
+}
 
-            const approved_by = await getUserData(courses[i].approved_by);
-            courses[i].approved_by = {
-                name: approved_by
-                    ? `${approved_by.first_name} ${approved_by.last_name}`
-                    : null,
-                username: approved_by ? approved_by.username : null,
-                profile_pic: approved_by ? approved_by.profile_pic : null
-            };
+export async function getEnrolledCourses(username) {
+    try {
+        const apiEndpoint = getEndpointUrl("courses") + `enrolled/${username}/`;
+        var config = getAuthHeader();
+        var { data: courses } = await http.get(apiEndpoint, config);
 
-            // temporary fix
-            //var x = courses[i].banner.indexOf("/media");
-            //courses[i].banner = getBaseUrl() + courses[i].banner.substring(x);
+        for (var i = 0; i < courses.length; i++) {
+            courses[i].author = courses[i].author_info;
+            courses[i].approved_by = courses[i].approved_by_info;
         }
 
         return courses;
@@ -336,25 +219,8 @@ export async function searchCourses(searchString) {
         var { data: courses } = await http.get(apiEndpoint, config);
 
         for (var i = 0; i < courses.length; i++) {
-            courses[i].tags = filterTags(courses[i].tags);
-
-            const author = await getUserData(courses[i].author);
-            courses[i].author = {
-                name: author
-                    ? `${author.first_name} ${author.last_name}`
-                    : null,
-                username: author ? author.username : null,
-                profile_pic: author ? author.profile_pic : null
-            };
-
-            const approved_by = await getUserData(courses[i].approved_by);
-            courses[i].approved_by = {
-                name: approved_by
-                    ? `${approved_by.first_name} ${approved_by.last_name}`
-                    : null,
-                username: approved_by ? approved_by.username : null,
-                profile_pic: approved_by ? approved_by.profile_pic : null
-            };
+            courses[i].author = courses[i].author_info;
+            courses[i].approved_by = courses[i].approved_by_info;
         }
 
         return courses;
@@ -408,6 +274,82 @@ export async function setPreview(course_id, preview) {
 
     try {
         const response = await http.post(apiEndpoint, preview, config);
+        return response.data;
+    } catch (ex) {
+        return ex.response.data;
+    }
+}
+
+export async function contentCompleted(course_id, data) {
+    const apiEndpoint = getEndpointUrl("courses") + `${course_id}/completed/`;
+    const config = getAuthHeader();
+
+    try {
+        await http.post(apiEndpoint, data, config);
+    } catch (ex) {}
+}
+
+export async function deleteContent(course_id, content_id) {
+    const apiEndpoint =
+        getEndpointUrl("courses") + `${course_id}/${content_id}/`;
+    const config = getAuthHeader();
+
+    try {
+        const response = await http.get(apiEndpoint, config);
+        return response;
+    } catch (ex) {
+        throw ex;
+    }
+}
+
+export async function enroll(course_id, data) {
+    const apiEndpoint = getEndpointUrl("courses") + `${course_id}/enroll/`;
+    const config = getAuthHeader();
+
+    try {
+        const response = await http.post(apiEndpoint, data, config);
+        return response.data;
+    } catch (ex) {
+        if (ex.response.status === 500) {
+            return {
+                data: "",
+                errors: "Something went wrong. Please try again"
+            };
+        }
+        return ex.response.data;
+    }
+}
+
+export async function rateCourse(course_id, data) {
+    const apiEndpoint = getEndpointUrl("courses") + `${course_id}/rating/`;
+    const config = getAuthHeader();
+
+    try {
+        const response = await http.post(apiEndpoint, data, config);
+        return response.data;
+    } catch (ex) {
+        throw ex;
+    }
+}
+
+export async function reviewCourse(course_id, data) {
+    const apiEndpoint = getEndpointUrl("courses") + `${course_id}/review/`;
+    const config = getAuthHeader();
+
+    try {
+        const response = await http.post(apiEndpoint, data, config);
+        return response.data;
+    } catch (ex) {
+        throw ex;
+    }
+}
+
+export async function getCourseReview(course_id) {
+    const apiEndpoint = getEndpointUrl("courses") + `${course_id}/review/`;
+    const config = getAuthHeader();
+
+    try {
+        const response = await http.get(apiEndpoint, config);
         return response.data;
     } catch (ex) {
         return ex.response.data;

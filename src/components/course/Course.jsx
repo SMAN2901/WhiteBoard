@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import HashTag from "../hashtag/HashTag";
+import { filterTags } from "../../api/ApiUtility";
 import staticValues from "../../staticValues.json";
 import "./Course.css";
 
@@ -28,7 +29,19 @@ class Course extends Component {
     };
 
     render() {
-        const { course_id, title, author, tags, rating, fee } = this.props.data;
+        var {
+            course_id,
+            title,
+            author,
+            tags,
+            rating,
+            fee,
+            bestseller,
+            top_rated
+        } = this.props.data;
+        var badge = bestseller ? "BESTSELLER" : top_rated ? "TOP RATED" : " ";
+
+        tags = filterTags(tags);
 
         return (
             <div className="courses-container">
@@ -43,7 +56,7 @@ class Course extends Component {
                         src={this.state.bannerUrl}
                         alt=""
                     />
-                    <div className="course-badge">BESTSELLER</div>
+                    <div className="course-badge">{badge}</div>
                     <div
                         className={
                             "course-values " +

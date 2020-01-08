@@ -43,6 +43,76 @@
     border-bottom: 2px solid rgb(0, 110, 255);
 }
 
+.coursereview-inp-container {
+    width: calc(100% - 80px);
+    display: inline-block;
+    vertical-align: top;
+    margin: 5px;
+    padding-bottom: 10px;
+    text-align: initial;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 3px;
+}
+
+.coursereview-inp {
+    width: calc(100% - 15px);
+    height: 80px;
+    color: rgb(48, 48, 48);
+    font-size: 16px;
+    font-family: "Exo 2", sans-serif;
+    border: none;
+    outline: none;
+    border-radius: 3px;
+    margin: 5px;
+}
+
+.coursereview-rate-text {
+    color: white;
+    font-size: 16px;
+    font-family: "Exo 2", sans-serif;
+    margin: 0px;
+    margin-left: 5px;
+}
+
+.coursereview-star-container {
+    margin-left: 5px;
+}
+
+.coursereview-star {
+    color: orange;
+    cursor: pointer;
+}
+
+.coursereview-save-btn {
+    height: 25px;
+    color: white;
+    background-color: rgb(0, 162, 255);
+    font-size: 16px;
+    font-family: "Exo 2", sans-serif;
+    margin-left: 5px;
+    border: none;
+    outline: none;
+    border-radius: 2px;
+    cursor: pointer;
+}
+
+.coursereview-save-btn:hover {
+    background-color: rgb(8, 165, 16);
+}
+
+.coursereview-save-btn:disabled,
+.coursereview-save-btn:active {
+    background-color: gray;
+}
+
+.coursereview-loading-text {
+    color: rgb(0, 162, 255);
+    font-size: 16px;
+    font-family: "Exo 2", sans-serif;
+    margin: 0px;
+    margin-left: 65px;
+}
+
 .coursereview-name {
     text-decoration: none;
     color: rgb(0, 183, 255);
@@ -68,10 +138,7 @@
 }
 
 .coursereview-rating {
-    color: white;
-    font-size: 14px;
-    font-family: "Exo 2", sans-serif;
-    background-color: rgb(21, 133, 185);
+    background-color: rgba(0, 0, 0, 0.3);
     display: inline-block;
     margin: 0px;
     margin-left: 5px;
@@ -80,12 +147,11 @@
     border-radius: 2px;
 }
 
-.rating-high {
-    background-color: rgb(86, 167, 20);
-}
-
-.rating-low {
-    background-color: rgb(214, 50, 50);
+.coursereview-rating-icon {
+    color: orange;
+    font-size: 14px;
+    display: inline-block;
+    vertical-align: middle;
 }
 
 @media screen and (max-width: 650px) {

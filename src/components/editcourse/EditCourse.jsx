@@ -79,10 +79,10 @@ class EditCourse extends Component {
                         to={`/update/course/${courses[index].course_id}`}
                     >
                         <i className="material-icons edit-course-conupd-icon">
-                            video_library
+                            edit
                         </i>
                         <span className="edit-course-conupd-text">
-                            Update Contents
+                            Edit Contents
                         </span>
                     </Link>
                     <CourseBannerEdit

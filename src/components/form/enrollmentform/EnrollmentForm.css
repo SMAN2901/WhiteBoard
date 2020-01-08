@@ -1,0 +1,143 @@
+.enroll-form-container {
+    width: 100%;
+    max-width: 700px;
+    margin-top: 70px;
+    display: inline-block;
+    text-align: center;
+    background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.5),
+        rgba(0, 0, 0, 0.1)
+    );
+    border-radius: 3px;
+}
+
+.enroll-form {
+    width: calc(100% - 40px);
+    margin: 10px;
+    padding: 10px;
+    display: inline-block;
+    text-align: center;
+}
+
+.enroll-form-pinfo,
+.enroll-form-uinfo,
+.enroll-form-cinfo {
+    width: flex;
+    max-width: 400px;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 3px;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-top: 4px solid rgb(0, 162, 255);
+    text-align: initial;
+}
+
+.enroll-form-pinfo-header,
+.enroll-form-uinfo-header,
+.enroll-form-cinfo-header {
+    width: 100%;
+    color: rgb(0, 162, 255);
+    font-size: 24px;
+    font-family: "Exo 2", sans-serif;
+    margin: 0px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.enroll-form-pinfo-header {
+    margin-left: 10px;
+}
+
+.enroll-form-uinfo-name,
+.enroll-form-cinfo-title {
+    color: white;
+    font-size: 22px;
+    font-family: "Exo 2", sans-serif;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.enroll-form-uinfo-name {
+    margin-bottom: 10px;
+}
+
+.enroll-form-cinfo-fc {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.enroll-form-uinfo-email,
+.enroll-form-cinfo-ft,
+.enroll-form-cinfo-ff {
+    color: rgb(192, 192, 192);
+    font-size: 18px;
+    font-family: "Exo 2", sans-serif;
+    display: inline-block;
+    vertical-align: middle;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.enroll-form-cinfo-big {
+    color: rgb(0, 162, 255);
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 22px;
+}
+
+.enroll-form-pinfo-inp,
+.enroll-form-pinfo-cno {
+    width: 160px;
+    color: white;
+    background-color: transparent;
+    font-size: 16px;
+    font-family: "Exo 2", sans-serif;
+    border: none;
+    outline: none;
+    border-bottom: 2px solid white;
+    margin: 10px;
+}
+
+.enroll-form-pinfo-cno {
+    width: 250px;
+}
+
+.enroll-form-pinfo-inp::placeholder,
+.enroll-form-pinfo-cno::placeholder {
+    color: white;
+}
+
+.enroll-form-enroll-btn {
+    border: none;
+    outline: none;
+    background-color: rgb(0, 162, 255);
+    height: 30px;
+    color: white;
+    font-size: 16px;
+    font-family: "Exo 2", sans-serif;
+    border-radius: 2px;
+    cursor: pointer;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    margin-left: 10px;
+}
+
+.enroll-form-enroll-btn:hover {
+    background-color: rgb(18, 155, 18);
+}
+
+.enroll-form-enroll-btn:disabled,
+.enroll-form-enroll-btn:active {
+    background-color: gray;
+}
+
+.enroll-form-error {
+    color: rgb(250, 69, 69);
+    font-size: 16px;
+    font-family: "Exo 2", sans-serif;
+    display: block;
+    margin: 5px;
+    margin-left: 10px;
+}

@@ -14,8 +14,17 @@ import EditCourse from "./components/editcourse/EditCourse";
 import EditCourseContent from "./components/editcoursecontent/EditCourseContent";
 import CourseSearchPage from "./components/coursesearchpage/CourseSearchPage";
 import ContentPage from "./components/contentpage/ContentPage";
+import EnrollmentForm from "./components/form/enrollmentform/EnrollmentForm";
 import { getCurrentUser, checkAuthToken } from "./api/AuthApi";
 import { getUserData } from "./api/UsersApi";
+import {
+    getCreatedCourses,
+    getEnrolledCourses,
+    getFreeCourses,
+    getNewCourses,
+    getTopRatedCourses,
+    getBestsellerCourses
+} from "./api/CoursesApi";
 import "./App.css";
 
 class App extends Component {
@@ -36,19 +45,22 @@ class App extends Component {
         user: "pending",
         courses: {
             created: "pending",
+            bestseller: "pending",
             toprated: "pending",
             new: "pending",
             free: "pending",
-            all: "pending",
-            lastUpdated: {
-                created: -1,
-                toprated: -1,
-                new: -1,
-                free: -1,
-                all: -1
-            },
-            expirationDelta: 600000
-        }
+            enrolled: "pending",
+            func: {
+                created: getCreatedCourses,
+                bestseller: getBestsellerCourses,
+                toprated: getTopRatedCourses,
+                new: getNewCourses,
+                free: getFreeCourses,
+                enrolled: getEnrolledCourses
+            }
+        },
+        lastUpdated: -1,
+        updateDelay: 3000
     };
 
     async componentDidMount() {
@@ -61,6 +73,8 @@ class App extends Component {
     }
 
     async componentDidUpdate() {
+        if (!this.shouldUpdate()) return;
+
         var user = getCurrentUser();
         var prevUser = this.state.user;
 
@@ -76,33 +90,52 @@ class App extends Component {
             }
         }
 
-        this.checkCoursesExpiration();
+        this.updateCourses();
     }
+
+    shouldUpdate = () => {
+        var currentTime = Date.now();
+        var { lastUpdated, updateDelay } = this.state;
+
+        if (lastUpdated === -1 || currentTime - lastUpdated > updateDelay) {
+            lastUpdated = currentTime;
+            this.setState({ lastUpdated });
+            return true;
+        }
+
+        return false;
+    };
+
+    updateCourses = async () => {
+        var { user } = this.state;
+        var keys = Object.keys(this.state.courses.func);
+
+        for (var type in keys) {
+            var key = keys[type];
+
+            try {
+                var data = "pending";
+                if (key === "created" || key === "enrolled") {
+                    if (user !== "pending" && user !== null) {
+                        data = await this.state.courses.func[key](
+                            user.username
+                        );
+                    }
+                } else data = await this.state.courses.func[key]();
+
+                if (data !== "pending" && this.state.courses[key] !== data) {
+                    var { courses } = this.state;
+                    courses[key] = data;
+                    this.setState({ courses });
+                }
+            } catch (ex) {}
+        }
+    };
 
     storeCourses = (type, fetchedCourses) => {
         var { courses } = this.state;
         courses[type] = fetchedCourses;
-        courses.lastUpdated[type] = Date.now();
         this.setState({ courses });
-    };
-
-    checkCoursesExpiration = () => {
-        var shouldUpdate = false;
-        var { courses } = this.state;
-        const currentTime = Date.now();
-
-        for (var type in Object.keys(courses.lastUpdated)) {
-            const lastUpdated = courses.lastUpdated[type];
-            if (
-                lastUpdated === -1 ||
-                currentTime - lastUpdated > courses.expirationDelta
-            ) {
-                courses[type] = "pending";
-                shouldUpdate = true;
-            }
-        }
-
-        if (shouldUpdate) this.setState({ courses });
     };
 
     startLoading = (text, subtext) => {
@@ -295,6 +328,18 @@ class App extends Component {
                                     )}
                                 />
                                 <Route
+                                    path="/enroll/:id"
+                                    render={props => (
+                                        <EnrollmentForm
+                                            {...props}
+                                            key={window.location.href}
+                                            user={user}
+                                            loadbar={loadbar}
+                                            popup={popup}
+                                        />
+                                    )}
+                                />
+                                <Route
                                     path="/"
                                     render={props => (
                                         <Home
@@ -302,6 +347,7 @@ class App extends Component {
                                             loadbar={loadbar}
                                             popup={popup}
                                             courses={courses}
+                                            key={courses}
                                             user={user}
                                             storeCourses={this.storeCourses}
                                         />

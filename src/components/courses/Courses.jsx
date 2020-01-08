@@ -1,11 +1,13 @@
 import React, { Component } from "react";
 import Course from "../course/Course";
 import {
-    getCourses,
+    getEnrolledCourses,
     getCreatedCourses,
+    getBestsellerCourses,
     getTopRatedCourses,
     getNewCourses,
-    getFreeCourses
+    getFreeCourses,
+    getCourses
 } from "../../api/CoursesApi";
 import $ from "jquery";
 import "./Courses.css";
@@ -18,11 +20,12 @@ class Courses extends Component {
     };
 
     icons = {
+        bestseller: "shop",
         created: "person_pin",
         toprated: "bar_chart",
         new: "new_releases",
         free: "card_giftcard",
-        all: "menu_book"
+        enrolled: "how_to_reg"
     };
 
     animation = {
@@ -40,12 +43,17 @@ class Courses extends Component {
 
         if (
             this.props.courses[queryType] === "pending" ||
-            (queryType === "created" && this.props.id !== user.username)
+            ((queryType === "created" || queryType === "enrolled") &&
+                this.props.id !== user.username)
         ) {
             if (this._isMounted) {
                 loadbar.start();
                 if (queryType === "created")
                     courses = await getCreatedCourses(this.props.id);
+                else if (queryType === "enrolled")
+                    courses = await getEnrolledCourses(this.props.id);
+                else if (queryType === "bestseller")
+                    courses = await getBestsellerCourses();
                 else if (queryType === "toprated")
                     courses = await getTopRatedCourses();
                 else if (queryType === "new") courses = await getNewCourses();
@@ -70,6 +78,19 @@ class Courses extends Component {
             if (this._isMounted) {
                 courses = this.props.courses[queryType];
                 this.setState({ courses });
+            }
+        }
+    }
+
+    componentDidUpdate() {
+        const { courses, queryType } = this.props;
+
+        if (
+            courses[queryType] !== "pending" &&
+            courses[queryType] !== this.state.courses
+        ) {
+            if (this._isMounted) {
+                this.setState({ courses: courses[queryType] });
             }
         }
     }
@@ -136,7 +157,7 @@ class Courses extends Component {
         const { label, queryType } = this.props;
         const icon = this.icons[queryType];
 
-        return courses === "pending" ? null : (
+        return courses === "pending" || courses.length < 1 ? null : (
             <React.Fragment>
                 <div
                     className="courselist-header-container"

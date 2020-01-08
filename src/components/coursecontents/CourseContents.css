@@ -4,16 +4,66 @@
     vertical-align: top;
     margin: 10px;
     margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+.coursedetails-contents-edit-cont {
+    width: calc(100% - 10px);
+    margin: 5px;
+    margin-bottom: 10px;
+    text-align: initial;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 3px;
+}
+
+.coursedetails-contents-edit-cont:hover .coursedetails-contents-edit-icon,
+.coursedetails-contents-edit-cont:hover .coursedetails-contents-edit-text {
+    color: white;
+}
+
+.coursedetails-contents-edit-cont:hover .coursedetails-contents-edit-text {
+    text-decoration: underline;
+}
+
+.coursedetails-contents-edit-link {
+    text-decoration: none;
+    margin: 5px;
+    display: inline-block;
+}
+
+.coursedetails-contents-edit-icon {
+    color: rgb(0, 162, 255);
+    font-size: 28px;
+    margin-left: 5px;
+    margin-right: 5px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.coursedetails-contents-edit-text {
+    color: rgb(0, 162, 255);
+    font-size: 16px;
+    font-family: "Exo 2", sans-serif;
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0px;
+}
+
+.coursedetails-content-link {
+    text-decoration: none;
 }
 
 .coursedetails-content {
     width: calc(100% - 10px);
     height: 50px;
-    margin: 5px;
+    margin: 0px;
+    margin-bottom: 0px;
     border-radius: 2px;
     box-shadow: 1px 1px 5px black;
     background-color: rgb(37, 156, 253);
     transition: transform(0.2s);
+    display: inline-block;
+    overflow: hidden;
 }
 
 .coursedetails-content:hover {
@@ -25,34 +75,33 @@
 }
 
 .content-file {
-    background-color: rgb(233, 50, 50);
+    background-color: rgb(233, 72, 72);
 }
 
 .coursedetails-content-title {
-    width: calc(100% - 55px);
+    width: calc(100% - 51px);
     height: flex;
+    max-height: 48px;
     color: white;
-    font-size: 18px;
+    font-size: 16px;
     font-family: "Exo 2", sans-serif;
-    text-align: initial;
-    vertical-align: middle;
+    margin: 0px;
+    padding-right: 5px;
     display: inline-block;
+    vertical-align: middle;
+    text-align: initial;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
-.coursedetails-content-icon-container {
-    width: 50px;
-    height: 50px;
-    vertical-align: middle;
-    display: inline-block;
-}
-
 .coursedetails-content-icon {
     color: white;
-    font-size: 36px;
+    font-size: 32px;
     display: inline-block;
-    margin-top: 8px;
+    vertical-align: middle;
+    margin: 8px;
+    margin-right: 5px;
+    margin-left: 5px;
 }
 
 @media screen and (max-width: 650px) {
