@@ -118,8 +118,12 @@ class PrerequisiteForm extends Form {
         const { index, prerequisites } = this.state;
 
         for (var k = 0; k < contents.length; k++) {
-            if (contents[k].serial >= contents[index].serial) b.push(false);
-            else b.push(true);
+            if (
+                contents[k].serial >= contents[index].serial ||
+                contents[k].preview
+            ) {
+                b.push(false);
+            } else b.push(true);
         }
 
         if (contents[index].prerequisites) {
