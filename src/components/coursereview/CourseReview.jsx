@@ -29,7 +29,8 @@ class CourseReview extends Component {
 
         if (this._isMounted) {
             this.setState({ reviews });
-            $(txtClass).text("");
+            if (reviews.length < 1) $(txtClass).text("No reviews yet");
+            else $(txtClass).text("");
         }
     }
 

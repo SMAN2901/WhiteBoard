@@ -107,11 +107,11 @@
 }
 
 .coursereview-loading-text {
-    color: rgb(0, 162, 255);
+    color: white;
     font-size: 16px;
     font-family: "Exo 2", sans-serif;
     margin: 0px;
-    margin-left: 65px;
+    margin-left: 10px;
 }
 
 .coursereview-name {

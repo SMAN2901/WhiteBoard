@@ -13,20 +13,22 @@ class CourseContents extends Component {
     async componentDidMount() {
         this._isMounted = true;
         const { loadbar, popup, match } = this.props;
-        var contents =
-            "contents" in this.props ? this.props.contents : "pending";
         const { id } = match.params;
 
-        if (!("contents" in this.props)) {
+        if ("contents" in this.props) {
+            if (this.props.contents !== "pending" && this._isMounted) {
+                this.setState({ contents: this.props.contents });
+            }
+        } else {
             try {
                 loadbar.start();
 
-                if (id === "latest") contents = [];
-                else contents = await getContents(id);
+                var contents = [];
+                if (id !== "latest") contents = await getContents(id);
+                loadbar.stop();
 
-                if (contents !== "pending" && this._isMounted) {
+                if (this._isMounted) {
                     this.setState({ contents });
-                    loadbar.stop();
                 }
             } catch (ex) {
                 this.setState({ contents: [] });
@@ -40,7 +42,11 @@ class CourseContents extends Component {
         if ("contents" in this.props) {
             const { contents } = this.props;
 
-            if (contents !== this.state.contents && this._isMounted) {
+            if (
+                contents !== "pending" &&
+                contents !== this.state.contents &&
+                this._isMounted
+            ) {
                 this.setState({ contents });
             }
         }

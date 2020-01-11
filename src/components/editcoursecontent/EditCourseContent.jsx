@@ -28,16 +28,14 @@ class EditCourseContent extends Component {
 
         loadbar.start();
         try {
-            var course = "pending";
-            var contents = "pending";
-            course = await getCourse(id);
-            contents = await getContents(id);
+            var [course, contents] = await Promise.all([
+                getCourse(id),
+                getContents(id)
+            ]);
 
-            if (course !== "pending" && contents !== "pending") {
-                loadbar.stop();
-                contents = this.fixPlacement(contents);
-                if (this._isMounted) this.setState({ course, contents });
-            }
+            loadbar.stop();
+            contents = this.fixPlacement(contents);
+            if (this._isMounted) this.setState({ course, contents });
         } catch (ex) {
             loadbar.stop();
             if (this._isMounted) {
