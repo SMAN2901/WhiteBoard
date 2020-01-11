@@ -209,7 +209,12 @@ class ContentPage extends Component {
                             setUpdateTrigger={this.setUpdateTrigger}
                         />
                     </div>
-                    <CourseContents {...this.props} contents={contents} />
+                    <CourseContents
+                        {...this.props}
+                        author={course.author}
+                        contents={contents}
+                        editOption
+                    />
                 </div>
                 <CourseReview
                     {...this.props}
