@@ -48,7 +48,13 @@ class ContentDeleteForm extends Form {
         var { content } = this.state;
         if (content === null || content === "none") return;
 
-        const { loadbar, popup, setLoading, match } = this.props;
+        const {
+            loadbar,
+            popup,
+            setLoading,
+            match,
+            setUpdateTrigger
+        } = this.props;
         const course_id = match.params.id;
 
         try {
@@ -57,6 +63,7 @@ class ContentDeleteForm extends Form {
             this.setState({ errors: "" });
             await deleteContent(course_id, content);
 
+            setUpdateTrigger();
             loadbar.stop();
             setLoading(false);
             popup.show("success", "Content", "Deleted");

@@ -44,15 +44,17 @@ class ProfileEditForm extends Form {
     }
 
     submitForm = async () => {
-        const { loadbar, popup, user } = this.props;
+        const { loadbar, popup, user, setUpdateTrigger, history } = this.props;
         loadbar.start("Updating profile", "Please wait");
         try {
             this.setState({ loading: true });
             await updateProfile(this.state.data);
+            setUpdateTrigger();
             loadbar.stop();
             popup.show("success", "Profile updated", "successfully");
             this.setState({ loading: false });
-            window.location = "/user/" + user.username;
+            //window.location = "/user/" + user.username;
+            history.push("/user/" + user.username);
         } catch (ex) {
             loadbar.stop();
             popup.show("error", "Update", "failed");

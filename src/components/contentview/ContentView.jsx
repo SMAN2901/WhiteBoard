@@ -5,8 +5,11 @@ import "./ContentView.css";
 
 class ContentView extends Component {
     async componentDidMount() {
-        const { course_id, content_id } = this.props.match.params;
-        await contentCompleted(course_id, { content_id });
+        if (this.props.enrolled) {
+            const { course_id, content_id } = this.props.match.params;
+            await contentCompleted(course_id, { content_id });
+            this.props.setUpdateTrigger();
+        }
     }
 
     render() {

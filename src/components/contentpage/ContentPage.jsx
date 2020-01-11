@@ -12,7 +12,8 @@ class ContentPage extends Component {
     state = {
         course: "pending",
         contents: "pending",
-        loading: false
+        loading: false,
+        needUpdate: false
     };
 
     _isMounted = false;
@@ -23,41 +24,50 @@ class ContentPage extends Component {
 
         const { loadbar, match } = this.props;
         const { course_id, content_id } = match.params;
-        var course = "pending";
-        var contents = "pending";
 
         loadbar.start();
 
-        course = await this.queryCourse(course_id);
-        contents = await this.queryContents(course_id);
+        var [course, contents] = await Promise.all([
+            this.queryCourse(course_id),
+            this.queryContents(course_id)
+        ]);
 
-        if (course !== "pending" && contents !== "pending") {
-            loadbar.stop();
+        loadbar.stop();
 
-            if (!this.findContent(contents, content_id)) {
-                contents = null;
-            }
+        if (!this.findContent(contents, content_id)) {
+            contents = null;
+        }
 
-            if (this._isMounted) {
-                this.setState({ course, contents });
-            }
+        if (this._isMounted) {
+            this.setState({ course, contents });
         }
     }
 
     async componentDidUpdate() {
-        var contents = "pending";
+        if (!this.state.needUpdate) return;
+
         const { course_id, content_id } = this.props.match.params;
 
-        contents = await this.queryContents(course_id);
+        var [course, contents] = await Promise.all([
+            this.queryCourse(course_id),
+            this.queryContents(course_id)
+        ]);
 
-        if (contents && contents !== this.state.contents && this._isMounted) {
+        if (this._isMounted) {
             if (!this.findContent(contents, content_id)) {
                 contents = null;
             }
+            var needUpdate = false;
 
-            this.setState({ contents });
+            this.setState({ course, contents, needUpdate });
         }
     }
+
+    setUpdateTrigger = () => {
+        if (this._isMounted) {
+            this.setState({ needUpdate: true });
+        }
+    };
 
     findContent = (contents, id) => {
         for (var i = 0; i < contents.length; i++) {
@@ -192,14 +202,20 @@ class ContentPage extends Component {
                             {...this.props}
                             key={window.location.href}
                             content={this.currentContent()}
+                            enrolled={course.enrolled}
                             goToNext={this.goToNext}
                             goToPrev={this.goToPrev}
                             getTitle={this.getTitle}
+                            setUpdateTrigger={this.setUpdateTrigger}
                         />
                     </div>
                     <CourseContents {...this.props} contents={contents} />
                 </div>
-                <CourseReview {...this.props} course={course} />
+                <CourseReview
+                    {...this.props}
+                    course={course}
+                    setUpdTrigger={this.setUpdateTrigger}
+                />
             </div>
         );
     }

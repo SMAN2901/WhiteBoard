@@ -61,13 +61,14 @@ class CourseEditForm extends Form {
     }
 
     submitForm = async () => {
-        const { loadbar, popup } = this.props;
+        const { loadbar, popup, setUpdateTrigger } = this.props;
         loadbar.start("Updating course");
         try {
             this.setState({ loading: true });
             const course = this.state.data;
             const { course_id } = this.props.course;
             await updateCourse(course_id, course);
+            setUpdateTrigger();
             loadbar.stop();
             popup.show("success", "Course updated", "successfully");
             this.setState({ loading: false });

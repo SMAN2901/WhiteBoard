@@ -13,7 +13,8 @@ class EditCourseContent extends Component {
     state = {
         course: "pending",
         contents: "pending",
-        loading: false
+        loading: false,
+        needUpdate: false
     };
 
     _isMounted = false;
@@ -52,6 +53,8 @@ class EditCourseContent extends Component {
     }
 
     async componentDidUpdate() {
+        if (!this.state.needUpdate) return;
+
         var contents = "pending";
         const id = this.props.match.params.id;
         contents = await getContents(id);
@@ -59,10 +62,17 @@ class EditCourseContent extends Component {
         if (contents !== "pending" && contents !== this.state.contents) {
             contents = this.fixPlacement(contents);
             if (this._isMounted) {
-                this.setState({ contents });
+                var needUpdate = false;
+                this.setState({ contents, needUpdate });
             }
         }
     }
+
+    setUpdateTrigger = () => {
+        if (this._isMounted) {
+            this.setState({ needUpdate: true });
+        }
+    };
 
     fixPlacement = contents => {
         var a = [];
@@ -107,8 +117,7 @@ class EditCourseContent extends Component {
 
     render() {
         const { user } = this.props;
-        const { course, loading } = this.state;
-        const contents = this.filterContents();
+        const { course, loading, contents } = this.state;
 
         return course === "pending" ||
             user === "pending" ||
@@ -132,12 +141,14 @@ class EditCourseContent extends Component {
                             type={true}
                             loading={loading}
                             setLoading={this.setLoading}
+                            setUpdateTrigger={this.setUpdateTrigger}
                         />
                         <ContentAddForm
                             {...this.props}
                             type={false}
                             loading={loading}
                             setLoading={this.setLoading}
+                            setUpdateTrigger={this.setUpdateTrigger}
                         />
                         {contents.length > 0 ? (
                             <React.Fragment key={contents}>
@@ -145,28 +156,25 @@ class EditCourseContent extends Component {
                                     {...this.props}
                                     loading={loading}
                                     setLoading={this.setLoading}
-                                    contents={contents}
+                                    contents={this.filterContents()}
                                 />
                                 <PreviewForm
                                     {...this.props}
                                     loading={loading}
                                     setLoading={this.setLoading}
-                                    contents={contents}
+                                    contents={this.filterContents()}
                                 />
                                 <ContentDeleteForm
                                     {...this.props}
                                     loading={loading}
                                     setLoading={this.setLoading}
-                                    contents={
-                                        this.state.contents !== "pending"
-                                            ? this.state.contents
-                                            : []
-                                    }
+                                    contents={contents}
+                                    setUpdateTrigger={this.setUpdateTrigger}
                                 />
                             </React.Fragment>
                         ) : null}
                     </div>
-                    <CourseContents {...this.props} />
+                    <CourseContents {...this.props} contents={contents} />
                 </div>
             </div>
         );

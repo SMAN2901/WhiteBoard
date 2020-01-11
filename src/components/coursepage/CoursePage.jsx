@@ -10,8 +10,7 @@ import "./CoursePage.css";
 class CoursePage extends Component {
     state = {
         course: "pending",
-        lastUpdated: -1,
-        updateDelay: 3000
+        needUpdate: false
     };
 
     _isMounted = false;
@@ -27,7 +26,7 @@ class CoursePage extends Component {
         try {
             const course =
                 id === "latest" ? await getLatestCourse() : await getCourse(id);
-            if (course !== "pending" && this._isMounted) {
+            if (this._isMounted) {
                 loadbar.stop();
                 this.setState({ course });
             }
@@ -43,20 +42,29 @@ class CoursePage extends Component {
     }
 
     async componentDidUpdate() {
+        if (!this.state.needUpdate) return;
+
         const id = this.props.match.params.id;
+        var needUpdate = false;
 
         try {
             const course =
                 id === "latest" ? await getLatestCourse() : await getCourse(id);
-            if (
-                course !== "pending" &&
-                course !== this.state.course &&
-                this._isMounted
-            ) {
-                this.setState({ course });
+            if (this._isMounted) {
+                this.setState({ course, needUpdate });
             }
-        } catch (ex) {}
+        } catch (ex) {
+            if (this._isMounted) {
+                this.setState({ course: null, needUpdate });
+            }
+        }
     }
+
+    setUpdateTrigger = () => {
+        if (this._isMounted) {
+            this.setState({ needUpdate: true });
+        }
+    };
 
     componentWillUnmount() {
         this._isMounted = false;
@@ -77,7 +85,11 @@ class CoursePage extends Component {
                         editOption
                     />
                 </div>
-                <CourseReview {...this.props} course={course} />
+                <CourseReview
+                    {...this.props}
+                    course={course}
+                    setUpdTrigger={this.setUpdateTrigger}
+                />
             </div>
         ) : (
             <Redirect to="/" />

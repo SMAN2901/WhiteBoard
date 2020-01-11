@@ -27,13 +27,14 @@ class LoginForm extends Form {
     }
 
     submitForm = async () => {
-        const { loadbar, popup } = this.props;
+        const { loadbar, popup, setUpdateTrigger } = this.props;
         loadbar.start("Logging in");
         try {
             this.setState({ loading: true });
             const { data } = await login(this.state.data);
             //localStorage.setItem("token", response.headers["auth-token"]);
             storeAuthToken(data.token);
+            setUpdateTrigger();
             loadbar.stop();
             popup.show("success", "Logged in", "successfully");
         } catch (ex) {

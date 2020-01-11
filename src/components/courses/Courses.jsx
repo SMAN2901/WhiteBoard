@@ -39,12 +39,14 @@ class Courses extends Component {
     async componentDidMount() {
         this._isMounted = true;
         const { loadbar, queryType, storeCourses, user } = this.props;
+        const username =
+            user === "pending" || user === null ? null : user.username;
         var courses = "pending";
 
         if (
             this.props.courses[queryType] === "pending" ||
             ((queryType === "created" || queryType === "enrolled") &&
-                this.props.id !== user.username)
+                this.props.id !== username)
         ) {
             if (this._isMounted) {
                 loadbar.start();
@@ -64,8 +66,11 @@ class Courses extends Component {
                     if (this._isMounted) {
                         this.setState({ courses });
 
-                        if (queryType === "created") {
-                            if (this.props.id === user.username) {
+                        if (
+                            queryType === "created" ||
+                            queryType === "enrolled"
+                        ) {
+                            if (this.props.id === username) {
                                 storeCourses(queryType, courses);
                             }
                         } else storeCourses(queryType, courses);
@@ -82,15 +87,26 @@ class Courses extends Component {
         }
     }
 
-    componentDidUpdate() {
-        const { courses, queryType } = this.props;
+    async componentDidUpdate(props) {
+        const { queryType, loadbar } = this.props;
 
-        if (
-            courses[queryType] !== "pending" &&
-            courses[queryType] !== this.state.courses
-        ) {
-            if (this._isMounted) {
-                this.setState({ courses: courses[queryType] });
+        if (queryType === "created" || queryType === "enrolled") {
+            const { user, id } = this.props;
+            const username =
+                user === "pending" || user === null ? null : user.username;
+
+            if (id !== username && id !== props.id) {
+                var courses;
+                loadbar.start();
+                if (queryType === "created")
+                    courses = await getCreatedCourses(this.props.id);
+                else if (queryType === "enrolled")
+                    courses = await getEnrolledCourses(this.props.id);
+                loadbar.stop();
+
+                if (this._isMounted) {
+                    this.setState({ courses });
+                }
             }
         }
     }

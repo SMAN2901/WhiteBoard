@@ -26,7 +26,7 @@ class ProfileImageForm extends Form {
     }
 
     submitForm = async () => {
-        const { loadbar, popup, user } = this.props;
+        const { loadbar, popup, user, history, setUpdateTrigger } = this.props;
 
         try {
             if (this.filefield.current.files.length < 1) {
@@ -37,10 +37,11 @@ class ProfileImageForm extends Form {
             loadbar.start("Uploading");
             const image = this.filefield.current.files[0];
             await updateProfileImage(image);
+            setUpdateTrigger();
             loadbar.stop();
             popup.show("success", "Profile", "Updated");
             this.setState({ loading: false });
-            window.location = "/user/" + user.username;
+            history.push("/user/" + user.username);
         } catch (ex) {
             loadbar.stop();
             popup.show("error", "Error", "Update failed");

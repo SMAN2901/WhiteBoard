@@ -19,7 +19,7 @@ class CourseBannerEdit extends Component {
     }
 
     onSubmit = async () => {
-        const { loadbar, popup, course } = this.props;
+        const { loadbar, popup, course, setUpdateTrigger } = this.props;
         const { files } = this.filefield.current;
 
         if (files.length < 1) {
@@ -32,6 +32,7 @@ class CourseBannerEdit extends Component {
             loadbar.start("Uploading");
             this.setState({ loading: true });
             const data = await updateCourseBanner(course.course_id, banner);
+            setUpdateTrigger();
             loadbar.stop();
             this.setState({ loading: false });
             this.changeBanner(data.banner);
@@ -44,12 +45,13 @@ class CourseBannerEdit extends Component {
     };
 
     removeBanner = async () => {
-        const { loadbar, popup, course } = this.props;
+        const { loadbar, popup, course, setUpdateTrigger } = this.props;
 
         try {
             loadbar.start();
             this.setState({ loading: true });
             await updateCourseBanner(course.course_id, null);
+            setUpdateTrigger();
             loadbar.stop();
             this.setState({ loading: false });
             this.changeBanner("");

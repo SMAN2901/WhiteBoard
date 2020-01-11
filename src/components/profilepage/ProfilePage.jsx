@@ -3,8 +3,17 @@ import Profile from "../profile/Profile";
 import Courses from "../courses/Courses";
 
 class ProfilePage extends Component {
+    state = {
+        username: ""
+    };
+
     componentDidMount() {
         window.scroll(0, 0);
+    }
+
+    componentDidUpdate(props) {
+        const { username } = props.match.params;
+        if (username !== this.state.username) this.setState({ username });
     }
 
     render() {
@@ -21,9 +30,14 @@ class ProfilePage extends Component {
 
         return (
             <React.Fragment>
-                <Profile match={match} popup={popup} user={user} />
+                <Profile
+                    match={match}
+                    history={history}
+                    popup={popup}
+                    user={user}
+                />
                 {user === "pending" ? null : (
-                    <React.Fragment>
+                    <React.Fragment key={id}>
                         <Courses
                             match={match}
                             history={history}

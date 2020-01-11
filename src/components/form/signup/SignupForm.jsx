@@ -64,7 +64,7 @@ class SignupForm extends Form {
     signupButton = React.createRef();
 
     submitForm = async () => {
-        const { loadbar, popup } = this.props;
+        const { loadbar, popup, setUpdateTrigger } = this.props;
         loadbar.start("Signing up");
         try {
             this.setState({ loading: true });
@@ -72,6 +72,7 @@ class SignupForm extends Form {
             //localStorage.setItem("token", response.headers["auth-token"]);
             //localStorage.setItem("token", response.data.token);
             storeAuthToken(data.token);
+            setUpdateTrigger();
             loadbar.stop();
             popup.show("success", "Signed up", "successfully");
         } catch (ex) {

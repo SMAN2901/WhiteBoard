@@ -66,7 +66,7 @@ class ContentAddForm extends Form {
     };
 
     submitForm = async () => {
-        const { loadbar, popup, setLoading } = this.props;
+        const { loadbar, popup, setLoading, setUpdateTrigger } = this.props;
 
         try {
             setLoading();
@@ -78,6 +78,7 @@ class ContentAddForm extends Form {
 
             await addContent(id, data, file, this.onUploadProgress);
 
+            setUpdateTrigger();
             loadbar.stop();
             this.toggleProgressBar();
             popup.show("success", "Course updated", "successfully");

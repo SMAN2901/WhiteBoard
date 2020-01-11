@@ -36,7 +36,7 @@ class EnrollmentForm extends Component {
     }
 
     onSubmit = async () => {
-        const { loadbar, popup, match, history } = this.props;
+        const { loadbar, popup, match, history, setUpdateTrigger } = this.props;
         const { id } = match.params;
         const fakeCard = {
             card_no: "1234123412341234"
@@ -45,6 +45,7 @@ class EnrollmentForm extends Component {
         loadbar.start();
         this.setState({ loading: true });
         const data = await enroll(id, fakeCard);
+        setUpdateTrigger();
         loadbar.stop();
         this.setState({ loading: false });
 

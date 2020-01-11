@@ -3,7 +3,6 @@ import { Link, Redirect } from "react-router-dom";
 import { getUserData } from "../../api/UsersApi";
 import { getCurrentUser } from "../../api/AuthApi";
 import staticValues from "../../staticValues.json";
-import $ from "jquery";
 import "./Profile.css";
 
 class Profile extends Component {
@@ -16,48 +15,89 @@ class Profile extends Component {
     async componentDidMount() {
         this._isMounted = true;
         const currentUser = this.props.user;
-        const currentUsername = currentUser ? currentUser.username : null;
+        if (currentUser === "pending") return;
 
-        if (this._isMounted) {
-            const username = this.props.match.params.username;
-            if (username !== currentUsername) {
-                const user = await getUserData(username);
-                if (user !== "pending") {
-                    if (user === null) {
-                        const { popup } = this.props;
-                        popup.show("error", "404", "Not found");
-                    }
+        const currentUsername = currentUser ? currentUser.username : null;
+        const username = this.props.match.params.username;
+
+        if (username !== currentUsername) {
+            const user = await getUserData(username);
+            if (user === null) {
+                const { popup } = this.props;
+                popup.show("error", "404", "Not found");
+                this.props.history.push("/");
+            } else if (this._isMounted) {
+                this.setState({ user });
+                this.loadImage(user.profile_pic);
+            }
+        } else {
+            if (this._isMounted) {
+                this.setState({ user: currentUser });
+                if (currentUser !== "pending") {
+                    this.loadImage(currentUser.profile_pic);
                 }
-                if (this._isMounted) this.setState({ user });
-            } else {
-                if (this._isMounted) this.setState({ user: currentUser });
             }
         }
     }
 
-    /*async componentDidUpdate(props) {
-        const { username } = this.props.match.params;
-        const prev = props.match.params.username;
-        const currentUser = this.props.user ? this.props.user.username : null;
+    async componentDidUpdate() {
+        const currentUser = this.props.user;
+        if (currentUser === "pending") return;
 
-        if (username !== prev && this._isMounted) {
-            if (username !== currentUser) {
-                this.setState({ user: "pending" });
+        const currentUsername = currentUser ? currentUser.username : null;
+        const username = this.props.match.params.username;
+
+        if (username !== currentUsername) {
+            if (username !== this.state.user.username) {
+                if (this.state.user !== "pending") {
+                    this.setState({ user: "pending" });
+                }
+
                 const user = await getUserData(username);
-                this.setState({ user });
-            } else {
-                $(".profile-img").css("visibility", "hidden");
-                this.setState({ user: this.props.user });
+
+                if (user === null) {
+                    const { popup } = this.props;
+                    popup.show("error", "404", "Not found");
+                    this.props.history.push("/");
+                } else if (this._isMounted) {
+                    this.setState({ user });
+                    this.loadImage(user.profile_pic);
+                }
             }
+            return;
         }
-    }*/
+
+        if (currentUsername !== this.state.user.username && this._isMounted) {
+            await this.setState({ user: currentUser });
+            this.loadImage(currentUser.profile_pic);
+        }
+    }
 
     componentWillUnmount() {
         this._isMounted = false;
     }
 
-    onLoad = () => {
-        $(".profile-img").css("visibility", "visible");
+    loadImage = src => {
+        if (src && this._isMounted) {
+            this.setDefaultImage();
+
+            var img = new Image();
+            img.src = src;
+            img.onload = () => {
+                var { user } = this.state;
+                user.profile_pic = src;
+                this.setState({ user });
+            };
+        }
+    };
+
+    setDefaultImage = () => {
+        var { user } = this.state;
+
+        if (user !== "pending" && this._isMounted) {
+            user.profile_pic = staticValues.images.defaultProfileImage;
+            this.setState({ user });
+        }
     };
 
     render() {
@@ -123,7 +163,6 @@ class Profile extends Component {
                                         : staticValues.images
                                               .defaultProfileImage
                                 }
-                                onLoad={this.onLoad}
                                 alt=""
                             ></img>
                         </div>

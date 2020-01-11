@@ -61,7 +61,7 @@ class EditCourse extends Component {
 
     render() {
         const { courses, index } = this.state;
-        const { loadbar, popup, user } = this.props;
+        const { loadbar, popup, user, setUpdateTrigger } = this.props;
 
         return user === "pending" ||
             courses === "pending" ? null : courses.length > 0 ? (
@@ -89,11 +89,13 @@ class EditCourse extends Component {
                         loadbar={loadbar}
                         popup={popup}
                         course={courses[index]}
+                        setUpdateTrigger={setUpdateTrigger}
                     />
                     <CourseEditForm
                         loadbar={loadbar}
                         popup={popup}
                         course={courses[index]}
+                        setUpdateTrigger={setUpdateTrigger}
                     />
                 </div>
             </div>

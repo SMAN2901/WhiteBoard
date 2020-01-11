@@ -59,8 +59,7 @@ class App extends Component {
                 enrolled: getEnrolledCourses
             }
         },
-        lastUpdated: -1,
-        updateDelay: 3000
+        needUpdate: true
     };
 
     async componentDidMount() {
@@ -72,39 +71,21 @@ class App extends Component {
         this.setState({ user });
     }
 
+    setUpdateTrigger = () => {
+        this.setState({ needUpdate: true });
+    };
+
     async componentDidUpdate() {
-        if (!this.shouldUpdate()) return;
+        if (!this.state.needUpdate) return;
 
         var user = getCurrentUser();
-        var prevUser = this.state.user;
 
-        if (prevUser && user) {
-            if (prevUser !== "pending" && prevUser !== user) {
-                user = await getUserData(user.username);
-                this.setState({ user });
-            }
-        } else {
-            if (user) {
-                user = await getUserData(user.username);
-                this.setState({ user });
-            }
-        }
+        if (user) user = await getUserData(user.username);
+        var needUpdate = false;
+        this.setState({ user, needUpdate });
 
         this.updateCourses();
     }
-
-    shouldUpdate = () => {
-        var currentTime = Date.now();
-        var { lastUpdated, updateDelay } = this.state;
-
-        if (lastUpdated === -1 || currentTime - lastUpdated > updateDelay) {
-            lastUpdated = currentTime;
-            this.setState({ lastUpdated });
-            return true;
-        }
-
-        return false;
-    };
 
     updateCourses = async () => {
         var { user } = this.state;
@@ -207,6 +188,9 @@ class App extends Component {
                                             {...props}
                                             loadbar={loadbar}
                                             popup={popup}
+                                            setUpdateTrigger={
+                                                this.setUpdateTrigger
+                                            }
                                         />
                                     )}
                                 />
@@ -217,6 +201,9 @@ class App extends Component {
                                             {...props}
                                             loadbar={loadbar}
                                             popup={popup}
+                                            setUpdateTrigger={
+                                                this.setUpdateTrigger
+                                            }
                                         />
                                     )}
                                 />
@@ -228,6 +215,9 @@ class App extends Component {
                                             user={user}
                                             loadbar={loadbar}
                                             popup={popup}
+                                            setUpdateTrigger={
+                                                this.setUpdateTrigger
+                                            }
                                         />
                                     )}
                                 />
@@ -254,6 +244,9 @@ class App extends Component {
                                             popup={popup}
                                             courses={courses}
                                             storeCourses={this.storeCourses}
+                                            setUpdateTrigger={
+                                                this.setUpdateTrigger
+                                            }
                                         />
                                     )}
                                 />
@@ -267,7 +260,6 @@ class App extends Component {
                                             storeCourses={this.storeCourses}
                                             loadbar={loadbar}
                                             popup={popup}
-                                            key={window.location.href}
                                         />
                                     )}
                                 />
@@ -278,6 +270,9 @@ class App extends Component {
                                             {...props}
                                             loadbar={loadbar}
                                             popup={popup}
+                                            setUpdateTrigger={
+                                                this.setUpdateTrigger
+                                            }
                                         />
                                     )}
                                 />
@@ -301,6 +296,9 @@ class App extends Component {
                                             popup={popup}
                                             user={user}
                                             key={window.location.href}
+                                            setUpdateTrigger={
+                                                this.setUpdateTrigger
+                                            }
                                         />
                                     )}
                                 />
@@ -324,6 +322,9 @@ class App extends Component {
                                             user={user}
                                             loadbar={loadbar}
                                             popup={popup}
+                                            setUpdateTrigger={
+                                                this.setUpdateTrigger
+                                            }
                                         />
                                     )}
                                 />
@@ -336,6 +337,9 @@ class App extends Component {
                                             user={user}
                                             loadbar={loadbar}
                                             popup={popup}
+                                            setUpdateTrigger={
+                                                this.setUpdateTrigger
+                                            }
                                         />
                                     )}
                                 />

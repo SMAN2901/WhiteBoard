@@ -63,13 +63,14 @@ class CourseCreateForm extends Form {
     }
 
     submitForm = async () => {
-        const { loadbar, popup } = this.props;
+        const { loadbar, popup, setUpdateTrigger } = this.props;
         loadbar.start("Creating course");
         try {
             this.setState({ loading: true });
             const course = this.state.data;
             const banner = this.filefield.current.files[0];
             await createCourse(course, banner);
+            setUpdateTrigger();
             loadbar.stop();
             popup.show("success", "Course created", "successfully");
             this.props.history.push("/course/latest");

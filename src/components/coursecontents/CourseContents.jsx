@@ -36,24 +36,14 @@ class CourseContents extends Component {
         }
     }
 
-    async componentDidUpdate() {
-        const { match } = this.props;
-        var contents = "pending";
-        const { id } = match.params;
+    componentDidUpdate() {
+        if ("contents" in this.props) {
+            const { contents } = this.props;
 
-        try {
-            if ("contents" in this.props) contents = this.props.contents;
-            else {
-                if (id === "latest") contents = [];
-                else contents = await getContents(id);
+            if (contents !== this.state.contents && this._isMounted) {
+                this.setState({ contents });
             }
-
-            if (contents !== "pending") {
-                if (contents !== this.state.contents && this._isMounted) {
-                    this.setState({ contents });
-                }
-            }
-        } catch (ex) {}
+        }
     }
 
     cutTitle = title => {

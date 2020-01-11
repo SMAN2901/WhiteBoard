@@ -14,8 +14,7 @@ class CourseReview extends Component {
         star: null,
         reviews: [],
         loading: false,
-        lastUpdated: -1,
-        updateDelay: 3000
+        needUpdate: false
     };
 
     _isMounted = false;
@@ -34,28 +33,16 @@ class CourseReview extends Component {
         }
     }
 
-    shouldUpdate = () => {
-        var currentTime = Date.now();
-        var { lastUpdated, updateDelay } = this.state;
-
-        if (lastUpdated === -1 || currentTime - lastUpdated > updateDelay) {
-            lastUpdated = currentTime;
-            if (this._isMounted) this.setState({ lastUpdated });
-            return true;
-        }
-
-        return false;
-    };
-
     async componentDidUpdate() {
-        if (!this.shouldUpdate()) return;
+        if (!this.state.needUpdate) return;
 
         const { course_id } = this.props.course;
 
         const reviews = await getCourseReview(course_id);
 
         if (this._isMounted && reviews !== this.state.reviews) {
-            this.setState({ reviews });
+            var needUpdate = false;
+            this.setState({ reviews, needUpdate });
         }
     }
 
@@ -63,7 +50,7 @@ class CourseReview extends Component {
         e.preventDefault();
 
         const { star } = this.state;
-        const { popup } = this.props;
+        const { popup, setUpdateTrigger, setUpdTrigger } = this.props;
         const { course_id } = this.props.course;
         const inpClass = ".coursereview-inp";
         const btnClass = ".coursereview-save-btn";
@@ -75,19 +62,29 @@ class CourseReview extends Component {
         $(btnClass).text("Saving...");
 
         try {
+            var str = null;
             if (star && review !== null && review.length > 0) {
+                str = "Review & Rating";
                 await Promise.all([
                     rateCourse(course_id, { value: star }),
                     reviewCourse(course_id, { review })
                 ]);
-            } else if (star) await rateCourse(course_id, { value: star });
-            else if (review !== null && review.length > 0) {
+            } else if (star) {
+                str = "Rating";
+                await rateCourse(course_id, { value: star });
+            } else if (review !== null && review.length > 0) {
+                str = "Review";
                 await reviewCourse(course_id, { review });
+            }
+            if (str) {
+                setUpdTrigger();
+                setUpdateTrigger();
+                popup.show("success", "Saved", str);
             }
             $(btnClass).text("Save");
             $(inpClass).val("");
             if (this._isMounted) {
-                this.setState({ star: null, loading: false });
+                this.setState({ star: null, loading: false, needUpdate: true });
                 this.onStarLeave();
             }
         } catch (ex) {
