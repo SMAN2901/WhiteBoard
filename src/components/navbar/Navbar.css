@@ -40,20 +40,25 @@
     object-fit: cover;
 }
 
+.msg-icon,
 .logout-icon {
     font-size: 30px;
-    color: rgb(0, 119, 255);
+    color: rgb(63, 65, 65);
     display: inline-block;
     vertical-align: middle;
     margin-left: 10px;
     margin-right: 10px;
 }
 
+.msg-icon {
+    margin-right: 0px;
+}
+
 .navbar-profile {
     text-decoration: none;
     font-weight: bold;
     font-family: "Exo 2", sans-serif;
-    color: rgb(0, 119, 255);
+    color: rgb(63, 65, 65);
     display: inline-block;
     vertical-align: middle;
     margin: 10px;
@@ -98,10 +103,12 @@
     color: white;
 }
 
+.msg-icon:hover,
 .logout-icon:hover {
     color: rgb(255, 136, 0);
 }
 
+.msg-icon:active,
 .logout-icon:active {
     color: gray;
 }

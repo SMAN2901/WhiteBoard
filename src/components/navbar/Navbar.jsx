@@ -31,6 +31,12 @@ class Navbar extends Component {
             </Link>
         ) : null;
 
+        const messageLink = user ? (
+            <Link to="">
+                <i className="material-icons msg-icon">mail</i>
+            </Link>
+        ) : null;
+
         const profileLink = user ? (
             <Link className="navbar-profile" to={"/user/" + user.username}>
                 {user ? `${user.first_name} ${user.last_name}` : ""}
@@ -65,6 +71,7 @@ class Navbar extends Component {
                         <React.Fragment>
                             {profileImage}
                             {profileLink}
+                            {messageLink}
                             {logoutLink}
                         </React.Fragment>
                     ) : (

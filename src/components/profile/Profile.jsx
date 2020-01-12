@@ -3,6 +3,7 @@ import { Link, Redirect } from "react-router-dom";
 import { getUserData } from "../../api/UsersApi";
 import { getCurrentUser } from "../../api/AuthApi";
 import staticValues from "../../staticValues.json";
+import $ from "jquery";
 import "./Profile.css";
 
 class Profile extends Component {
@@ -67,8 +68,23 @@ class Profile extends Component {
             return;
         }
 
-        if (currentUsername !== this.state.user.username && this._isMounted) {
+        const stateUser =
+            this.state.user === "pending" || this.state.user === null
+                ? null
+                : this.state.user;
+        const currentPic =
+            currentUser !== "pending" && currentUser !== null
+                ? currentUser.profile_pic
+                : null;
+        const statePic =
+            this.state.user !== "pending" && this.state.use !== null
+                ? this.state.user.profile_pic
+                : null;
+
+        if (currentUser !== stateUser && this._isMounted) {
             await this.setState({ user: currentUser });
+        }
+        if (currentPic !== statePic && this._isMounted) {
             this.loadImage(currentUser.profile_pic);
         }
     }
@@ -100,91 +116,244 @@ class Profile extends Component {
         }
     };
 
+    toggleOptions = () => {
+        const className = ".profile-option-text-container";
+        const iconClass = ".profile-option-expand-icon";
+        const icon = $(iconClass).text();
+        const newIcon =
+            "keyboard_arrow_" +
+            (icon === "keyboard_arrow_left" ? "right" : "left");
+
+        $(className).animate({ width: "toggle" });
+        $(iconClass).text(newIcon);
+    };
+
+    enlistOptions = () => {
+        const className = ".profile-op";
+        const txtClass = ".profile-op-text-container";
+        const iconClass = ".profile-op-expand-icon";
+        const expClass = ".profile-op-expand";
+        const icon = $(iconClass).text();
+        const display = $(className).css("display");
+        const newIcon =
+            "keyboard_arrow_" + (icon === "keyboard_arrow_up" ? "down" : "up");
+        const newDisplay = display === "block" ? "inline-block" : "block";
+
+        if (display === "block") {
+            $(expClass).css(
+                "border-right",
+                "2px solid rgba(255, 255, 255, 0.1)"
+            );
+            $(txtClass).animate({ width: "toggle" }, 0, () => {
+                $(className).css({
+                    border: "none",
+                    "border-right": "2px solid rgba(255, 255, 255, 0.1)"
+                });
+                $(className).css("display", newDisplay);
+            });
+        } else {
+            $(expClass).css("border", "none");
+            $(className).css({
+                border: "none",
+                "border-top": "2px solid rgba(255, 255, 255, 0.1)"
+            });
+            $(className).css("display", newDisplay);
+            $(txtClass).animate({ width: "toggle" });
+        }
+
+        $(iconClass).text(newIcon);
+    };
+
+    renderOption = (link, icon, text, classes) => {
+        return (
+            <Link className={classes} to={link}>
+                <i className={classes + "-icon material-icons"}>{icon}</i>
+                <div className={classes + "-text-container"}>
+                    <label className={classes + "-text"}>{text}</label>
+                </div>
+            </Link>
+        );
+    };
+
+    renderOptions = classes => {
+        return (
+            <div className={classes + "-container"}>
+                {classes === "profile-op" ? (
+                    <div
+                        className={classes + "-expand"}
+                        onClick={this.enlistOptions}
+                    >
+                        <i className={classes + "-expand-icon material-icons"}>
+                            keyboard_arrow_up
+                        </i>
+                    </div>
+                ) : null}
+                {this.renderOption("", "mail", "Messages", classes)}
+                {this.renderOption(
+                    "/edit/profile",
+                    "edit",
+                    "Edit profile",
+                    classes
+                )}
+                {this.renderOption(
+                    "/course/create",
+                    "create_new_folder",
+                    "Create course",
+                    classes
+                )}
+                {this.renderOption(
+                    "/edit/course",
+                    "amp_stories",
+                    "Edit course",
+                    classes
+                )}
+                {classes !== "profile-op" ? (
+                    <div
+                        className={classes + "-expand"}
+                        onClick={this.toggleOptions}
+                    >
+                        <i className="material-icons profile-option-expand-icon">
+                            keyboard_arrow_left
+                        </i>
+                    </div>
+                ) : null}
+                <img
+                    src=""
+                    alt=""
+                    onError={
+                        classes === "profile-op"
+                            ? this.enlistOptions
+                            : this.toggleOptions
+                    }
+                ></img>
+            </div>
+        );
+    };
+
+    renderStars = rating => {
+        var a = [];
+        var n = Math.floor(rating);
+
+        for (var i = 0; i < n; i++) a.push(i);
+
+        return (
+            <div className="profile-rating-container">
+                {a.map(i => (
+                    <i className="material-icons profile-rating-icon" key={i}>
+                        star
+                    </i>
+                ))}
+                {rating - n >= 0.5 ? (
+                    <i className="material-icons profile-rating-icon">
+                        star_half
+                    </i>
+                ) : null}
+            </div>
+        );
+    };
+
+    renderProfileImage = img => {
+        return (
+            <div className="profile-img-container">
+                <div className="profile-img-back-container">
+                    <div
+                        className="profile-img-back"
+                        style={{ backgroundImage: `url(${img})` }}
+                    ></div>
+                </div>
+                <div className="profile-img-holder">
+                    <img className="profile-img" src={img} alt=""></img>
+                </div>
+            </div>
+        );
+    };
+
     render() {
         const { user } = this.state;
         const currentUserData = getCurrentUser();
         const currentUser = currentUserData ? currentUserData.username : null;
-
-        const editprofile_link =
-            this.props.match.params.username === currentUser ? (
-                <Link className="edit-profile-link" to="/edit/profile">
-                    <i className="material-icons edit-profile-icon">edit</i>
-                    <span className="edit-profile-text">Edit profile</span>
-                </Link>
-            ) : null;
-
-        const createcourse_link =
-            this.props.match.params.username === currentUser ? (
-                <Link className="create-course-link" to="/course/create">
-                    <i className="material-icons create-course-icon">
-                        create_new_folder
-                    </i>
-                    <span className="create-course-text">
-                        Create a new course
-                    </span>
-                </Link>
-            ) : null;
-
-        const updatecourse_link =
-            this.props.match.params.username === currentUser ? (
-                <Link className="update-course-link" to="/edit/course">
-                    <i className="material-icons update-course-icon">
-                        playlist_add
-                    </i>
-                    <span className="update-course-text">Update a course</span>
-                </Link>
-            ) : null;
+        const { username } = this.props.match.params;
 
         return user === "pending" ? null : user ? (
-            <div className="profile-info">
-                <div className="profile-img-div">
-                    <div className="profile-img-container">
-                        <div className="profile-img-outer"></div>
-                        <div className="profile-img-inner"></div>
-                        <div className="profile-img-back-container">
-                            <div
-                                className="profile-img-back"
-                                style={{
-                                    backgroundImage: `url(${
-                                        user.profile_pic
-                                            ? user.profile_pic
-                                            : staticValues.images
-                                                  .defaultProfileImage
-                                    })`
-                                }}
-                            ></div>
+            <div className="profile-container">
+                <div className="profile-info">
+                    <div className="profile-info-basic">
+                        {this.renderProfileImage(
+                            user.profile_pic
+                                ? user.profile_pic
+                                : staticValues.images.defaultProfileImage
+                        )}
+                        <p className="profile-name">{`${user.first_name} ${user.last_name}`}</p>
+                        <p className="profile-email">{user.email}</p>
+                        {user.activity.rating > 0 ? (
+                            <React.Fragment>
+                                <p className="profile-rating-text">
+                                    Author rating
+                                </p>
+                                {this.renderStars(user.activity.rating)}
+                            </React.Fragment>
+                        ) : null}
+                    </div>
+                    <div className="profile-info-details">
+                        <p className="profile-info-header">About</p>
+                        <p className="profile-bio">{user.bio}</p>
+                        <p className="profile-info-header">Acitivity</p>
+                        <div className="profile-bcount-container">
+                            <i className="material-icons profile-bcount-icon">
+                                person_pin
+                            </i>
+                            <p className="profile-bcount-text">
+                                {`Enrolled in ${user.activity.enrolled} courses`}
+                            </p>
                         </div>
-                        <div className="profile-img-holder">
-                            <img
-                                className="profile-img"
-                                src={
-                                    user.profile_pic
-                                        ? user.profile_pic
-                                        : staticValues.images
-                                              .defaultProfileImage
-                                }
-                                alt=""
-                            ></img>
+                        <div className="profile-bcount-container">
+                            <i className="material-icons profile-bcount-icon">
+                                how_to_reg
+                            </i>
+                            <p className="profile-bcount-text">
+                                {`Authored ${user.activity.author} courses`}
+                            </p>
+                        </div>
+                        <div className="profile-bcount-container">
+                            <i className="material-icons profile-bcount-icon profile-bcount-icon-sp1">
+                                loyalty
+                            </i>
+                            <p className="profile-bcount-text">{`Bestseller: ${user.activity.bestseller}`}</p>
+                        </div>
+                        <div className="profile-bcount-container">
+                            <i className="material-icons profile-bcount-icon profile-bcount-icon-sp1">
+                                loyalty
+                            </i>
+                            <p className="profile-bcount-text">{`Top rated: ${user.activity.top_rated}`}</p>
+                        </div>
+                        <div className="profile-bcount-container">
+                            <i className="material-icons profile-bcount-icon profile-bcount-icon-sp2">
+                                card_giftcard
+                            </i>
+                            <p className="profile-bcount-text">
+                                {`Free courses: ${user.activity.free}`}
+                            </p>
+                        </div>
+                        <div className="profile-bcount-container">
+                            <i className="material-icons profile-bcount-icon">
+                                bar_chart
+                            </i>
+                            <p className="profile-bcount-text">
+                                {`Author rating: ${
+                                    user.activity.rating > 0
+                                        ? user.activity.rating.toFixed(1)
+                                        : "N/A"
+                                }`}
+                            </p>
                         </div>
                     </div>
-                    <br></br>
-                    <span className="profile-name">
-                        {user ? `${user.first_name} ${user.last_name}` : ""}
-                    </span>
-                    <br></br>
-                    <span className="profile-email">
-                        {user ? user.email : ""}
-                    </span>
                 </div>
-                <div className="profile-bio-container">
-                    <p className="profile-bio">{user ? user.bio : ""}</p>
-                </div>
-                <br></br>
-                {editprofile_link}
-                <br></br>
-                {createcourse_link}
-                <br></br>
-                {updatecourse_link}
+                {currentUser && currentUser === username
+                    ? this.renderOptions("profile-option")
+                    : null}
+                {currentUser && currentUser === username
+                    ? this.renderOptions("profile-op")
+                    : null}
             </div>
         ) : (
             <Redirect to="/" />

@@ -1,63 +1,46 @@
-.profile-info {
-    width: calc(100% - 20px);
-    padding: 10px;
-    padding-top: 70px;
+.profile-container {
+    width: calc(100% - 10px);
+    margin: 5px;
+    margin-top: 70px;
     margin-bottom: 30px;
+    padding-top: 10px;
     text-align: initial;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 3px;
 }
 
-.profile-img-div {
-    width: 210px;
+.profile-info {
     display: inline-block;
-    margin-right: 20px;
-    padding-right: 40px;
-    padding-top: 20px;
-    padding-bottom: 20px;
-    vertical-align: middle;
+    margin-bottom: 30px;
 }
 
-.profile-bio-container {
-    width: calc(100% - 220px);
-    min-width: 200px;
-    max-width: 500px;
+.profile-info-basic {
+    width: 250px;
+    padding: 10px;
     display: inline-block;
-    vertical-align: middle;
+    vertical-align: top;
+}
+
+.profile-info-details {
+    width: calc(100% - 300px);
+    min-width: 250px;
+    padding: 10px;
+    padding-left: 15px;
+    display: inline-block;
+    vertical-align: top;
+    border-left: 2px solid rgba(255, 255, 255, 0.1);
 }
 
 .profile-img-container {
     width: 200px;
     height: 200px;
-    margin-top: 20px;
-}
-
-.profile-img-outer {
-    width: 200px;
-    height: 200px;
-    border-radius: 2px;
-    margin: 5px;
-    position: absolute;
-    background-color: rgb(52, 137, 248);
-    box-shadow: 1px 1px 5px black;
-    transform: rotate(10deg);
-    transform-origin: bottom right;
-}
-
-.profile-img-inner {
-    width: 200px;
-    height: 200px;
-    border-radius: 2px;
-    margin: 5px;
-    position: absolute;
-    background-color: rgb(255, 174, 0);
-    box-shadow: 1px 1px 5px black;
-    transform: rotate(5deg);
-    transform-origin: bottom right;
+    border-radius: 3px;
+    margin-bottom: 10px;
 }
 
 .profile-img-back-container {
     width: 200px;
     height: 200px;
-    margin: 5px;
     overflow: hidden;
     position: absolute;
     box-shadow: 1px 1px 5px black;
@@ -77,7 +60,6 @@
 .profile-img-holder {
     width: 200px;
     height: 200px;
-    margin: 5px;
     overflow: hidden;
     position: absolute;
 }
@@ -92,87 +74,169 @@
     box-shadow: 1px 1px 5px black;
 }
 
-.profile-name {
+.profile-name,
+.profile-email,
+.profile-rating-text {
     color: white;
-    font-family: "Exo 2", sans-serif;
     font-size: 22px;
-    margin: 5px;
+    font-family: "Exo 2", sans-serif;
+    margin-top: 5px;
+    margin-bottom: 2px;
 }
 
 .profile-email {
-    font-family: "Exo 2", sans-serif;
     font-size: 16px;
-    margin: 5px;
-    color: rgb(62, 236, 248);
+    color: rgb(0, 162, 255);
+    margin-top: 0px;
+    margin-bottom: 10px;
+}
+
+.profile-rating-text {
+    font-size: 16px;
+}
+
+.profile-rating-container {
+    margin-bottom: 20px;
+}
+
+.profile-rating-icon {
+    color: orange;
+    font-size: 18px;
+    display: inline-block;
+}
+
+.profile-info-header {
+    color: white;
+    font-size: 22px;
+    font-family: "Exo 2", sans-serif;
+    margin-top: 0px;
 }
 
 .profile-bio {
-    color: white;
-    font-family: "Exo 2", sans-serif;
+    color: rgb(177, 177, 177);
     font-size: 16px;
-    margin: 5px;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    border-left: 4px solid rgb(0, 183, 255);
-    padding-left: 20px;
-    white-space: pre-wrap;
-    text-align: justify;
-    text-justify: inter-word;
-}
-
-.update-course-link,
-.create-course-link,
-.edit-profile-link {
-    display: inline-block;
-}
-
-.update-course-text,
-.create-course-text,
-.edit-profile-text {
-    text-decoration: none;
-    color: white;
-    font-size: 18px;
     font-family: "Exo 2", sans-serif;
-    display: inline-block;
-    vertical-align: middle;
-    margin: 5px;
+    white-space: pre-wrap;
+    margin-bottom: 20px;
 }
 
-.update-course-text:hover,
-.create-course-text:hover,
-.edit-profile-text:hover {
-    text-decoration: underline;
-}
-
-.update-course-icon,
-.create-course-icon,
-.edit-profile-icon {
+.profile-bcount-icon {
     color: orange;
     font-size: 24px;
+    margin-right: 5px;
     display: inline-block;
     vertical-align: middle;
-    margin: 5px;
 }
 
-.create-course-btn {
-    text-decoration: none;
-    color: rgb(0, 204, 255);
-    font-family: "Exo 2", sans-serif;
+.profile-bcount-icon-sp1 {
+    color: rgb(255, 42, 42);
+}
+
+.profile-bcount-icon-sp2 {
+    color: springgreen;
+}
+
+.profile-bcount-text {
+    color: rgb(177, 177, 177);
     font-size: 16px;
-    margin: 35px;
+    font-family: "Exo 2", sans-serif;
+    display: inline-block;
+    vertical-align: middle;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
-.create-course-btn:hover {
-    text-decoration: underline;
+.profile-op-container,
+.profile-option-container {
+    width: 100%;
+    border-top: 2px solid rgb(0, 162, 255);
+    display: inline-block;
 }
 
-.create-course-btn:active {
-    color: gray;
+.profile-op-container {
+    display: none;
 }
 
-@media screen and (max-width: 800px) {
-    .profile-bio-container {
+.profile-op-expand,
+.profile-op,
+.profile-option-expand,
+.profile-option {
+    padding: 5px;
+    border-right: 2px solid rgba(255, 255, 255, 0.1);
+    text-decoration: none;
+    display: inline-block;
+    align-items: center;
+    cursor: pointer;
+}
+
+.profile-op {
+    width: flex;
+    display: block;
+    border: none;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.profile-op:hover .profile-op-icon,
+.profile-op:hover .profile-op-text,
+.profile-option:hover .profile-option-icon,
+.profile-option:hover .profile-option-text {
+    color: rgb(0, 162, 255);
+}
+
+.profile-op-expand:hover .profile-op-expand-icon,
+.profile-option-expand:hover .profile-option-expand-icon {
+    color: rgb(0, 162, 255);
+}
+
+.profile-op-expand-icon,
+.profile-option-expand-icon,
+.profile-op-icon,
+.profile-option-icon {
+    color: white;
+    font-size: 28px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 5px;
+}
+
+.profile-option-expand-icon {
+    margin: 0px;
+}
+
+.profile-op-text-container,
+.profile-option-text-container {
+    display: inline-block;
+    vertical-align: middle;
+    overflow: hidden;
+}
+
+.profile-op-text,
+.profile-option-text {
+    line-height: 28px;
+    color: white;
+    font-size: 16px;
+    font-family: "Exo 2", sans-serif;
+    white-space: nowrap;
+    margin-right: 5px;
+}
+
+@media screen and (max-width: 620px) {
+    .profile-info-basic,
+    .profile-info-details {
         display: block;
-        width: 100%;
+        width: calc(100% - 20px);
+    }
+
+    .profile-info-details {
+        padding: 10px;
+        border: none;
+    }
+
+    .profile-option-container {
+        display: none;
+    }
+
+    .profile-op-container {
+        display: inline-block;
     }
 }

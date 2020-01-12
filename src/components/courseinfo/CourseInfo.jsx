@@ -43,7 +43,7 @@ class CourseInfo extends Component {
         var defaultImage = staticValues.images.defaultProfileImage;
         var image = author.profile_pic ? author.profile_pic : defaultImage;
         fee = fee.toFixed(2).toString() + "$";
-        rating = rating.toFixed(1);
+        rating = rating > 0 ? rating.toFixed(1) : "N/A";
 
         return (
             <div className="coursedetails-info-container">
