@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link, Redirect } from "react-router-dom";
 import { getUserData } from "../../api/UsersApi";
 import { getCurrentUser } from "../../api/AuthApi";
+import { getTimeDifference } from "../../services/util";
 import staticValues from "../../staticValues.json";
 import $ from "jquery";
 import "./Profile.css";
@@ -207,6 +208,12 @@ class Profile extends Component {
                     "Edit course",
                     classes
                 )}
+                {this.renderOption(
+                    "/blog/entry",
+                    "subject",
+                    "Write blog",
+                    classes
+                )}
                 {classes !== "profile-op" ? (
                     <div
                         className={classes + "-expand"}
@@ -232,9 +239,13 @@ class Profile extends Component {
 
     renderStars = rating => {
         var a = [];
+        var b = [];
         var n = Math.floor(rating);
 
         for (var i = 0; i < n; i++) a.push(i);
+        for (var j = 0; j < 5 - n; j++) b.push(j);
+
+        if (rating - n >= 0.5) b.pop();
 
         return (
             <div className="profile-rating-container">
@@ -248,6 +259,14 @@ class Profile extends Component {
                         star_half
                     </i>
                 ) : null}
+                {b.map(i => (
+                    <i
+                        className="material-icons profile-rating-icon"
+                        key={i + 10}
+                    >
+                        star_border
+                    </i>
+                ))}
             </div>
         );
     };
@@ -293,6 +312,16 @@ class Profile extends Component {
                                 {this.renderStars(user.activity.rating)}
                             </React.Fragment>
                         ) : null}
+                        <div className="profile-ls">
+                            <i className="material-icons profile-ls-icon">
+                                lens
+                            </i>
+                            <p className="profile-ls-text">
+                                {"Last online: " +
+                                    getTimeDifference(user.login_time) +
+                                    " ago"}
+                            </p>
+                        </div>
                     </div>
                     <div className="profile-info-details">
                         <p className="profile-info-header">About</p>
@@ -346,6 +375,21 @@ class Profile extends Component {
                                 }`}
                             </p>
                         </div>
+                        {user.activity.blogs > 0 ? (
+                            <Link
+                                to="/blog/user/"
+                                className="profile-blog-link"
+                            >
+                                <div className="profile-bcount-container">
+                                    <i className="material-icons profile-bcount-icon profile-bcount-icon-sp3">
+                                        subject
+                                    </i>
+                                    <p className="profile-bcount-text pb-link">
+                                        {`Blogs written: ${user.activity.blogs}`}
+                                    </p>
+                                </div>
+                            </Link>
+                        ) : null}
                     </div>
                 </div>
                 {currentUser && currentUser === username

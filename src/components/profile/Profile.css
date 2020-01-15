@@ -74,6 +74,24 @@
     box-shadow: 1px 1px 5px black;
 }
 
+.profile-ls-icon {
+    color: rgb(0, 255, 0);
+    font-size: 12px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 5px;
+}
+
+.profile-ls-text {
+    color: white;
+    font-size: 14px;
+    font-family: "Exo 2", sans-serif;
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0px;
+    padding-bottom: 2px;
+}
+
 .profile-name,
 .profile-email,
 .profile-rating-text {
@@ -96,7 +114,7 @@
 }
 
 .profile-rating-container {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
 .profile-rating-icon {
@@ -133,7 +151,19 @@
 }
 
 .profile-bcount-icon-sp2 {
-    color: springgreen;
+    color: rgb(33, 168, 28);
+}
+
+.profile-bcount-icon-sp3 {
+    color: white;
+}
+
+.profile-blog-link p {
+    text-decoration: underline;
+}
+
+.profile-blog-link:hover .pb-link {
+    color: rgb(0, 162, 255);
 }
 
 .profile-bcount-text {
@@ -196,7 +226,6 @@
     font-size: 28px;
     display: inline-block;
     vertical-align: middle;
-    margin-right: 5px;
 }
 
 .profile-option-expand-icon {
@@ -208,6 +237,7 @@
     display: inline-block;
     vertical-align: middle;
     overflow: hidden;
+    margin-left: 5px;
 }
 
 .profile-op-text,
@@ -220,6 +250,16 @@
     margin-right: 5px;
 }
 
+@media screen and (max-width: 730px) {
+    .profile-option-container {
+        display: none;
+    }
+
+    .profile-op-container {
+        display: inline-block;
+    }
+}
+
 @media screen and (max-width: 620px) {
     .profile-info-basic,
     .profile-info-details {
@@ -230,13 +270,5 @@
     .profile-info-details {
         padding: 10px;
         border: none;
-    }
-
-    .profile-option-container {
-        display: none;
-    }
-
-    .profile-op-container {
-        display: inline-block;
     }
 }

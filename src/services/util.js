@@ -15,3 +15,51 @@ export function shuffleArray(a) {
     }
     return a;
 }
+
+export function formatDate(dateString) {
+    if (!dateString || dateString === "") return "";
+    var date = new Date(dateString);
+    var monthNames = [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December"
+    ];
+
+    var day = date.getDate();
+    var monthIndex = date.getMonth();
+    var year = date.getFullYear();
+
+    return day + " " + monthNames[monthIndex] + " " + year;
+}
+
+export function getTimeDifference(a) {
+    var diff = Math.abs(Date.now() - new Date(a)) / 1000;
+    var year = 365 * 24 * 60 * 60;
+    var month = 30 * 24 * 60 * 60;
+    var week = 7 * 24 * 60 * 60;
+    var day = 24 * 60 * 60;
+    var hour = 60 * 60;
+    var minute = 60;
+    var second = 1;
+    var t = [year, month, week, day, hour, minute, second];
+    var s = ["year", "month", "week", "day", "hour", "minute", "second"];
+
+    for (var i = 0; i < t.length; i++) {
+        if (diff >= t[i]) {
+            var d = Math.floor(diff / t[i]).toString();
+            var e = s[i] + (d > 1 ? "s" : "");
+            return d + " " + e;
+        }
+    }
+
+    return "Few moments";
+}

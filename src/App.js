@@ -15,6 +15,9 @@ import EditCourseContent from "./components/editcoursecontent/EditCourseContent"
 import CourseSearchPage from "./components/coursesearchpage/CourseSearchPage";
 import ContentPage from "./components/contentpage/ContentPage";
 import EnrollmentForm from "./components/form/enrollmentform/EnrollmentForm";
+import BlogHome from "./components/bloghome/BlogHome";
+import BlogPage from "./components/blogpage/BlogPage";
+import BlogEntry from "./components/blogentry/BlogEntry";
 import { getCurrentUser, checkAuthToken } from "./api/AuthApi";
 import { getUserData } from "./api/UsersApi";
 import {
@@ -340,6 +343,53 @@ class App extends Component {
                                             setUpdateTrigger={
                                                 this.setUpdateTrigger
                                             }
+                                        />
+                                    )}
+                                />
+                                <Route
+                                    path="/blog/post/:id"
+                                    render={props => (
+                                        <BlogPage
+                                            {...props}
+                                            loadbar={loadbar}
+                                            popup={popup}
+                                            user={user}
+                                            key={window.location.href}
+                                        />
+                                    )}
+                                />
+                                <Route
+                                    path="/blog/user/:id?"
+                                    render={props => (
+                                        <BlogHome
+                                            {...props}
+                                            loadbar={loadbar}
+                                            popup={popup}
+                                            user={user}
+                                            home={false}
+                                        />
+                                    )}
+                                />
+                                <Route
+                                    path="/blog/entry"
+                                    render={props => (
+                                        <BlogEntry
+                                            {...props}
+                                            loadbar={loadbar}
+                                            popup={popup}
+                                            user={user}
+                                        />
+                                    )}
+                                />
+                                <Route
+                                    path="/blog"
+                                    render={props => (
+                                        <BlogHome
+                                            {...props}
+                                            loadbar={loadbar}
+                                            popup={popup}
+                                            user={user}
+                                            home={true}
                                         />
                                     )}
                                 />

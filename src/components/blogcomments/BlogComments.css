@@ -1,0 +1,166 @@
+.bcomments-div {
+    width: calc(100% - 5px);
+    display: inline-block;
+    margin-bottom: 50px;
+    margin-right: 5px;
+}
+
+.bcomments-nc-text {
+    color: white;
+    font-size: 22px;
+    font-family: "Exo 2", sans-serif;
+}
+
+.bcommens-inp-div {
+    width: 100%;
+    display: inline-block;
+}
+
+.bcomments-lbtn-container {
+    width: 100%;
+    display: inline-block;
+}
+
+.bcomments-lbtn-liked,
+.bcomments-lbtn-icon {
+    color: white;
+    background-color: rgb(0, 102, 255);
+    border-radius: 50%;
+    border: 4px solid transparent;
+    font-size: 28px;
+    padding: 5px;
+    margin-left: 5px;
+    margin-right: 10px;
+    display: inline-block;
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+.bcomments-lbtn-liked {
+    background-color: white;
+    color: rgb(0, 102, 255);
+}
+
+.bcomments-lbtn-icon:hover {
+    border: 4px solid white;
+}
+
+.bcomments-lbtn-liked:hover {
+    border: 4px solid rgb(0, 102, 255);
+}
+
+.bcomments-lbtn-icon:active {
+    color: rgb(165, 165, 165);
+}
+
+.bcomments-lbtn-text {
+    margin: 0px;
+    color: white;
+    font-size: 16px;
+    font-family: "Exo 2", sans-serif;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.bcomments-inp-container {
+    width: 100%;
+    display: inline-block;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.bcomments-inp-btn {
+    width: calc(100% - 55px);
+    display: inline-block;
+    vertical-align: top;
+}
+
+.bcomments-inp {
+    color: black;
+    font-size: 16px;
+    font-family: "Exo 2", sans-serif;
+    width: calc(100% - 5px);
+    height: 80px;
+    border-radius: 3px;
+    resize: none;
+    border: none;
+    outline: none;
+    margin-top: 5px;
+    margin-right: 5px;
+}
+
+.bcomments-btn {
+    color: white;
+    background-color: rgb(0, 162, 255);
+    font-size: 16px;
+    font-family: "Exo 2", sans-serif;
+    border: none;
+    outline: none;
+    border-radius: 2px;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.bcomments-btn:hover {
+    background-color: rgb(18, 155, 18);
+}
+
+.bcomments-btn:active,
+.bcomments-btn:disabled {
+    background-color: gray;
+}
+
+.pcomment-container {
+    width: 100%;
+    display: inline-block;
+    text-align: initial;
+    margin-top: 10px;
+}
+
+.bcomments-img,
+.pcomment-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: inline-block;
+    vertical-align: top;
+    margin: 5px;
+    margin-right: 10px;
+    object-fit: cover;
+}
+
+.pcomment-nametext {
+    width: calc(100% - 65px);
+    padding: 5px;
+    display: inline-block;
+    vertical-align: top;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 3px;
+}
+
+.pcomment-name {
+    text-decoration: none;
+    color: rgb(0, 162, 255);
+    font-size: 18px;
+    font-family: "Exo 2", sans-serif;
+    margin: 0px;
+}
+
+.pcomment-name:hover {
+    text-decoration: underline;
+}
+
+.pcomment-time {
+    color: white;
+    font-size: 12px;
+    font-family: "Exo 2", sans-serif;
+    margin: 0px;
+    margin-bottom: 5px;
+}
+
+.pcomment-text {
+    color: rgb(192, 192, 192);
+    font-size: 16px;
+    font-family: "Exo 2", sans-serif;
+    margin: 0px;
+}

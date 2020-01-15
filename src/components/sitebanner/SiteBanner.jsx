@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import CategoryList from "../categorylist/CategoryList";
+import BlogLink from "../bloglink/BlogLink";
 import { shuffleArray } from "../../services/util";
 import staticValues from "../../staticValues.json";
 import $ from "jquery";
@@ -86,6 +87,7 @@ class SiteBanner extends Component {
                         </i>
                         <p className="sitebanner-text">Make learning easy</p>
                     </div>
+                    <BlogLink />
                 </div>
                 <div className="sitebanner-course-category">
                     <CategoryList

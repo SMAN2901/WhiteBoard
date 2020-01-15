@@ -111,6 +111,25 @@ class CourseSearch extends Component {
         }
     };
 
+    paginateTo = e => {
+        e.preventDefault();
+        this.onKeyUp();
+
+        var inpClass = ".coursesearch-pagination-inp";
+        var currentPage = $(inpClass).val();
+        var { itemPerPage, totalPage } = this.state.pagination;
+
+        $(inpClass).val("");
+        if (currentPage.length > 0) currentPage = parseInt(currentPage);
+        else return;
+
+        if (currentPage < 1) currentPage = 1;
+        if (currentPage > totalPage) currentPage = totalPage;
+
+        const pagination = { itemPerPage, totalPage, currentPage };
+        this.setState({ pagination });
+    };
+
     getCurrentItems = () => {
         var a = [];
         const { courses } = this.state;
@@ -125,6 +144,24 @@ class CourseSearch extends Component {
         }
 
         return a;
+    };
+
+    onKeyUp = e => {
+        var inpClass = ".coursesearch-pagination-inp";
+        var s = $(inpClass).val();
+        var val = "";
+
+        if (e && e.keyCode === 13) {
+            this.paginateTo(e);
+        }
+
+        for (var i = 0; i < s.length; i++) {
+            if (!isNaN(parseInt(s[i]))) {
+                val += s[i];
+            }
+        }
+
+        $(inpClass).val(val);
     };
 
     renderPagination = () => {
@@ -145,6 +182,17 @@ class CourseSearch extends Component {
                 >
                     keyboard_arrow_right
                 </i>
+                <input
+                    type="text"
+                    className="coursesearch-pagination-inp"
+                    onKeyUp={this.onKeyUp}
+                ></input>
+                <button
+                    className="coursesearch-pagination-btn"
+                    onClick={this.paginateTo}
+                >
+                    Go
+                </button>
             </div>
         ) : null;
     };

@@ -1,0 +1,176 @@
+.userblogs-container {
+    width: 250px;
+    margin: 10px;
+    padding: 5px;
+    display: inline-block;
+    vertical-align: top;
+    text-align: initial;
+    background-color: rgba(0, 0, 0, 0.4);
+    border-radius: 3px;
+}
+
+.userblogs-header {
+    color: rgb(0, 162, 255);
+    font-size: 18px;
+    font-family: "Exo 2", sans-serif;
+    margin: 5px;
+    margin-top: 0px;
+}
+
+.userblogs-wlink {
+    text-decoration: none;
+    display: inline-block;
+    background-color: rgba(0, 162, 255);
+    border-radius: 3px;
+    padding: 5px;
+    padding-top: 2px;
+    margin-left: 5px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.userblogs-wlink-icon {
+    color: white;
+    font-size: 18px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 5px;
+}
+
+.userblogs-wlink-text {
+    color: white;
+    font-size: 16px;
+    font-family: "Exo 2", sans-serif;
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0px;
+}
+
+.userblog-container {
+    width: calc(100% - 10px);
+    display: inline-block;
+    border-radius: 3px;
+    padding: 5px;
+}
+
+.userblog-title {
+    color: white;
+    font-size: 16px;
+    font-family: "Exo 2", sans-serif;
+    margin: 0px;
+}
+
+.userblog-date {
+    color: rgb(163, 163, 163);
+    font-size: 14px;
+    font-family: "Exo 2", sans-serif;
+    margin: 0px;
+}
+
+.userblog-like,
+.userblog-comment,
+.userblog-view {
+    display: inline-block;
+    margin: 0px;
+    margin-right: 5px;
+}
+
+.userblog-like-icon,
+.userblog-comment-icon,
+.userblog-view-icon {
+    color: rgb(8, 102, 165);
+    font-size: 16px;
+    padding: 5px;
+    border-radius: 50%;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.userblog-comment-icon {
+    color: rgb(32, 163, 6);
+}
+
+.userblog-view-icon {
+    color: rgb(255, 40, 40);
+}
+
+.userblog-like-text,
+.userblog-comment-text,
+.userblog-view-text {
+    color: rgb(190, 190, 190);
+    font-size: 16px;
+    font-family: "Exo 2", sans-serif;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.userblogs-pagination-container {
+    margin-top: 10px;
+}
+
+.userblogs-pagination-number {
+    color: white;
+    font-size: 18px;
+    font-family: "Exo 2", sans-serif;
+    display: inline-block;
+    vertical-align: middle;
+    margin: 5px;
+}
+
+.userblogs-pagination-icon {
+    color: orange;
+    font-size: 36px;
+    display: inline-block;
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+.userblogs-pagination-icon:active {
+    color: gray;
+}
+
+.userblogs-pagination-inp {
+    width: 60px;
+    height: 25px;
+    color: black;
+    font-size: 16px;
+    font-family: "Exo 2", sans-serif;
+    border: none;
+    border-radius: 3px;
+    outline: none;
+    display: inline-block;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.userblogs-pagination-btn {
+    height: 25px;
+    color: white;
+    background-color: rgb(255, 56, 56);
+    font-size: 16px;
+    font-family: "Exo 2", sans-serif;
+    border: none;
+    border-radius: 3px;
+    outline: none;
+    padding: 0px;
+    padding-left: 5px;
+    padding-right: 5px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 5px;
+    cursor: pointer;
+}
+
+.userblogs-pagination-btn:hover {
+    background-color: rgb(0, 162, 255);
+}
+
+.userblogs-pagination-btn:active {
+    background-color: gray;
+}
+
+@media screen and (max-width: 720px) {
+    .userblogs-container {
+        width: calc(100% - 30px);
+    }
+}

@@ -87,8 +87,11 @@ class CourseCreateForm extends Form {
         const { error } = Joi.validate(obj, schema);
 
         if (name === "banner") {
-            const file = this.filefield.current.files[0];
-            return this.validateImage(file);
+            const { files } = this.filefield.current;
+            if (files.length > 0) {
+                const file = this.filefield.current.files[0];
+                return this.validateImage(file);
+            }
         }
 
         return error ? error.details[0].message : null;

@@ -33,7 +33,7 @@ class Navbar extends Component {
 
         const messageLink = user ? (
             <Link to="">
-                <i className="material-icons msg-icon">mail</i>
+                <i className="material-icons msg-icon">notifications</i>
             </Link>
         ) : null;
 

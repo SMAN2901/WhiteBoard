@@ -13,7 +13,10 @@ class ProfilePage extends Component {
 
     componentDidUpdate(props) {
         const { username } = props.match.params;
-        if (username !== this.state.username) this.setState({ username });
+        if (username !== this.state.username) {
+            window.scroll(0, 0);
+            this.setState({ username });
+        }
     }
 
     render() {

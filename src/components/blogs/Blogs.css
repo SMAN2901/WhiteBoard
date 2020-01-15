@@ -1,0 +1,243 @@
+.blogs-container {
+    width: calc(100% - 310px);
+    min-width: 250px;
+    margin: 10px;
+    padding: 5px;
+    margin-top: 0px;
+    display: inline-block;
+    vertical-align: top;
+    text-align: initial;
+}
+
+.blogs-header {
+    color: white;
+    font-size: 22px;
+    font-family: "Exo 2", sans-serif;
+    margin-left: 5px;
+    margin-top: 0px;
+}
+
+.blogs-nh {
+    margin-bottom: 10px;
+    display: inline-block;
+}
+
+.blogs-nh-text {
+    color: white;
+    font-size: 22px;
+    font-family: "Exo 2", sans-serif;
+    margin-left: 5px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    display: inline-block;
+}
+
+.blogs-nh-text2 {
+    color: rgb(0, 162, 255);
+}
+
+.blogs-nh-text2:hover {
+    text-decoration: none;
+}
+
+.minblog-container {
+    width: calc(100% - 10px);
+    margin: 5px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    box-shadow: 1px 1px 5px black;
+    margin-bottom: 50px;
+    cursor: pointer;
+}
+
+.minblog-banner-container {
+    width: 100%;
+    height: 120px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    overflow: hidden;
+    position: relative;
+    display: inline-block;
+    background-color: rgb(0, 119, 255);
+}
+
+.minblog-banner {
+    width: 100%;
+    height: auto;
+    background-position: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.minblog-info-container {
+    width: 100%;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    background-color: white;
+}
+
+.minblog-title {
+    width: calc(100% - 10px);
+    color: rgb(68, 42, 85);
+    font-size: 22px;
+    font-weight: bold;
+    font-family: "Exo 2", sans-serif;
+    margin: 5px;
+    margin-bottom: 0px;
+    display: inline-block;
+}
+
+.minblog-author-name {
+    color: rgb(9, 92, 139);
+    font-size: 18px;
+    font-family: "Exo 2", sans-serif;
+    margin: 0px;
+    margin-left: 5px;
+    display: inline-block;
+    text-decoration: none;
+}
+
+.minblog-author-name:hover {
+    text-decoration: underline;
+}
+
+.minblog-date {
+    width: calc(100% - 5px);
+    color: white;
+    font-size: 14px;
+    font-family: "Exo 2", sans-serif;
+    margin: 0px;
+    padding-left: 5px;
+    display: inline-block;
+    vertical-align: middle;
+    background: linear-gradient(
+        to right,
+        rgb(255, 54, 54),
+        rgba(255, 54, 54, 0.1)
+    );
+}
+
+.minblog-description {
+    width: 100%;
+    color: rgb(54, 54, 54);
+    font-size: 16px;
+    font-family: "Exo 2", sans-serif;
+    margin: 0px;
+    display: inline-block;
+    vertical-align: middle;
+    margin: 5px;
+    white-space: pre-wrap;
+}
+
+.minblog-like,
+.minblog-comment,
+.minblog-view {
+    display: inline-block;
+    margin: 5px;
+}
+
+.minblog-like-icon,
+.minblog-comment-icon,
+.minblog-view-icon {
+    color: white;
+    background-color: rgb(8, 102, 165);
+    font-size: 16px;
+    padding: 5px;
+    margin-right: 5px;
+    border-radius: 50%;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.minblog-comment-icon {
+    background-color: rgb(32, 163, 6);
+}
+
+.minblog-view-icon {
+    background-color: rgb(255, 40, 40);
+}
+
+.minblog-like-text,
+.minblog-comment-text,
+.minblog-view-text {
+    color: rgb(43, 43, 43);
+    font-size: 16px;
+    font-family: "Exo 2", sans-serif;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.blogs-pagination-container {
+    margin-top: 10px;
+}
+
+.blogs-pagination-number {
+    color: white;
+    font-size: 18px;
+    font-family: "Exo 2", sans-serif;
+    display: inline-block;
+    vertical-align: middle;
+    margin: 5px;
+}
+
+.blogs-pagination-icon {
+    color: orange;
+    font-size: 36px;
+    display: inline-block;
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+.blogs-pagination-icon:active {
+    color: gray;
+}
+
+.blogs-pagination-inp {
+    width: 60px;
+    height: 25px;
+    color: black;
+    font-size: 16px;
+    font-family: "Exo 2", sans-serif;
+    border: none;
+    border-radius: 3px;
+    outline: none;
+    display: inline-block;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.blogs-pagination-btn {
+    height: 25px;
+    color: white;
+    background-color: rgb(255, 56, 56);
+    font-size: 16px;
+    font-family: "Exo 2", sans-serif;
+    border: none;
+    border-radius: 3px;
+    outline: none;
+    padding: 0px;
+    padding-left: 5px;
+    padding-right: 5px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 5px;
+    cursor: pointer;
+}
+
+.blogs-pagination-btn:hover {
+    background-color: rgb(0, 162, 255);
+}
+
+.blogs-pagination-btn:active {
+    background-color: gray;
+}
+
+@media screen and (max-width: 720px) {
+    .blogs-container {
+        width: calc(100% - 30px);
+    }
+}

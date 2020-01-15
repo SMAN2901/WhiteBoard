@@ -1,0 +1,169 @@
+.bp-form-div {
+    width: calc(100% - 310px);
+    min-width: 250px;
+    margin: 15px;
+    margin-top: 10px;
+    display: inline-block;
+    vertical-align: top;
+    text-align: initial;
+}
+
+.bp-form-container {
+    width: 100%;
+    display: inline-block;
+    border-radius: 5px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    box-shadow: 1px 1px 5px black;
+    background-color: white;
+}
+
+.bp-form-toplink {
+    text-decoration: none;
+    margin-bottom: 10px;
+    display: inline-block;
+}
+
+.bp-form-toplink:hover .bp-form-toplink-icon,
+.bp-form-toplink:hover .bp-form-toplink-text {
+    color: rgb(0, 162, 255);
+}
+
+.bp-form-toplink-icon {
+    color: white;
+    font-size: 24px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.bp-form-toplink-text {
+    color: white;
+    font-size: 18px;
+    font-family: "Exo 2", sans-serif;
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0px;
+}
+
+.bp-form-banner-container {
+    width: 100%;
+    height: 100px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    overflow: hidden;
+    position: relative;
+    display: inline-block;
+    background-color: rgb(0, 119, 255);
+}
+
+.bp-form-banner {
+    width: 100%;
+    height: auto;
+    background-position: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.bp-form {
+    width: calc(100% - 20px);
+    margin: 10px;
+    display: inline-block;
+}
+
+.bp-form-title {
+    color: rgb(30, 74, 99);
+    font-size: 22px;
+    font-family: "Exo 2", sans-serif;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+.bp-tags-inp,
+.bp-body-inp,
+.bp-title-inp {
+    width: calc(100% - 10px);
+    height: 30px;
+    color: black;
+    font-size: 16px;
+    font-family: "Exo 2", sans-serif;
+    border: none;
+    outline: none;
+    padding-left: 5px;
+    padding-right: 5px;
+    background-color: rgb(209, 208, 208);
+    border-radius: 3px;
+}
+
+.bp-body-inp {
+    height: 250px;
+    resize: none;
+    white-space: pre-wrap;
+}
+
+.bp-banner-filefield {
+    display: none;
+}
+
+.bp-banner-filefield-label {
+    width: 200px;
+    height: 20px;
+    line-height: 20px;
+    color: white;
+    background-color: rgb(125, 46, 182);
+    font-size: 16px;
+    font-family: "Exo 2", sans-serif;
+    padding: 5px;
+    border-radius: 3px;
+    cursor: pointer;
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.bp-post-btn {
+    border: none;
+    outline: none;
+    background-color: rgb(0, 162, 255);
+    height: 30px;
+    color: white;
+    font-size: 16px;
+    font-family: "Exo 2", sans-serif;
+    border-radius: 2px;
+    cursor: pointer;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.bp-post-btn:hover {
+    background-color: rgb(18, 155, 18);
+}
+
+.bp-post-btn:active,
+.bp-post-btn:disabled {
+    background-color: gray;
+}
+
+.bp-form .error-container {
+    width: calc(100% - 10px);
+    margin: 0px;
+    margin-bottom: 10px;
+    padding: 5px;
+    padding-top: 0px;
+}
+
+.bp-form .error-text {
+    color: rgb(255, 46, 46);
+    font-size: 16px;
+    font-family: "Exo 2", sans-serif;
+    margin: 0px;
+}
+
+@media screen and (max-width: 720px) {
+    .bp-form-div {
+        width: calc(100% - 30px);
+    }
+}

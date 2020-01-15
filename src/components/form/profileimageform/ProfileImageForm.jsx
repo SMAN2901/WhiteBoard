@@ -68,8 +68,11 @@ class ProfileImageForm extends Form {
     };
 
     validateField = () => {
-        const file = this.filefield.current.files[0];
-        return this.validateImage(file);
+        const { files } = this.filefield.current;
+        if (files.length > 0) {
+            const file = this.filefield.current.files[0];
+            return this.validateImage(file);
+        }
     };
 
     validateImage = file => {

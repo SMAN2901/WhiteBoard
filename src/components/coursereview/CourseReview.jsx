@@ -5,6 +5,7 @@ import {
     reviewCourse,
     rateCourse
 } from "../../api/CoursesApi";
+import { formatDate } from "../../services/util";
 import staticValues from "../../staticValues.json";
 import $ from "jquery";
 import "./CourseReview.css";
@@ -147,7 +148,7 @@ class CourseReview extends Component {
     reviewElement = data => {
         var defaultImage = staticValues.images.defaultProfileImage;
         var { username, profile_pic, name } = data.user;
-        var { review, rating } = data;
+        var { review, rating, review_time } = data;
 
         profile_pic = profile_pic ? profile_pic : defaultImage;
 
@@ -158,6 +159,9 @@ class CourseReview extends Component {
                     <Link to={`/user/${username}`}>
                         <p className="coursereview-name">{name}</p>
                     </Link>
+                    <p className="coursereview-time">
+                        {formatDate(review_time)}
+                    </p>
                     <p className="coursereview-text">{review}</p>
                     <div className="coursereview-rating">
                         {this.getStars(Math.floor(rating)).map(

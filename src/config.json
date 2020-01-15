@@ -9,7 +9,8 @@
             "signup": "/user/register/",
             "users": "/user/",
             "courses": "/course/",
-            "createCourse": "/course-add/"
+            "createCourse": "/course-add/",
+            "blog": "/blog/"
         }
     },
     "validation": {

@@ -82,7 +82,8 @@
             "/assets/images/banner01.png",
             "/assets/images/banner02.png",
             "/assets/images/banner03.png"
-        ]
+        ],
+        "defaultBlogBanner": "/assets/images/doodles.png"
     },
     "courseCategories": [
         {
