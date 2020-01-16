@@ -229,6 +229,12 @@ class Blogs extends Component {
     renderNameHeader = user => {
         return (
             <div className="blogs-nh">
+                <Link to="/blog" className="blogs-toplink">
+                    <i className="material-icons blogs-toplink-icon">
+                        menu_open
+                    </i>
+                    <p className="blogs-toplink-text">View Recent Blogs</p>
+                </Link>
                 <p className="blogs-nh-text blogs-nh-text1">Recent blogs by</p>
                 <Link to={`/user/${user.username}`}>
                     <p className="blogs-nh-text blogs-nh-text2">{user.name}</p>

@@ -9,6 +9,35 @@
     text-align: initial;
 }
 
+.blogs-toplink {
+    text-decoration: none;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.blogs-toplink:hover .blogs-toplink-icon,
+.blogs-toplink:hover .blogs-toplink-text {
+    color: rgb(0, 162, 255);
+}
+
+.blogs-toplink-icon {
+    color: white;
+    font-size: 24px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.blogs-toplink-text {
+    color: white;
+    font-size: 18px;
+    font-family: "Exo 2", sans-serif;
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0px;
+}
+
 .blogs-header {
     color: white;
     font-size: 22px;

@@ -37,6 +37,28 @@ class BlogHome extends Component {
         }
     }
 
+    async componentDidUpdate(props) {
+        if (props.home !== this.props.home) {
+            const { loadbar, home, match } = this.props;
+            const user = getCurrentUser();
+            var uid = home ? "" : match.params.id;
+
+            if (typeof uid === "undefined") uid = user.username;
+
+            loadbar.start();
+            try {
+                const blogs = home ? await getPosts() : await getUserPosts(uid);
+                if (this._isMounted) this.setState({ blogs });
+                loadbar.stop();
+            } catch (ex) {
+                if (this._isMounted) {
+                    this.setState({ blogs: [] });
+                    loadbar.stop();
+                }
+            }
+        }
+    }
+
     componentWillUnmount() {
         this._isMounted = false;
     }

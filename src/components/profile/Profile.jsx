@@ -51,7 +51,7 @@ class Profile extends Component {
 
         if (username !== currentUsername) {
             if (username !== this.state.user.username) {
-                if (this.state.user !== "pending") {
+                if (this.state.user !== "pending" && this._isMounted) {
                     this.setState({ user: "pending" });
                 }
 
@@ -103,7 +103,7 @@ class Profile extends Component {
             img.onload = () => {
                 var { user } = this.state;
                 user.profile_pic = src;
-                this.setState({ user });
+                if (this._isMounted) this.setState({ user });
             };
         }
     };
@@ -377,7 +377,7 @@ class Profile extends Component {
                         </div>
                         {user.activity.blogs > 0 ? (
                             <Link
-                                to="/blog/user/"
+                                to={`/blog/user/${user.username}`}
                                 className="profile-blog-link"
                             >
                                 <div className="profile-bcount-container">
