@@ -18,7 +18,7 @@ import EnrollmentForm from "./components/form/enrollmentform/EnrollmentForm";
 import BlogHome from "./components/bloghome/BlogHome";
 import BlogPage from "./components/blogpage/BlogPage";
 import BlogEntry from "./components/blogentry/BlogEntry";
-import { getCurrentUser, checkAuthToken } from "./api/AuthApi";
+import { getCurrentUser, checkAuthToken, logout } from "./api/AuthApi";
 import { getUserData } from "./api/UsersApi";
 import {
     getCreatedCourses,
@@ -28,6 +28,8 @@ import {
     getTopRatedCourses,
     getBestsellerCourses
 } from "./api/CoursesApi";
+import config from "./config.json";
+import Pusher from "pusher-js";
 import "./App.css";
 
 class App extends Component {
@@ -72,6 +74,7 @@ class App extends Component {
         if (user) user = await getUserData(user.username);
 
         this.setState({ user });
+        this.initPusher();
     }
 
     setUpdateTrigger = () => {
@@ -85,10 +88,28 @@ class App extends Component {
 
         if (user) user = await getUserData(user.username);
         var needUpdate = false;
-        this.setState({ user, needUpdate });
 
+        this.setState({ user, needUpdate });
+        this.initPusher();
         this.updateCourses();
     }
+
+    initPusher = () => {
+        var { user } = this.state;
+        var { key, settings } = config.pusher;
+        var pusher = new Pusher(key, settings);
+
+        if (user) {
+            var channelName = "channel_" + user.username;
+            var channel = pusher.subscribe(channelName);
+            channel.bind("reauth", this.forceLogOut);
+        }
+    };
+
+    forceLogOut = () => {
+        logout();
+        window.location.href = "/login";
+    };
 
     updateCourses = async () => {
         var { user } = this.state;

@@ -18,5 +18,12 @@
         "imageTypes": ["image/gif", "image/jpeg", "image/png"],
         "maxFileSize": 104857600,
         "videoTypes": ["video/mp4"]
+    },
+    "pusher": {
+        "key": "2dff71e589ab50fbf652",
+        "settings": {
+            "cluster": "ap2",
+            "forceTLS": true
+        }
     }
 }

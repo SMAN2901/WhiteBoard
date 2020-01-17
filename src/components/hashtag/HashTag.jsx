@@ -4,10 +4,18 @@ import "./HashTag.css";
 
 class HashTag extends Component {
     render() {
-        const { tag } = this.props;
+        const { tag, link } = this.props;
+        const url = link ? `/search/course/${tag}` : window.location.pathname;
 
         return (
-            <Link key={tag} to={`/search/course/${tag}`} className="hashtag">
+            <Link
+                key={tag}
+                to={url}
+                className="hashtag"
+                onClick={e => {
+                    e.stopPropagation();
+                }}
+            >
                 {tag}
             </Link>
         );

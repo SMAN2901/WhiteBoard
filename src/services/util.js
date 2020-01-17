@@ -37,8 +37,14 @@ export function formatDate(dateString) {
     var day = date.getDate();
     var monthIndex = date.getMonth();
     var year = date.getFullYear();
+    var hour = date.getHours();
+    var minute = ("0" + date.getMinutes()).slice(-2);
+    var ampm = "AM";
 
-    return day + " " + monthNames[monthIndex] + " " + year;
+    if (hour >= 12) ampm = "PM";
+    if (hour >= 13) hour -= 12;
+
+    return `${day} ${monthNames[monthIndex]} ${year} at ${hour}.${minute} ${ampm}`;
 }
 
 export function getTimeDifference(a) {

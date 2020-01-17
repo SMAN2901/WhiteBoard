@@ -9,9 +9,52 @@
     align-items: center;
 }
 
-.navbar-logo {
-    width: 150px;
+.navbar-left-container {
     display: inline-block;
+    vertical-align: middle;
+}
+
+.navbar-left-inner {
+    width: 230px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 10px;
+}
+
+.navbar-logo {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.navbar-blog-link {
+    display: inline-block;
+    vertical-align: middle;
+    text-decoration: none;
+    padding: 5px;
+    margin-left: 10px;
+    border-radius: 3px;
+}
+
+.navbar-blog-link:hover {
+    background-color: rgb(226, 225, 225);
+}
+
+.navbar-blog-link-icon {
+    color: rgb(51, 41, 88);
+    font-size: 24px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 5px;
+}
+
+.navbar-blog-link-text {
+    color: rgb(51, 41, 88);
+    font-size: 18px;
+    font-weight: bold;
+    font-family: "Exo 2", sans-serif;
+    display: inline-block;
+    vertical-align: middle;
 }
 
 .navbar-user {
@@ -40,17 +83,14 @@
     object-fit: cover;
 }
 
+.noti-icon,
 .msg-icon,
 .logout-icon {
-    font-size: 30px;
+    font-size: 24px;
     color: rgb(68, 68, 68);
     display: inline-block;
     vertical-align: middle;
-    margin-right: 5px;
-}
-
-.msg-icon {
-    margin-left: 5px;
+    padding: 5px;
 }
 
 .navbar-profile {
@@ -65,7 +105,7 @@
 }
 
 .navbar-profile:hover {
-    color: rgb(255, 136, 0);
+    color: rgb(255, 60, 60);
 }
 
 .navbar-profile:active {
@@ -103,11 +143,15 @@
     color: white;
 }
 
+.noti-icon:hover,
 .msg-icon:hover,
 .logout-icon:hover {
-    color: rgb(255, 136, 0);
+    color: rgb(255, 60, 60);
+    background-color: rgb(226, 225, 225);
+    border-radius: 50%;
 }
 
+.noti-icon:active,
 .msg-icon:active,
 .logout-icon:active {
     color: gray;
@@ -120,9 +164,120 @@
     margin-right: 0px;
 }
 
-@media screen and (max-width: 500px) {
+.navbarx-container {
+    width: 100%;
+    margin-top: 50px;
+    padding: 5px;
+    display: none;
+    background-color: white;
+    box-shadow: 1px 1px 5px black;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.navbarx-link {
+    display: inline-block;
+    text-decoration: none;
+    padding: 5px;
+    border-radius: 3px;
+}
+
+.navbarx-link:hover .navbarx-link-icon,
+.navbarx-link:hover .navbarx-link-text {
+    color: rgb(255, 60, 60);
+}
+
+.navbarx-link-icon {
+    color: rgb(68, 68, 68);
+    font-size: 24px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 5px;
+}
+
+.navbarx-link-text {
+    color: rgb(68, 68, 68);
+    font-size: 16px;
+    font-family: "Exo 2", sans-serif;
+    display: inline-block;
+    vertical-align: middle;
+    padding-bottom: 2px;
+}
+
+.navbarx-logout-link {
+    display: none;
+}
+
+.counter-parent {
+    position: relative;
+}
+
+.counter-spanx,
+.counter-span {
+    min-width: 10px;
+    color: white;
+    font-size: 12px;
+    font-family: "Exo 2", sans-serif;
+    text-align: center;
+    background-color: rgb(0, 140, 255);
+    position: absolute;
+    border-radius: 10px;
+    padding: 1px;
+    padding-left: 3px;
+    padding-right: 3px;
+    left: 17px;
+    top: -7px;
+}
+
+.counter-spanx {
+    left: 20px;
+    top: -2px;
+}
+
+.counter-spanx:empty,
+.counter-span:empty {
+    display: none;
+}
+
+@media screen and (max-width: 680px) {
     .navbar-profile {
         display: none;
+    }
+}
+
+@media screen and (max-width: 520px) {
+    .navbar-blog-link,
+    .msg-icon-parent,
+    .noti-icon-parent {
+        display: none;
+    }
+
+    .navbar-logout-link {
+        margin-left: 5px;
+    }
+
+    .navbarx-container {
+        display: flex;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .navbar-signup {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 370px) {
+    .navbarx-link-text {
+        display: none;
+    }
+
+    .navbar-logout-link {
+        display: none;
+    }
+
+    .navbarx-logout-link {
+        display: inline-block;
     }
 }
 

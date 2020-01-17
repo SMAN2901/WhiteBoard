@@ -26,14 +26,23 @@ class Navbar extends Component {
                     logout();
                     window.location = "/";
                 }}
+                className="navbar-logout-link"
             >
                 <i className="material-icons logout-icon">power_settings_new</i>
             </Link>
         ) : null;
 
+        const notificationLink = user ? (
+            <Link to="" className="counter-parent noti-icon-parent">
+                <i className="material-icons noti-icon">notifications</i>
+                <span className="counter-span"></span>
+            </Link>
+        ) : null;
+
         const messageLink = user ? (
-            <Link to="">
-                <i className="material-icons msg-icon">notifications</i>
+            <Link to="" className="counter-parent msg-icon-parent">
+                <i className="material-icons msg-icon">mail</i>
+                <span className="counter-span"></span>
             </Link>
         ) : null;
 
@@ -60,25 +69,79 @@ class Navbar extends Component {
         ) : null;
 
         return (
-            <div className="navbar-container">
-                <div className="navbar-logo">
-                    <Link className="navbar-logo-text" to="/">
-                        WhiteBoard
-                    </Link>
+            <React.Fragment>
+                <div className="navbar-container">
+                    <div className="navbar-left-container">
+                        <div className="navbar-left-inner">
+                            <div className="navbar-logo">
+                                <Link className="navbar-logo-text" to="/">
+                                    WhiteBoard
+                                </Link>
+                            </div>
+                            <Link className="navbar-blog-link" to="/blog">
+                                <i className="material-icons navbar-blog-link-icon">
+                                    subject
+                                </i>
+                                <span className="navbar-blog-link-text">
+                                    Blogs
+                                </span>
+                            </Link>
+                        </div>
+                    </div>
+                    <div className="navbar-user">
+                        {user === "pending" ? null : user ? (
+                            <React.Fragment>
+                                {profileImage}
+                                {profileLink}
+                                {notificationLink}
+                                {messageLink}
+                                {logoutLink}
+                            </React.Fragment>
+                        ) : (
+                            loginLink
+                        )}
+                    </div>
                 </div>
-                <div className="navbar-user">
-                    {user === "pending" ? null : user ? (
-                        <React.Fragment>
-                            {profileImage}
-                            {profileLink}
-                            {messageLink}
-                            {logoutLink}
-                        </React.Fragment>
-                    ) : (
-                        loginLink
-                    )}
-                </div>
-            </div>
+                {user !== "pending" && user !== null ? (
+                    <div className="navbarx-container">
+                        <Link className="navbarx-link" to="/blog">
+                            <i className="material-icons navbarx-link-icon">
+                                subject
+                            </i>
+                            <span className="navbarx-link-text">Blogs</span>
+                        </Link>
+                        <Link className="navbarx-link counter-parent" to="">
+                            <i className="material-icons navbarx-link-icon">
+                                notifications
+                            </i>
+                            <span className="navbarx-link-text">
+                                Notifications
+                            </span>
+                            <span className="counter-spanx"></span>
+                        </Link>
+                        <Link className="navbarx-link counter-parent" to="">
+                            <i className="material-icons navbarx-link-icon">
+                                mail
+                            </i>
+                            <span className="navbarx-link-text">Messages</span>
+                            <span className="counter-spanx"></span>
+                        </Link>
+                        <Link
+                            className="navbarx-link navbarx-logout-link"
+                            onClick={() => {
+                                logout();
+                                window.location = "/";
+                            }}
+                            to=""
+                        >
+                            <i className="material-icons navbarx-link-icon">
+                                power_settings_new
+                            </i>
+                            <span className="navbarx-link-text">Log out</span>
+                        </Link>
+                    </div>
+                ) : null}
+            </React.Fragment>
         );
     }
 }

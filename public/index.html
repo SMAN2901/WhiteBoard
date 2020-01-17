@@ -52,7 +52,7 @@
 
             footer {
                 width: 100%;
-                height: 70px;
+                height: 250px;
                 text-align: center;
                 display: inline-block;
                 background-color: rgb(15, 16, 17);
@@ -60,14 +60,107 @@
                 border-top: 2px solid rgb(0, 132, 255);
             }
 
-            footer p {
-                margin: 4px;
-                color: rgb(180, 180, 180);
+            .footer-container {
+                width: 100%;
+                margin-top: 20px;
+                display: flex;
+                align-items: top;
+                justify-content: space-around;
+                flex-flow: row wrap;
             }
 
-            footer span {
-                margin: 2px;
+            .footer-part {
+                display: inline-block;
+                text-align: initial;
+            }
+
+            .footer-part-1 {
+                text-align: center;
+            }
+
+            .footer-text {
                 color: white;
+                font-size: 18px;
+                font-family: "Exo 2", sans-serif;
+                margin-top: 5px;
+                margin-bottom: 5px;
+            }
+
+            .footer-text-small {
+                font-size: 16px;
+                color: rgb(197, 197, 197);
+            }
+
+            .footer-text-sm {
+                font-size: 14px;
+                color: rgb(197, 197, 197);
+                margin-bottom: 10px;
+            }
+
+            .footer-text-h {
+                color: rgb(197, 197, 197);
+                margin-bottom: 10px;
+            }
+
+            .footer-part img {
+                width: 30px;
+                height: 30px;
+                margin: 5px;
+            }
+
+            .footer-link {
+                text-decoration: none;
+                color: rgb(197, 197, 197);
+                font-size: 16px;
+                font-family: "Exo 2", sans-serif;
+                margin-top: 5px;
+                margin-bottom: 5px;
+                display: block;
+            }
+
+            .footer-link:hover {
+                text-decoration: underline;
+            }
+
+            .footer-name {
+                font-size: 16px;
+                color: rgb(89, 255, 247);
+            }
+
+            @media screen and (max-width: 820px) {
+                footer {
+                    height: 400px;
+                }
+
+                .footer-part {
+                    margin: 20px;
+                }
+            }
+
+            @media screen and (max-width: 630px) {
+                footer {
+                    height: 450px;
+                }
+
+                .footer-part-3 {
+                    text-align: center;
+                }
+            }
+
+            @media screen and (max-width: 500px) {
+                footer {
+                    height: 600px;
+                }
+            }
+
+            @media screen and (max-width: 380px) {
+                footer {
+                    height: 800px;
+                }
+
+                .footer-part {
+                    text-align: center;
+                }
             }
         </style>
         <title>WhiteBoard</title>
@@ -77,10 +170,54 @@
         <nav class="white-navbar"></nav>
         <div id="root"></div>
         <footer>
-            <p>Developed and maintained by</p>
-            <span>Sadman Rizwan</span>
-            <span>and</span>
-            <span>Minhajul Islam</span>
+            <div class="footer-container">
+                <div class="footer-part footer-part-2">
+                    <p class="footer-text">NAVIGATE</p>
+                    <a class="footer-link" href="">About us</a>
+                    <a class="footer-link" href="">Contact</a>
+                    <a class="footer-link" href="">Support & Help</a>
+                    <a class="footer-link" href="">Feedback</a>
+                    <a class="footer-link" href="">Author's guide</a>
+                    <a class="footer-link" href="">API documentation</a>
+                </div>
+                <div class="footer-part footer-part-2">
+                    <p class="footer-text">LEGAL</p>
+                    <a class="footer-link" href="">Terms & conditions</a>
+                    <a class="footer-link" href="">License agreement</a>
+                    <a class="footer-link" href="">Privecy policy</a>
+                    <a class="footer-link" href="">Cookies policy</a>
+                    <a class="footer-link" href="">Copyright notification</a>
+                </div>
+                <div class="footer-part footer-part-3">
+                    <p class="footer-text">WHITEBOARD TEAM</p>
+                    <p class="footer-text footer-text-h">
+                        Lead developers
+                    </p>
+                    <a class="footer-link footer-name" href="/user/sadman"
+                        >Sadman Rizwan</a
+                    >
+                    <p class="footer-text footer-text-sm">
+                        Frontend, Design & Connections
+                    </p>
+                    <a class="footer-link footer-name" href="/user/minhaj"
+                        >Minhajul Islam</a
+                    >
+                    <p class="footer-text footer-text-sm">
+                        Backend, Database & API
+                    </p>
+                </div>
+                <div class="footer-part footer-part-1">
+                    <p class="footer-text">CONNECT WITH US</p>
+                    <p class="footer-text footer-text-small">
+                        Find us on social media
+                    </p>
+                    <a href=""><img src="/assets/images/twitter.png"/></a>
+                    <a href=""><img src="/assets/images/facebook.png"/></a>
+                    <a href=""><img src="/assets/images/instagram.png"/></a>
+                    <a href=""><img src="/assets/images/youtube.png"/></a>
+                    <a href=""><img src="/assets/images/googleplus.png"/></a>
+                </div>
+            </div>
         </footer>
     </body>
 </html>

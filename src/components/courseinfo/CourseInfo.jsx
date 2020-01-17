@@ -118,7 +118,7 @@ class CourseInfo extends Component {
                 <p className="coursedetails-prerequisites">{prerequisites}</p>
                 <br></br>
                 {tags.map(tag => (
-                    <HashTag {...this.props} key={tag} tag={tag} />
+                    <HashTag {...this.props} key={tag} tag={tag} link={true} />
                 ))}
             </div>
         );

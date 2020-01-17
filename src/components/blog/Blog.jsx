@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link, Redirect } from "react-router-dom";
+import HashTag from "../hashtag/HashTag";
 import { formatDate } from "../../services/util";
 import staticValues from "../../staticValues.json";
 import "./Blog.css";
@@ -53,6 +54,15 @@ class Blog extends Component {
                         {formatDate(blog.date_created)}
                     </p>
                     <p className="blogpost-description">{blog.description}</p>
+                    {blog.tags.map(tag => (
+                        <HashTag
+                            {...this.props}
+                            key={tag}
+                            tag={tag}
+                            link={false}
+                        />
+                    ))}
+                    <br></br>
                     <div className="blogpost-like">
                         <i className="material-icons blogpost-like-icon">
                             thumb_up

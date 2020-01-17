@@ -312,10 +312,8 @@ class Profile extends Component {
                                 {this.renderStars(user.activity.rating)}
                             </React.Fragment>
                         ) : null}
-                        <div className="profile-ls">
-                            <i className="material-icons profile-ls-icon">
-                                lens
-                            </i>
+                        <div>
+                            <div className="profile-ls-icon"></div>
                             <p className="profile-ls-text">
                                 {"Last online: " +
                                     getTimeDifference(user.login_time) +

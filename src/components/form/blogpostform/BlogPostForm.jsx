@@ -30,7 +30,7 @@ class BlogPostForm extends Form {
         description: Joi.string()
             .trim()
             .min(30)
-            .max(2000)
+            .max(10000)
             .required()
             .label("Body"),
         tags: Joi.string().label("Tags"),
