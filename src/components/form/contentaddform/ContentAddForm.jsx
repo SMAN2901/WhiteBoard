@@ -81,13 +81,13 @@ class ContentAddForm extends Form {
             setUpdateTrigger();
             loadbar.stop();
             this.toggleProgressBar();
-            popup.show("success", "Course updated", "successfully");
+            popup.show("success", "Content added", "successfully");
             this.initState();
             setLoading(false);
         } catch (ex) {
             loadbar.stop();
             this.toggleProgressBar();
-            popup.show("error", "Error", "Update failed");
+            popup.show("error", "Error", "Upload failed");
             setLoading(false);
         }
     };

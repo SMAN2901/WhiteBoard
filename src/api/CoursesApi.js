@@ -243,6 +243,20 @@ export async function addContent(course_id, data, file, onUploadProgress) {
     }
 }
 
+export async function editContent(course_id, content_id, data) {
+    const apiEndpoint =
+        getEndpointUrl("courses") +
+        `${course_id}/contents/${content_id}/update/`;
+    var config = getAuthHeader();
+
+    try {
+        const response = await http.post(apiEndpoint, data, config);
+        return response.data;
+    } catch (ex) {
+        throw ex;
+    }
+}
+
 export async function getContents(course_id) {
     const apiEndpoint = getEndpointUrl("courses") + `${course_id}/contents/`;
     const config = getAuthHeader();

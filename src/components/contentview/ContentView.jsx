@@ -56,17 +56,22 @@ class ContentView extends Component {
                             <i className="material-icons conv-icon conv-icon-download">
                                 save_alt
                             </i>
+                            <span className="conv-link-tooltiptext">
+                                Download
+                            </span>
                         </a>
                     ) : null}
                     <Link to={goToPrev()} className="conv-link">
                         <i className="material-icons conv-icon">
                             keyboard_arrow_left
                         </i>
+                        <span className="conv-link-tooltiptext">Previous</span>
                     </Link>
                     <Link to={goToNext()} className="conv-link">
                         <i className="material-icons conv-icon">
                             keyboard_arrow_right
                         </i>
+                        <span className="conv-link-tooltiptext">Next</span>
                     </Link>
                 </div>
                 {prerequisites ? (

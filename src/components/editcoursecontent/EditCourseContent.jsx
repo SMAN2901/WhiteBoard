@@ -5,6 +5,7 @@ import CourseContents from "../coursecontents/CourseContents";
 import ContentAddForm from "../form/contentaddform/ContentAddForm";
 import PrerequisiteForm from "../form/prerequisiteform/PrerequisiteForm";
 import PreviewForm from "../form/previewform/PreviewForm";
+import ContentEditForm from "../form/contenteditform/ContentEditForm";
 import ContentDeleteForm from "../form/contentdeleteform/ContentDeleteForm";
 import { getCourse, getContents } from "../../api/CoursesApi";
 import "./EditCourseContent.css";
@@ -161,6 +162,13 @@ class EditCourseContent extends Component {
                                     loading={loading}
                                     setLoading={this.setLoading}
                                     contents={this.filterContents()}
+                                />
+                                <ContentEditForm
+                                    {...this.props}
+                                    loading={loading}
+                                    setLoading={this.setLoading}
+                                    setUpdateTrigger={this.setUpdateTrigger}
+                                    contents={this.state.contents}
                                 />
                                 <ContentDeleteForm
                                     {...this.props}
