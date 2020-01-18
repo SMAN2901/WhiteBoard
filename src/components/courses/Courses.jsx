@@ -130,18 +130,30 @@ class Courses extends Component {
     clickRight = () => {
         if (this.shouldAnimate("click", 500)) {
             const classes = ".courses-" + this.props.queryType;
-            const move = this.animation.transitionLength;
-            const scrollValue = "+=" + move.toString();
-            $(classes).animate({ scrollLeft: scrollValue }, 500, "swing");
+            const display = $(classes)
+                .parent()
+                .css("display");
+
+            if (display !== "none") {
+                const move = this.animation.transitionLength;
+                const scrollValue = "+=" + move.toString();
+                $(classes).animate({ scrollLeft: scrollValue }, 500, "swing");
+            }
         }
     };
 
     clickLeft = () => {
         if (this.shouldAnimate("click", 500)) {
             const classes = ".courses-" + this.props.queryType;
-            const move = this.animation.transitionLength;
-            const scrollValue = "-=" + move.toString();
-            $(classes).animate({ scrollLeft: scrollValue }, 500, "swing");
+            const display = $(classes)
+                .parent()
+                .css("display");
+
+            if (display !== "none") {
+                const move = this.animation.transitionLength;
+                const scrollValue = "-=" + move.toString();
+                $(classes).animate({ scrollLeft: scrollValue }, 500, "swing");
+            }
         }
     };
 
@@ -150,7 +162,9 @@ class Courses extends Component {
         const contclass = ".courses-" + queryType;
         const textClass = ".courselist-expand-container-" + queryType;
 
-        $(contclass).slideToggle();
+        $(contclass)
+            .parent()
+            .slideToggle();
         $(textClass).slideToggle();
     };
 
@@ -158,7 +172,9 @@ class Courses extends Component {
         if (this.shouldAnimate("focus", 1000)) {
             const className = ".courses-" + this.props.queryType;
             const move = $(className).offset().top - 130;
-            const display = $(className).css("display");
+            const display = $(className)
+                .parent()
+                .css("display");
 
             if (display !== "none") {
                 $("html,body").animate({ scrollTop: move }, 1000, () => {
@@ -203,17 +219,22 @@ class Courses extends Component {
                         </i>
                     </div>
                 </div>
-                <div className={`courses courses-${queryType}`} tabIndex="-1">
+                <div className="courses-scroller-hider">
                     <div
-                        className={`courselist-container courselist-container-${queryType}`}
+                        className={`courses courses-${queryType}`}
+                        tabIndex="-1"
                     >
-                        {this.state.courses.map(item => (
-                            <Course
-                                key={item.course_id}
-                                {...this.props}
-                                data={item}
-                            />
-                        ))}
+                        <div
+                            className={`courselist-container courselist-container-${queryType}`}
+                        >
+                            {this.state.courses.map(item => (
+                                <Course
+                                    key={item.course_id}
+                                    {...this.props}
+                                    data={item}
+                                />
+                            ))}
+                        </div>
                     </div>
                 </div>
                 <div

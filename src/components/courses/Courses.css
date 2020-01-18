@@ -1,6 +1,14 @@
+.courses-scroller-hider {
+    width: 100%;
+    height: 365px;
+    display: inline-block;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
 .courses {
     width: 100%;
-    height: 345px;
+    height: 400px;
     padding-top: 10px;
     text-align: initial;
     display: inline-block;
