@@ -10,7 +10,8 @@
             "users": "/user/",
             "courses": "/course/",
             "createCourse": "/course-add/",
-            "blog": "/blog/"
+            "blog": "/blog/",
+            "siteInfo": "/ex-info/"
         }
     },
     "validation": {

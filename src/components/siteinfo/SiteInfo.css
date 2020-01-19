@@ -1,0 +1,50 @@
+.sinfo-container {
+    width: 100%;
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    justify-content: space-around;
+    margin-top: 30px;
+}
+
+.sinfo-div {
+    width: 200px;
+    margin: 20px;
+    padding: 10px;
+    border-radius: 10px;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    background-color: rgba(0, 0, 0, 0.4);
+    display: inline-block;
+}
+
+.sinfo-div-user {
+    border-top: 20px solid rgb(47, 255, 47);
+}
+
+.sinfo-div-course {
+    border-top: 20px solid rgb(0, 162, 255);
+}
+
+.sinfo-div-enrollment {
+    border-top: 20px solid rgb(255, 54, 54);
+}
+
+.sinfo-icon {
+    color: orange;
+    font-size: 48px;
+}
+
+.sinfo-num,
+.sinfo-text {
+    color: white;
+    font-size: 32px;
+    font-family: "Exo 2", sans-serif;
+    display: block;
+    margin: 10px;
+}
+
+.sinfo-num {
+    font-size: 48px;
+    color: rgb(141, 141, 141);
+}

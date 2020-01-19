@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import SiteBanner from "../sitebanner/SiteBanner";
 import Courses from "../courses/Courses";
+import SiteInfo from "../siteinfo/SiteInfo";
 
 class Home extends Component {
     componentDidMount() {
@@ -27,6 +28,7 @@ class Home extends Component {
                     queryType="free"
                     label="On the House"
                 />
+                <SiteInfo />
             </React.Fragment>
         );
     }
