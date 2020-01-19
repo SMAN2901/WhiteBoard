@@ -1,6 +1,5 @@
 .coursereview-div {
     width: calc(100% - 320px);
-    height: 400px;
     min-width: 280px;
     display: inline-block;
     vertical-align: top;
