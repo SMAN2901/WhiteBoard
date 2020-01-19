@@ -151,3 +151,9 @@
         display: none;
     }
 }
+
+@media screen and (max-width: 520px) {
+    .signup-form-container {
+        padding-top: 30px;
+    }
+}

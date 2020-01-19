@@ -143,3 +143,9 @@
         display: none;
     }
 }
+
+@media screen and (max-width: 520px) {
+    .login-form-container {
+        padding-top: 30px;
+    }
+}
