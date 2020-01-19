@@ -11,8 +11,6 @@ class EditProfileImage extends Component {
         return (
             <div className="profile-img-div">
                 <div className="profile-img-container">
-                    <div className="profile-img-outer"></div>
-                    <div className="profile-img-inner"></div>
                     <div className="profile-img-back-container">
                         <div
                             className="profile-img-back"

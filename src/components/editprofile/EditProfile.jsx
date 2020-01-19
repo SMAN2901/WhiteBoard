@@ -3,6 +3,7 @@ import { Redirect } from "react-router-dom";
 import EditProfileImage from "../editprofileimage/EditProfileImage";
 import ProfileEditForm from "../form/profileeditform/ProfileEditForm";
 import "./EditProfile.css";
+import PasswordChangeForm from "../form/passwordchangeform/PasswordChangeForm";
 
 class EditProfile extends Component {
     componentDidMount() {
@@ -22,12 +23,19 @@ class EditProfile extends Component {
                         popup={popup}
                         image={user.profile_pic}
                     />
-                    <ProfileEditForm
-                        {...this.props}
-                        loadbar={loadbar}
-                        popup={popup}
-                        user={user}
-                    />
+                    <div className="edit-profile-right">
+                        <ProfileEditForm
+                            {...this.props}
+                            loadbar={loadbar}
+                            popup={popup}
+                            user={user}
+                        />
+                        <PasswordChangeForm
+                            {...this.props}
+                            loadbar={loadbar}
+                            popup={popup}
+                        />
+                    </div>
                 </div>
             ) : (
                 <Redirect to="/" />

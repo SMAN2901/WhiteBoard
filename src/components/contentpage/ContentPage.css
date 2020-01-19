@@ -6,7 +6,7 @@
     text-align: initial;
 }
 
-.course-conupg-div {
+.course-conpg-div {
     width: calc(100% - 10px);
     margin: 5px;
     text-align: center;
@@ -67,5 +67,11 @@
     .course-conpg-content-div {
         width: calc(100% - 20px);
         min-width: 0px;
+    }
+}
+
+@media screen and (max-width: 520px) {
+    .course-conpg-container {
+        padding-top: 20px;
     }
 }

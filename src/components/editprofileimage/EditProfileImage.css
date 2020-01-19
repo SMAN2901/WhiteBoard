@@ -14,37 +14,13 @@
 .edit-profile-container .profile-img-container {
     width: 200px;
     height: 200px;
-    margin-top: 20px;
-}
-
-.edit-profile-container .profile-img-outer {
-    width: 200px;
-    height: 200px;
-    border-radius: 2px;
-    margin: 5px;
-    position: absolute;
-    background-color: rgb(52, 137, 248);
-    box-shadow: 1px 1px 5px black;
-    transform: rotate(10deg);
-    transform-origin: bottom right;
-}
-
-.edit-profile-container .profile-img-inner {
-    width: 200px;
-    height: 200px;
-    border-radius: 2px;
-    margin: 5px;
-    position: absolute;
-    background-color: rgb(255, 174, 0);
-    box-shadow: 1px 1px 5px black;
-    transform: rotate(5deg);
-    transform-origin: bottom right;
 }
 
 .edit-profile-container .profile-img-back-container {
     width: 200px;
     height: 200px;
     margin: 5px;
+    margin-top: 0px;
     overflow: hidden;
     position: absolute;
     box-shadow: 1px 1px 5px black;

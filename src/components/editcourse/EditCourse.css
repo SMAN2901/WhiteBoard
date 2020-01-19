@@ -76,3 +76,9 @@
         margin-top: 20px;
     }
 }
+
+@media screen and (max-width: 520px) {
+    .edit-course-div {
+        padding-top: 10px;
+    }
+}

@@ -161,6 +161,12 @@
     }
 }
 
+@media screen and (max-width: 520px) {
+    .sitebanner-container {
+        padding-top: 20px;
+    }
+}
+
 @keyframes sliding {
     0% {
         left: 0px;

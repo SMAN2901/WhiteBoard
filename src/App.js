@@ -69,12 +69,18 @@ class App extends Component {
 
     async componentDidMount() {
         window.scrollTo(0, 0);
-        await checkAuthToken();
         var user = getCurrentUser();
-        if (user) user = await getUserData(user.username);
 
-        this.setState({ user });
-        this.initPusher();
+        if (user) {
+            await checkAuthToken();
+            user = getCurrentUser();
+
+            if (user) {
+                user = await getUserData(user.username);
+                this.setState({ user });
+                this.initPusher();
+            } else window.location.reload();
+        } else this.setState({ user: null });
     }
 
     setUpdateTrigger = () => {

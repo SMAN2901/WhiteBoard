@@ -14,6 +14,18 @@ export async function login(user) {
     return response;
 }
 
+export async function changePassword(data) {
+    const apiEndpoint = getEndpointUrl("users") + "profile/change-password/";
+    const config = getAuthHeader();
+
+    try {
+        const response = await http.put(apiEndpoint, data, config);
+        return response.data;
+    } catch (ex) {
+        return ex.response.data;
+    }
+}
+
 export function storeAuthToken(token) {
     localStorage.setItem("token", token);
     localStorage.setItem("tokenCreated", Date.now());

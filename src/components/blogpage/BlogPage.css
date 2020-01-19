@@ -48,3 +48,9 @@
         width: calc(100% - 30px);
     }
 }
+
+@media screen and (max-width: 520px) {
+    .blogpage-container {
+        margin-top: 10px;
+    }
+}

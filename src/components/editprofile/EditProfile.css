@@ -3,3 +3,25 @@
     text-align: center;
     margin-top: 70px;
 }
+
+.edit-profile-right {
+    min-width: 270px;
+    display: inline-block;
+    vertical-align: top;
+    width: calc(100% - 280px);
+    text-align: center;
+}
+
+@media screen and (max-width: 620px) {
+    .edit-profile-right {
+        width: calc(100% - 20px);
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+}
+
+@media screen and (max-width: 520px) {
+    .edit-profile-container {
+        margin-top: 10px;
+    }
+}

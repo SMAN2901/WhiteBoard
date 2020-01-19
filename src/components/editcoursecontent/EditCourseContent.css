@@ -44,3 +44,9 @@
         min-width: 0px;
     }
 }
+
+@media screen and (max-width: 520px) {
+    .course-conupd-container {
+        padding-top: 20px;
+    }
+}
