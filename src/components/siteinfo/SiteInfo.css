@@ -37,7 +37,7 @@
 
 .sinfo-num,
 .sinfo-text {
-    color: white;
+    color: rgb(141, 141, 141);
     font-size: 32px;
     font-family: "Exo 2", sans-serif;
     display: block;
@@ -46,5 +46,5 @@
 
 .sinfo-num {
     font-size: 48px;
-    color: rgb(141, 141, 141);
+    color: white;
 }
