@@ -47,4 +47,62 @@
 .sinfo-num {
     font-size: 48px;
     color: white;
+    margin: 2px;
+}
+
+@media screen and (max-width: 800px) {
+    .sinfo-div {
+        width: 150px;
+    }
+
+    .sinfo-icon {
+        font-size: 36px;
+    }
+
+    .sinfo-num {
+        font-size: 32px;
+    }
+
+    .sinfo-text {
+        font-size: 24px;
+    }
+}
+
+@media screen and (max-width: 640px) {
+    .sinfo-div {
+        width: 120px;
+        margin: 5px;
+        padding: 2px;
+    }
+
+    .sinfo-num {
+        font-size: 24px;
+    }
+
+    .sinfo-text {
+        font-size: 18px;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .sinfo-div {
+        width: calc(100% - 10px);
+        margin: 5px;
+        padding: 0px;
+        border-top-width: 5px;
+        border-radius: 3px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+
+    .sinfo-icon,
+    .sinfo-num,
+    .sinfo-text {
+        display: inline-block;
+        vertical-align: middle;
+        margin: 0px;
+        margin-left: 5px;
+        margin-right: 5px;
+        line-height: 100%;
+    }
 }
