@@ -68,7 +68,7 @@
     }
 }
 
-@media screen and (max-width: 640px) {
+@media screen and (max-width: 650px) {
     .sinfo-div {
         width: 120px;
         margin: 5px;
