@@ -41,6 +41,7 @@ class Inbox extends Component {
 
         if (this._isMounted && inbox !== this.state.inbox) {
             await this.setState({ inbox });
+            this.fetchMessages();
         }
         if (
             this._isMounted &&
