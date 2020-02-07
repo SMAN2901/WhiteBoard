@@ -101,10 +101,12 @@ class App extends Component {
 
         if (user) user = await getUserData(user.username);
         var needUpdate = false;
+        var prevUser = this.state.user;
 
         this.setState({ user, needUpdate });
         this.initPusher();
         this.updateCourses();
+        if (user !== prevUser) this.updateInbox();
     }
 
     initPusher = () => {

@@ -25,6 +25,7 @@ class Inbox extends Component {
     _isMounted = false;
     lastUpdated = -1;
     minDelay = 200;
+    lastWidth = $(window).width();
 
     componentDidMount() {
         this._isMounted = true;
@@ -129,10 +130,12 @@ class Inbox extends Component {
         var { key } = this.state;
 
         if (
-            this.lastUpdated === -1 ||
-            time - this.lastUpdated >= this.minDelay
+            (this.lastUpdated === -1 ||
+                time - this.lastUpdated >= this.minDelay) &&
+            this.lastWidth !== $(window).width()
         ) {
             this.lastUpdated = Date.now();
+            this.lastWidth = $(window).width();
             key++;
             this.setState({ key });
         }
