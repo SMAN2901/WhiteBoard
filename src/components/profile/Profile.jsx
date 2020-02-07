@@ -189,7 +189,7 @@ class Profile extends Component {
                         </i>
                     </div>
                 ) : null}
-                {this.renderOption("", "mail", "Messages", classes)}
+                {this.renderOption("/inbox", "mail", "Messages", classes)}
                 {this.renderOption(
                     "/edit/profile",
                     "edit",

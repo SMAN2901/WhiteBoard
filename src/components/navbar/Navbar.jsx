@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { logout } from "../../api/AuthApi";
+import { logout, isAuthenticated } from "../../api/AuthApi";
 import staticValues from "../../staticValues.json";
 import "./Navbar.css";
 
@@ -40,9 +40,11 @@ class Navbar extends Component {
         ) : null;
 
         const messageLink = user ? (
-            <Link to="" className="counter-parent msg-icon-parent">
+            <Link to="/inbox" className="counter-parent msg-icon-parent">
                 <i className="material-icons msg-icon">mail</i>
-                <span className="counter-span"></span>
+                <span className="counter-span">
+                    {this.props.message ? this.props.message : ""}
+                </span>
             </Link>
         ) : null;
 
@@ -105,8 +107,7 @@ class Navbar extends Component {
                 <div
                     className="navbarx-container"
                     style={{
-                        marginTop:
-                            user === "pending" || user === null ? "0px" : "50px"
+                        marginTop: isAuthenticated() ? "50px" : "0px"
                     }}
                 >
                     <Link className="navbarx-link" to="/blog">
@@ -122,10 +123,12 @@ class Navbar extends Component {
                         <span className="navbarx-link-text">Notifications</span>
                         <span className="counter-spanx"></span>
                     </Link>
-                    <Link className="navbarx-link counter-parent" to="">
+                    <Link className="navbarx-link counter-parent" to="/inbox">
                         <i className="material-icons navbarx-link-icon">mail</i>
                         <span className="navbarx-link-text">Messages</span>
-                        <span className="counter-spanx"></span>
+                        <span className="counter-spanx">
+                            {this.props.message ? this.props.message : ""}
+                        </span>
                     </Link>
                     <Link
                         className="navbarx-link navbarx-logout-link"

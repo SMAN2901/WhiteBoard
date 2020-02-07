@@ -9,6 +9,7 @@ import SignupForm from "./components/form/signup/SignupForm";
 import CourseCreateForm from "./components/form/coursecreate/CourseCreateForm";
 import ProfilePage from "./components/profilepage/ProfilePage";
 import EditProfile from "./components/editprofile/EditProfile";
+import Inbox from "./components/inbox/Inbox";
 import CoursePage from "./components/coursepage/CoursePage";
 import EditCourse from "./components/editcourse/EditCourse";
 import EditCourseContent from "./components/editcoursecontent/EditCourseContent";
@@ -28,6 +29,7 @@ import {
     getTopRatedCourses,
     getBestsellerCourses
 } from "./api/CoursesApi";
+import { getInboxData } from "./api/chatApi";
 import config from "./config.json";
 import Pusher from "pusher-js";
 import "./App.css";
@@ -48,6 +50,10 @@ class App extends Component {
             subtext: null
         },
         user: "pending",
+        inbox: {
+            not_seen: 0,
+            inbox: []
+        },
         courses: {
             created: "pending",
             bestseller: "pending",
@@ -78,6 +84,7 @@ class App extends Component {
             if (user) {
                 user = await getUserData(user.username);
                 this.setState({ user });
+                this.updateInbox();
                 this.initPusher();
             } else window.location.reload();
         } else this.setState({ user: null });
@@ -109,6 +116,21 @@ class App extends Component {
             var channelName = "channel_" + user.username;
             var channel = pusher.subscribe(channelName);
             channel.bind("reauth", this.forceLogOut);
+            channel.bind("inbox", this.updateInbox);
+        }
+    };
+
+    updateInbox = async () => {
+        try {
+            const inbox = await getInboxData();
+            this.setState({ inbox });
+        } catch (ex) {
+            this.setState({
+                inbox: {
+                    not_seen: 0,
+                    inbox: []
+                }
+            });
         }
     };
 
@@ -192,7 +214,7 @@ class App extends Component {
     };
 
     render() {
-        const { user, courses, loadbar, popup } = this.state;
+        const { user, inbox, courses, loadbar, popup } = this.state;
 
         loadbar.start = this.startLoading;
         loadbar.stop = this.stopLoading;
@@ -208,7 +230,7 @@ class App extends Component {
                     }
                     return (
                         <React.Fragment>
-                            <Navbar user={user} />
+                            <Navbar user={user} message={inbox.not_seen} />
                             <Loadbar loadbar={loadbar} popup={popup} />
                             <Switch>
                                 <Route
@@ -248,6 +270,18 @@ class App extends Component {
                                             setUpdateTrigger={
                                                 this.setUpdateTrigger
                                             }
+                                        />
+                                    )}
+                                />
+                                <Route
+                                    path="/inbox/:username?"
+                                    render={props => (
+                                        <Inbox
+                                            {...props}
+                                            user={user}
+                                            inbox={inbox}
+                                            loadbar={loadbar}
+                                            popup={popup}
                                         />
                                     )}
                                 />
