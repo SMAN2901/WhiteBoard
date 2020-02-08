@@ -319,6 +319,19 @@ class Profile extends Component {
                                     getTimeDifference(user.login_time) +
                                     " ago"}
                             </p>
+                            {currentUser !== user.username ? (
+                                <Link
+                                    className="profile-message-link"
+                                    to={"/inbox/" + user.username}
+                                >
+                                    <i className="profile-message-link-icon material-icons">
+                                        mail
+                                    </i>
+                                    <p className="profile-message-link-text">
+                                        Send message
+                                    </p>
+                                </Link>
+                            ) : null}
                         </div>
                     </div>
                     <div className="profile-info-details">

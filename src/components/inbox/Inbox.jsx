@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link, Redirect } from "react-router-dom";
 import staticValues from "../../staticValues.json";
 import { getMessages, sendMessage } from "../../api/chatApi";
-import { isAuthenticated } from "../../api/AuthApi";
+import { isAuthenticated, getCurrentUser } from "../../api/AuthApi";
 import $ from "jquery";
 import "jquery.nicescroll";
 import "./Inbox.css";
@@ -26,10 +26,17 @@ class Inbox extends Component {
     lastUpdated = -1;
     minDelay = 200;
     lastWidth = $(window).width();
+    msgLoaded = false;
 
     componentDidMount() {
         this._isMounted = true;
         const { inbox } = this.props;
+        var { username } = this.props.match.params;
+        if (typeof username !== "undefined") {
+            var u = getCurrentUser();
+            var uname = u ? u.username : null;
+            if (uname !== username) this.setState({ current: -1 });
+        }
         this.setState({ inbox });
         this.fetchMessages();
         window.addEventListener("resize", this.setHeight);
@@ -63,7 +70,10 @@ class Inbox extends Component {
         const { inbox } = this.state.inbox;
 
         if (inbox.length > 0) {
-            const { username } = inbox[current].user_info;
+            var { username } =
+                current < 0
+                    ? this.props.match.params
+                    : inbox[current].user_info;
 
             if (change) {
                 this.setState({
@@ -109,6 +119,13 @@ class Inbox extends Component {
         } catch (ex) {
             popup.show("error", "Sending", "Failed");
             this.setState({ loading: false });
+        }
+    };
+
+    onKeyDown = e => {
+        if (e.keyCode === 13 && !e.shiftKey) {
+            e.preventDefault();
+            this.sendText();
         }
     };
 
@@ -212,6 +229,10 @@ class Inbox extends Component {
 
         if (profile_pic === null) profile_pic = defaultProfileImage;
         if (!seen) className += " inbox-info-unseen";
+        if (this.state.current === -1) {
+            var user = this.props.match.params.username;
+            if (user === username) this.setState({ current: i });
+        }
         if (this.state.current === i) className += " inbox-info-selected";
 
         return (
@@ -312,6 +333,7 @@ class Inbox extends Component {
                                     className="inbox-inp"
                                     placeholder="Type here"
                                     disabled={this.state.loading}
+                                    onKeyDown={this.onKeyDown}
                                 />
                                 <i
                                     className={

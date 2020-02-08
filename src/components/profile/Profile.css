@@ -94,7 +94,37 @@
     padding-bottom: 2px;
 }
 
-.profile-name,
+.profile-message-link {
+    text-decoration: none;
+    display: inline-block;
+}
+
+.profile-message-link:hover .profile-message-link-text {
+    text-decoration: underline;
+}
+
+.profile-message-link:active .profile-message-link-text {
+    color: gray;
+}
+
+.profile-message-link-icon {
+    color: white;
+    font-size: 24px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 5px;
+}
+
+.profile-message-link-text {
+    color: white;
+    font-size: 16px;
+    line-height: 24px;
+    font-family: "Exo 2", sans-serif;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.profile .profile-name,
 .profile-email,
 .profile-rating-text {
     color: white;
