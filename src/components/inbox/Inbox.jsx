@@ -246,6 +246,7 @@ class Inbox extends Component {
                     <p className="inbox-info-name">{name}</p>
                     <p className="inbox-info-msg">{text}</p>
                 </div>
+                <div className="inbox-info-indicator"></div>
             </div>
         );
     };
