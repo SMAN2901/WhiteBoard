@@ -373,6 +373,11 @@
     .inbox-info-text {
         display: none;
     }
+
+    .inbox-info-indicator {
+        top: 45px;
+        right: 5px;
+    }
 }
 
 @media screen and (max-width: 520px) {
