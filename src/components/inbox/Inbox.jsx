@@ -197,6 +197,8 @@ class Inbox extends Component {
         if (width === "270px") {
             const newWidth = (ww - 50).toString() + "px";
             $(".inbox-info-text").css("display", "none");
+            $(".inbox-info-indicator").css("top", "45px");
+            $(".inbox-info-indicator").css("right", "5px");
             $(right).animate({ width: newWidth });
             $(left).animate({ width: "50px" }, () => {
                 $(".inbox-header-icon").text(newIcon);
@@ -206,6 +208,8 @@ class Inbox extends Component {
             $(right).animate({ width: newWidth });
             $(left).animate({ width: "270px" }, () => {
                 $(".inbox-info-text").css("display", "inline-block");
+                $(".inbox-info-indicator").css("top", "25px");
+                $(".inbox-info-indicator").css("right", "10px");
                 $(".inbox-header-icon").text(newIcon);
             });
         }
